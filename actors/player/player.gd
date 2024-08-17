@@ -8,6 +8,8 @@ var health_component: HealthComponent
 # weapon
 var space_state: PhysicsDirectSpaceState2D
 @export var block_scene: PackedScene = preload("res://actors/buildable/block/block.tscn")
+@export var max_blocks: int = 5
+var blocks_amount: int = 0
 
 # movement
 @export var SPEED: float = 200.
@@ -57,9 +59,12 @@ func setup_ui():
 	else:
 		in_game_ui = preload("res://ui/InGameUI.tscn").instantiate()
 		get_tree().get_root().add_child.call_deferred(in_game_ui)
+	in_game_ui.block_amount = blocks_amount
 	in_game_ui.assign_health_component(health_component)
+	
 
 func _ready():
+	blocks_amount = max_blocks
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
 	space_state = get_world_2d().direct_space_state
@@ -107,14 +112,23 @@ func process_mouse(_delta):
 		params.position = mouse_position
 		var results: Array[Dictionary] = space_state.intersect_point(params)
 		if results.size() == 0:
+			if blocks_amount <= 0:
+				return
 			var block_instance: Block = block_scene.instantiate()
 			block_instance.position = mouse_position
 			get_tree().get_root().add_child(block_instance)
+			blocks_amount -= 1
 		else:
 			for result in results:
 				var collider = result["collider"]
 				if collider is Block:
+					if blocks_amount >= max_blocks:
+						in_game_ui.warn_block_full()
+						return
+					blocks_amount += 1
 					collider.remove()
+		in_game_ui.block_amount = blocks_amount
+		in_game_ui.update_ui()
 
 
 func coyote():
