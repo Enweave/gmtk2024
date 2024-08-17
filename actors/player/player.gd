@@ -6,7 +6,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var SPEED: float = 200.
 @export var JUMP_FORCE: float = 300.
 @export var NUM_JUMPS: int = 2
+@export var block_scene: PackedScene = preload("res://actors/buildable/block/block.tscn")
 
+var space_state: PhysicsDirectSpaceState2D
 var jumps_left: int = NUM_JUMPS
 var just_jumped: bool = false
 var FRICTION: float = SPEED/10
@@ -27,10 +29,14 @@ var StateAnimationMap: Dictionary = {
 
 var current_state: PlayerState = PlayerState.IDLE
 
+func _ready():
+	space_state = get_world_2d().direct_space_state
+
 func _physics_process(delta):
 	process_gravity(delta) 
 	player_run(delta)
 	player_jump(delta)
+	process_mouse(delta)
 	move_and_slide()
 	update_animations()
 
@@ -42,6 +48,28 @@ func player_jump(_delta):
 			jumps_left -= 1
 			current_state = PlayerState.JUMP
 
+
+func process_mouse(_delta):
+	if Input.is_action_just_pressed("fire"):
+		# get the mouse position
+		var mouse_position: Vector2 = get_global_mouse_position()
+		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
+		params.position = mouse_position
+		var results: Array[Dictionary] = space_state.intersect_point(params)
+		# check if space is free around the mouse position
+		if results.size() == 0:
+			# create a new block at the mouse position
+			var block_instance : Block = block_scene.instantiate()
+			block_instance.position = mouse_position
+			get_tree().get_root().add_child(block_instance)
+		else:
+			# remove the block at the mouse position
+			for result in results:
+				var collider = result["collider"]
+				if collider is Block:
+					collider.remove()
+		
+		
 func process_gravity(delta):
 	if is_on_floor():
 		jumps_left = NUM_JUMPS
