@@ -1,220 +1,26 @@
-[gd_scene load_steps=12 format=3 uid="uid://13i56snp3lcx"]
+[gd_scene load_steps=6 format=3 uid="uid://13i56snp3lcx"]
 
-[ext_resource type="Texture2D" uid="uid://bhetpgcm2dvm3" path="res://assets/tilesets/tileset1.png" id="1_j03om"]
+[ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_cky3j"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="2_2xihh"]
+[ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_chkwk"]
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block/block.tscn" id="3_vv6lg"]
-
-[sub_resource type="Gradient" id="Gradient_i05i3"]
-offsets = PackedFloat32Array(0, 0.574074, 0.915123, 0.989198)
-colors = PackedColorArray(0, 0, 0, 1, 0.0179423, 0.0845435, 0.0972989, 1, 0.4089, 0.462872, 0.47, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ira8c"]
-noise_type = 2
-frequency = 0.0028
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2w0js"]
-in_3d_space = true
-seamless = true
-seamless_blend_skirt = 0.373
-color_ramp = SubResource("Gradient_i05i3")
-noise = SubResource("FastNoiseLite_ira8c")
-
-[sub_resource type="Animation" id="Animation_ugrl4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:noise:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_0rihd"]
-resource_name = "flow"
-length = 10.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:noise:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 100)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kpdww"]
-_data = {
-"RESET": SubResource("Animation_ugrl4"),
-"flow": SubResource("Animation_0rihd")
-}
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h38ja"]
-texture = ExtResource("1_j03om")
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-8:1/0 = 0
-11:1/0 = 0
-12:1/0 = 0
-13:1/0 = 0
-14:1/0 = 0
-16:1/0 = 0
-17:1/0 = 0
-17:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-18:1/0 = 0
-18:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2.25, -3, -2.125, 3.25, -8, 8)
-2:3/0 = 0
-3:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
-8:3/0 = 0
-10:3/0 = 0
-12:3/0 = 0
-14:3/0 = 0
-16:3/0 = 0
-17:3/0 = 0
-19:3/0 = 0
-20:3/0 = 0
-22:3/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-8:4/0 = 0
-10:4/0 = 0
-16:4/0 = 0
-17:4/0 = 0
-19:4/0 = 0
-20:4/0 = 0
-22:4/0 = 0
-1:6/0 = 0
-3:6/0 = 0
-4:6/0 = 0
-6:6/0 = 0
-8:6/0 = 0
-10:6/0 = 0
-11:6/0 = 0
-13:6/0 = 0
-14:6/0 = 0
-15:6/0 = 0
-16:6/0 = 0
-21:6/0 = 0
-1:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-6:7/0 = 0
-8:7/0 = 0
-10:7/0 = 0
-10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-11:7/0 = 0
-11:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-13:7/0 = 0
-13:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-14:7/0 = 0
-14:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-15:7/0 = 0
-15:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-16:7/0 = 0
-16:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-18:7/0 = 0
-19:7/0 = 0
-1:8/0 = 0
-12:8/0 = 0
-13:8/0 = 0
-13:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-14:8/0 = 0
-14:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-15:8/0 = 0
-15:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-16:8/0 = 0
-16:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-17:8/0 = 0
-18:8/0 = 0
-19:8/0 = 0
-21:8/0 = 0
-22:8/0 = 0
-3:9/0 = 0
-5:9/0 = 0
-7:9/0 = 0
-8:9/0 = 0
-10:9/0 = 0
-11:9/0 = 0
-13:9/0 = 0
-13:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-14:9/0 = 0
-14:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-15:9/0 = 0
-15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-16:9/0 = 0
-16:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-18:9/0 = 0
-19:9/0 = 0
-21:9/0 = 0
-22:9/0 = 0
-3:10/0 = 0
-5:10/0 = 0
-7:10/0 = 0
-8:10/0 = 0
-10:10/0 = 0
-11:10/0 = 0
-13:10/0 = 0
-13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-14:10/0 = 0
-14:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-15:10/0 = 0
-15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-16:10/0 = 0
-16:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-18:10/0 = 0
-19:10/0 = 0
-13:11/0 = 0
-14:11/0 = 0
-15:11/0 = 0
-16:11/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_bsuna"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_h38ja")
+[ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="4_0430u"]
 
 [node name="Level" type="Node2D"]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(-1098, -40)
-motion_scale = Vector2(0.2, 0.2)
-motion_mirroring = Vector2(512, 512)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture_filter = 2
-texture = SubResource("NoiseTexture2D_2w0js")
-centered = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer/Sprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_kpdww")
-}
-autoplay = "flow"
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_cky3j")]
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_bsuna")
+tile_set = ExtResource("2_chkwk")
 format = 2
 layer_0/name = "ground"
 layer_0/tile_data = PackedInt32Array(0, 851968, 7, 65536, 851968, 8, 131072, 851968, 9, 196608, 851968, 10, 1, 917504, 7, 65537, 917504, 8, 131073, 917504, 8, 196609, 917504, 10, 2, 917504, 7, 65538, 917504, 8, 131074, 917504, 8, 196610, 983040, 10, 3, 983040, 7, 65539, 917504, 8, 131075, 917504, 8, 196611, 917504, 10, 4, 983040, 7, 65540, 917504, 8, 131076, 917504, 8, 196612, 983040, 10, 5, 983040, 7, 65541, 917504, 8, 131077, 917504, 8, 196613, 917504, 10, 6, 917504, 7, 65542, 917504, 8, 131078, 917504, 8, 196614, 983040, 10, 7, 983040, 7, 65543, 917504, 8, 131079, 917504, 8, 196615, 917504, 10, 8, 983040, 7, 65544, 917504, 8, 131080, 917504, 8, 196616, 983040, 10, 9, 983040, 7, 65545, 917504, 8, 131081, 917504, 8, 196617, 917504, 10, 10, 917504, 7, 65546, 917504, 8, 131082, 917504, 8, 196618, 983040, 10, 11, 983040, 7, 65547, 917504, 8, 131083, 917504, 8, 196619, 917504, 10, 12, 917504, 7, 65548, 917504, 8, 131084, 917504, 8, 196620, 983040, 10, 13, 1048576, 7, 65549, 1048576, 8, 131085, 1048576, 9, 196621, 1048576, 10, -327678, 655360, 6, -262142, 655360, 7, -327677, 720896, 6, -262141, 720896, 7, -589812, 655360, 6, -524276, 655360, 7, -589811, 720896, 6, -524275, 720896, 7, -589814, 655360, 6, -524278, 655360, 7, -589813, 720896, 6, -524277, 720896, 7)
 
 [node name="Player" parent="." instance=ExtResource("2_2xihh")]
-position = Vector2(41, -1)
+position = Vector2(178, -143)
 
 [node name="Block" parent="." instance=ExtResource("3_vv6lg")]
 position = Vector2(146, -58)
+
+[node name="Killz" parent="." instance=ExtResource("4_0430u")]
+position = Vector2(88, 125)

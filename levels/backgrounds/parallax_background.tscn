@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://c10a13m3feaeg"]
+
+[sub_resource type="Gradient" id="Gradient_i05i3"]
+offsets = PackedFloat32Array(0, 0.574074, 0.915123, 0.989198)
+colors = PackedColorArray(0, 0, 0, 1, 0.0179423, 0.0845435, 0.0972989, 1, 0.4089, 0.462872, 0.47, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ira8c"]
+noise_type = 2
+frequency = 0.0028
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2w0js"]
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.373
+color_ramp = SubResource("Gradient_i05i3")
+noise = SubResource("FastNoiseLite_ira8c")
+
+[sub_resource type="Animation" id="Animation_ugrl4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:noise:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0rihd"]
+resource_name = "flow"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:noise:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 100)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kpdww"]
+_data = {
+"RESET": SubResource("Animation_ugrl4"),
+"flow": SubResource("Animation_0rihd")
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2(-1098, -40)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(512, 512)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture_filter = 2
+texture = SubResource("NoiseTexture2D_2w0js")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxLayer/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_kpdww")
+}
+autoplay = "flow"
