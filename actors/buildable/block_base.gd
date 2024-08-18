@@ -10,6 +10,7 @@ enum BlockType {
 }
 
 @export var UISprite: Texture2D
+@export var prefab: PackedScene
 
 @onready var anim_player = %AnimationPlayer
 var is_being_removed: bool = false
