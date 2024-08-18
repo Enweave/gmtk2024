@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://wvcxcqjoq8mw"]
+[gd_scene load_steps=21 format=3 uid="uid://wvcxcqjoq8mw"]
 
 [ext_resource type="Texture2D" uid="uid://c2t3ga231e2jp" path="res://assets/spritesheets/player/player-idle.png" id="1_3wp24"]
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_wegfv"]
 [ext_resource type="Texture2D" uid="uid://dvaw3k3wh4e3g" path="res://assets/spritesheets/player/player-run.png" id="2_7oqmh"]
+[ext_resource type="PackedScene" uid="uid://co37m83j8o14e" path="res://actors/player/beam.tscn" id="4_v35ri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1s4o"]
 atlas = ExtResource("2_7oqmh")
@@ -207,3 +208,16 @@ shape = SubResource("CapsuleShape2D_w7l1k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.735, 2.735)
+
+[node name="Beam" parent="." instance=ExtResource("4_v35ri")]
+unique_name_in_owner = true
+position = Vector2(10, -20.95)
+beam_color = Color(0.385027, 0.567829, 0.967246, 1)
+
+[node name="WeaponPivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -20.95)
+
+[node name="WeaponHotSpot" type="Node2D" parent="WeaponPivot"]
+unique_name_in_owner = true
+position = Vector2(10, 0)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://co37m83j8o14e"]
+
+[ext_resource type="Script" path="res://actors/player/beam.gd" id="1_lwxpr"]
+
+[sub_resource type="Curve" id="Curve_a5s08"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="RayCast2D" type="RayCast2D"]
+enabled = false
+collision_mask = 3
+collide_with_areas = true
+script = ExtResource("1_lwxpr")
+
+[node name="Line2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+visible = false
+points = PackedVector2Array(0, 0, 0, 77.345)
+width = 4.0
+width_curve = SubResource("Curve_a5s08")
+default_color = Color(0, 0.561879, 0.931933, 1)
+begin_cap_mode = 2
+end_cap_mode = 2

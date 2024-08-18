@@ -10,10 +10,15 @@ func _ready() -> void:
 	anim_player.play("appear")
 	
 	
-func remove() -> void:
+func _remove() -> void:
+	await get_tree().create_timer(0.5).timeout
+	queue_free()
+
+
+func remove() -> int:
 	if !is_being_removed:
 		is_being_removed = true
 		anim_player.play("disappear")
-		await get_tree().create_timer(0.5).timeout
-		queue_free()
-		
+		_remove()
+		return 1
+	return 0
