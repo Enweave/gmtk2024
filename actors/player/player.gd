@@ -19,6 +19,7 @@ var blocks_amount: int = 0
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var weapon_hotspot: Node2D = %WeaponHotSpot
 @onready var beam: Beam = %Beam
+@onready var wall_cast: RayCast2D = %WallCaster
 
 # movement
 @export var SPEED: float = 200.
@@ -27,6 +28,8 @@ var FRICTION: float = SPEED/10
 
 # jump and gravity
 @export var JUMP_FORCE: float = 300.
+@export var WALL_JUMP_FORCE_X: float = 350.
+@export var WALL_JUMP_FORCE_Y: float = 450.
 @export var NUM_JUMPS_MAX: int = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -34,8 +37,9 @@ var current_num_jumps_max: int = NUM_JUMPS_MAX
 var jumps_left: int = NUM_JUMPS_MAX
 var jump_queued: bool = false
 var jump_buffer: float = 0.1
-var coyote_time: float = 0.2
+var coyote_time: float = 0.15
 var coyote_triggered: bool = false
+var is_on_wall_recently: bool = false
 
 # animation
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
@@ -105,16 +109,26 @@ func _player_jump():
 	current_state = PlayerAnimationState.JUMP
 	jump_queued = false
 
+func _player_walljump():
+	velocity.y = -WALL_JUMP_FORCE_Y
+	velocity.x = WALL_JUMP_FORCE_X * -wall_cast.scale.x
+	current_state = PlayerAnimationState.JUMP
+	is_on_wall_recently = false
+	jump_queued = false
 
 func player_jump(_delta):
 	if Input.is_action_just_pressed("jump"):
-		if jumps_left > 0:
+		if is_on_wall_recently:
+			_player_walljump()
+		elif jumps_left > 0:
 			_player_jump()
 		else:
 			jump_queued = true
 			await get_tree().create_timer(jump_buffer).timeout
 			if jump_queued and jumps_left > 0:
 				_player_jump()
+			elif jump_queued and is_on_wall_recently:
+				_player_walljump()
 			jump_queued = false
 
 
@@ -160,6 +174,7 @@ func coyote():
 	if not coyote_triggered:
 		coyote_triggered = true
 		await get_tree().create_timer(coyote_time).timeout
+		is_on_wall_recently = false	
 		if not is_on_floor():
 			current_num_jumps_max = NUM_JUMPS_MAX - 1
 			jumps_left = min(jumps_left, current_num_jumps_max)
@@ -173,7 +188,13 @@ func process_gravity(delta):
 		jumps_left = current_num_jumps_max
 		current_state = PlayerAnimationState.IDLE
 		if jump_queued:
-			_player_jump()
+			_player_jump() #doesn't get run?
+	elif is_on_wall_only():
+		is_on_wall_recently = true
+		if jump_queued:
+			_player_walljump()
+		else:
+			velocity.y = gravity * delta * 5
 	else:
 		coyote()
 		if velocity.y > 0:
@@ -190,8 +211,10 @@ func player_run(_delta):
 		animated_sprite.flip_h = direction < 0
 		if direction < 0:
 			weapon_pivot.rotation_degrees = 180.
+			wall_cast.scale.x = -1
 		else:
 			weapon_pivot.rotation_degrees = 0
+			wall_cast.scale.x = 1
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
 

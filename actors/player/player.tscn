@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c2t3ga231e2jp" path="res://assets/spritesheets/player/player-idle.png" id="1_3wp24"]
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_wegfv"]
 [ext_resource type="Texture2D" uid="uid://dvaw3k3wh4e3g" path="res://assets/spritesheets/player/player-run.png" id="2_7oqmh"]
-[ext_resource type="PackedScene" uid="uid://co37m83j8o14e" path="res://actors/player/beam.tscn" id="4_v35ri"]
+[ext_resource type="PackedScene" path="res://actors/player/beam.tscn" id="4_v35ri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1s4o"]
 atlas = ExtResource("2_7oqmh")
@@ -221,3 +221,8 @@ position = Vector2(0, -20.95)
 [node name="WeaponHotSpot" type="Node2D" parent="WeaponPivot"]
 unique_name_in_owner = true
 position = Vector2(10, 0)
+
+[node name="WallCaster" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+target_position = Vector2(10, 0)
