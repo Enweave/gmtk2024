@@ -3,16 +3,26 @@ class_name Player
 
 # health
 @export var max_health: float = 10
-var health_component: HealthComponent
 
+var health_component: HealthComponent
 # weapon
 var space_state: PhysicsDirectSpaceState2D
+
+@export var weapon_range: float = 400
+@export var weapon_cooldown: float = 0.2
 @export var block_scene: PackedScene = preload("res://actors/buildable/block/block.tscn")
 @export var max_blocks: int = 5
+@export var initial_blocks_amount: int = 5
+
 var blocks_amount: int = 0
+
+@onready var weapon_pivot: Node2D = %WeaponPivot
+@onready var weapon_hotspot: Node2D = %WeaponHotSpot
+@onready var beam: Beam = %Beam
 
 # movement
 @export var SPEED: float = 200.
+
 var FRICTION: float = SPEED/10
 
 # jump and gravity
@@ -29,8 +39,8 @@ var coyote_triggered: bool = false
 
 # animation
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
-var in_game_ui: InGameUi
 
+var in_game_ui: InGameUi
 enum PlayerAnimationState {
 	IDLE,
 	RUN,
@@ -47,12 +57,13 @@ var StateAnimationMap: Dictionary = {
 
 var current_state: PlayerAnimationState = PlayerAnimationState.IDLE
 
+
 func setup_ui():
 	var existing_ui: InGameUi
 	var game_ui: Node = get_tree().get_root().get_node_or_null("/root/GameUI")
 	if game_ui:
 		existing_ui = game_ui.get_node_or_null("%InGameUI")
-	
+
 	if existing_ui:
 		in_game_ui = existing_ui
 		in_game_ui.show()
@@ -61,16 +72,18 @@ func setup_ui():
 		get_tree().get_root().add_child.call_deferred(in_game_ui)
 	in_game_ui.block_amount = blocks_amount
 	in_game_ui.assign_health_component(health_component)
-	
+
 
 func _ready():
-	blocks_amount = max_blocks
+	blocks_amount = min(initial_blocks_amount, max_blocks)
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
 	space_state = get_world_2d().direct_space_state
 
 
 var push_force: int = 2
+
+
 func _physics_process(delta):
 	process_gravity(delta)
 	player_run(delta)
@@ -78,14 +91,14 @@ func _physics_process(delta):
 	process_mouse(delta)
 	move_and_slide()
 	update_animations()
-	
+
 	# push rigid bodies
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
-			
-	
+
+
 func _player_jump():
 	velocity.y = -JUMP_FORCE
 	jumps_left -= 1
@@ -109,24 +122,36 @@ func process_mouse(_delta):
 	if Input.is_action_just_pressed("fire"):
 		var mouse_position: Vector2 = get_global_mouse_position()
 		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
-		params.position = mouse_position
+		var _beam_vector: Vector2 = mouse_position - beam.global_position
+		var _distance = min(weapon_range, _beam_vector.length())
+
+		params.position = beam.global_position + _beam_vector.normalized() * _distance
+		beam.global_rotation = _beam_vector.angle() - PI/2
+		beam.global_position = weapon_hotspot.global_position
+		var _beam_target: Node2D = beam.fire(_distance, weapon_cooldown)
+
 		var results: Array[Dictionary] = space_state.intersect_point(params)
-		if results.size() == 0:
+		if results.size() == 0 and !_beam_target:
 			if blocks_amount <= 0:
 				return
 			var block_instance: Block = block_scene.instantiate()
-			block_instance.position = mouse_position
+			block_instance.position = params.position
 			get_tree().get_root().add_child(block_instance)
 			blocks_amount -= 1
+			beam.can_print = true
 		else:
 			for result in results:
 				var collider = result["collider"]
 				if collider is Block:
+					if _beam_target != collider:
+						return
 					if blocks_amount >= max_blocks:
 						in_game_ui.warn_block_full()
 						return
-					blocks_amount += 1
-					collider.remove()
+					var _remove_result: int = collider.remove()
+					blocks_amount += _remove_result
+					beam.can_print = bool(_remove_result)
+
 		in_game_ui.block_amount = blocks_amount
 		in_game_ui.update_ui()
 
@@ -163,6 +188,10 @@ func player_run(_delta):
 		current_state = PlayerAnimationState.RUN
 		velocity.x = move_toward(velocity.x, direction * SPEED, FRICTION)
 		animated_sprite.flip_h = direction < 0
+		if direction < 0:
+			weapon_pivot.rotation_degrees = 180.
+		else:
+			weapon_pivot.rotation_degrees = 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
 
