@@ -56,8 +56,8 @@ _data = {
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-position = Vector2(-1098, -40)
 motion_scale = Vector2(0.2, 0.2)
+motion_offset = Vector2(-256, -256)
 motion_mirroring = Vector2(512, 512)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
