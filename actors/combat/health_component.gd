@@ -23,7 +23,7 @@ func update_max_health(value: float) -> void:
 func damage(amount: float) -> void:
 	if is_invulnerable:
 		return
-	current_health -= 1.0 #amount
+	current_health -= amount #amount
 
 	if current_health <= 0:
 		is_dead = true
@@ -34,7 +34,6 @@ func damage(amount: float) -> void:
 func instakill() -> void:
 	is_dead = true
 	current_health = 0
-	print("instakill")
 	OnDeath.emit()
 
 

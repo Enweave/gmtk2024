@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://ksty41djvtca"]
+
+[ext_resource type="Script" path="res://actors/traps/spikes/spikes_instakill.gd" id="1_j51di"]
+[ext_resource type="Texture2D" uid="uid://dq5omee4jy45k" path="res://assets/spritesheets/props/spikes_red.png" id="2_7mym8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc7h5"]
+atlas = ExtResource("2_7mym8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nt0t"]
+atlas = ExtResource("2_7mym8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77rse"]
+atlas = ExtResource("2_7mym8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6erqu"]
+atlas = ExtResource("2_7mym8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q83sf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc7h5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nt0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77rse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6erqu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jfjgt"]
+radius = 15.0
+
+[node name="Spikes" type="Node2D"]
+script = ExtResource("1_j51di")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q83sf")
+autoplay = "default"
+frame_progress = 0.854702
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jfjgt")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
