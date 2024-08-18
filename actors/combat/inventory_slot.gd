@@ -10,6 +10,9 @@ var current_blocks: int = 0
 var is_selected: bool = false
 var unlocked: bool = false
 
+func get_texture() -> Texture:
+	return load(block.UI_Texture_path)
+
 func _init(_block_class: BlockBase, _current_blocks: int = 0) -> void:
 	block = _block_class
 	current_blocks = min(_current_blocks, MAX_BLOCKS)

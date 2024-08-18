@@ -66,7 +66,6 @@ collision_mask = 3
 mass = 0.1
 max_contacts_reported = 1
 script = ExtResource("1_w368x")
-UISprite = ExtResource("2_ragku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u56c2")

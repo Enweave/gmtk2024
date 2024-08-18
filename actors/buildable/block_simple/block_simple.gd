@@ -7,3 +7,4 @@ func _ready() -> void:
 
 func _init() -> void:
 	prefab = preload("res://actors/buildable/block_simple/block_simple.tscn")
+	UI_Texture_path = "res://assets/spritesheets/props/block.png"

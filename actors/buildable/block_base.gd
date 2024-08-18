@@ -9,7 +9,7 @@ enum BlockType {
 	HOT
 }
 
-@export var UISprite: Texture2D
+var UI_Texture_path: String = ""
 @export var prefab: PackedScene
 
 @onready var anim_player = %AnimationPlayer

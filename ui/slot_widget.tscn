@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhie8i5fe7lao"]
+
+[ext_resource type="Script" path="res://ui/slot_widget.gd" id="1_re84j"]
+[ext_resource type="Texture2D" uid="uid://xq1mj1yf0gj8" path="res://assets/spritesheets/props/block.png" id="2_v0b2g"]
+
+[node name="SlotWidget" type="Control"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_re84j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 10.0
+offset_bottom = 27.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_v0b2g")
+
+[node name="Value" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

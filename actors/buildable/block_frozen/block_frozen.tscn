@@ -1,11 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dviiracpaoc3t"]
+[gd_scene load_steps=15 format=3 uid="uid://dviiracpaoc3t"]
 
 [ext_resource type="Script" path="res://actors/buildable/block_frozen/block_frozen.gd" id="1_87pli"]
 [ext_resource type="Texture2D" uid="uid://1cewu6myj5rp" path="res://assets/spritesheets/props/block_frozen.png" id="2_mc634"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6vjc"]
-atlas = ExtResource("2_mc634")
-region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u56c2"]
 size = Vector2(16, 16)
@@ -121,7 +117,6 @@ mass = 0.1
 freeze = true
 max_contacts_reported = 1
 script = ExtResource("1_87pli")
-UISprite = SubResource("AtlasTexture_s6vjc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u56c2")

@@ -65,9 +65,9 @@ func setup_ui():
 	else:
 		in_game_ui = preload("res://ui/InGameUI.tscn").instantiate()
 		get_tree().get_root().add_child.call_deferred(in_game_ui)
-	in_game_ui.block_amount = 0
 	in_game_ui.assign_health_component(health_component)
-
+	in_game_ui.assign_inventory(inventory)
+	in_game_ui.update_ui()
 
 func _ready():
 	inventory = Inventory.new()
@@ -135,7 +135,6 @@ func process_mouse(_delta):
 		var results: Array[Dictionary] = space_state.intersect_point(params)
 		if results.size() == 0 and !_beam_target:
 			if inventory.selected_slot.can_remove_block(1):
-				print(inventory.selected_slot.block.prefab)
 				var block_instance := inventory.selected_slot.block.prefab.instantiate()
 				block_instance.position = params.position
 				get_tree().get_root().add_child(block_instance)
