@@ -1,6 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bboyiiiqctgln"]
+[gd_scene load_steps=6 format=3 uid="uid://bboyiiiqctgln"]
 
 [ext_resource type="Script" path="res://ui/in_game_ui.gd" id="1_qsgcy"]
+[ext_resource type="PackedScene" uid="uid://bhie8i5fe7lao" path="res://ui/slot_widget.tscn" id="2_xogei"]
+
+[sub_resource type="Animation" id="Animation_mm527"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_akpmp"]
 resource_name = "warn"
@@ -27,21 +43,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.27, 1.27), Vector2(1, 1), Vector2(1.27, 1.27), Vector2(1, 1), Vector2(1.27, 1.27), Vector2(1, 1), Vector2(1.27, 1.27)]
-}
-
-[sub_resource type="Animation" id="Animation_mm527"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7hnex"]
@@ -86,17 +87,6 @@ text = "10"
 [node name="BlockCount" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="blocks" type="Label" parent="MarginContainer/HBoxContainer/BlockCount"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 31
-text = "BLOCKS:"
-
-[node name="BlockValue" type="Label" parent="MarginContainer/HBoxContainer/BlockCount"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 31
-text = "0"
-
 [node name="Control" type="Control" parent="MarginContainer/HBoxContainer/BlockCount"]
 layout_mode = 2
 
@@ -138,3 +128,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 56
 text = "DEAD"
+
+[node name="Slots" type="HBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="SlotWidget" parent="MarginContainer/Slots" instance=ExtResource("2_xogei")]
+layout_mode = 2

@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgchea04160h0"]
+[gd_scene load_steps=15 format=3 uid="uid://dgchea04160h0"]
 
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_ggjre"]
 [ext_resource type="Texture2D" uid="uid://bxtw6sixk2hf3" path="res://assets/spritesheets/props/spaceship.png" id="2_28wnn"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_qbdhe"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_mk632"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="5_6k4o2"]
-[ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block/block.tscn" id="6_a1h51"]
+[ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="6_a1h51"]
 [ext_resource type="PackedScene" uid="uid://8ouhiscdat65" path="res://actors/traps/spikes/spikes.tscn" id="7_oy6ul"]
+[ext_resource type="PackedScene" uid="uid://ksty41djvtca" path="res://actors/traps/spikes/spikes_instakill.tscn" id="8_0i617"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m14yb"]
 atlas = ExtResource("2_28wnn")
@@ -88,3 +89,6 @@ position = Vector2(76, -110)
 
 [node name="Spikes" parent="." instance=ExtResource("7_oy6ul")]
 position = Vector2(172, -52)
+
+[node name="Spikes2" parent="." instance=ExtResource("8_0i617")]
+position = Vector2(-27, -62)

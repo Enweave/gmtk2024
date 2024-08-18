@@ -7,15 +7,10 @@ class_name Player
 var health_component: HealthComponent
 # weapon
 var space_state: PhysicsDirectSpaceState2D
+var inventory : Inventory
 
 @export var weapon_range: float = 400
 @export var weapon_cooldown: float = 0.2
-@export var block_scene: PackedScene = preload("res://actors/buildable/block/block.tscn")
-@export var max_blocks: int = 5
-@export var initial_blocks_amount: int = 5
-
-var blocks_amount: int = 0
-
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var weapon_hotspot: Node2D = %WeaponHotSpot
 @onready var beam: Beam = %Beam
@@ -74,18 +69,24 @@ func setup_ui():
 	else:
 		in_game_ui = preload("res://ui/InGameUI.tscn").instantiate()
 		get_tree().get_root().add_child.call_deferred(in_game_ui)
-	in_game_ui.block_amount = blocks_amount
 	in_game_ui.assign_health_component(health_component)
-
+	in_game_ui.assign_inventory(inventory)
+	in_game_ui.update_ui()
 
 func _ready():
-	blocks_amount = min(initial_blocks_amount, max_blocks)
+	inventory = Inventory.new()
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
 	space_state = get_world_2d().direct_space_state
 
 
 var push_force: int = 2
+
+func process_inventory(_delta):
+	if Input.is_action_just_pressed("switch_slot_1"):
+		inventory.switch_slot(BlockBase.BlockType.SIMPLE)
+	elif Input.is_action_just_pressed("switch_slot_2"):
+		inventory.switch_slot(BlockBase.BlockType.FROZEN)
 
 
 func _physics_process(delta):
@@ -95,6 +96,7 @@ func _physics_process(delta):
 	process_mouse(delta)
 	move_and_slide()
 	update_animations()
+	process_inventory(delta)
 
 	# push rigid bodies
 	for i in get_slide_collision_count():
@@ -146,27 +148,25 @@ func process_mouse(_delta):
 
 		var results: Array[Dictionary] = space_state.intersect_point(params)
 		if results.size() == 0 and !_beam_target:
-			if blocks_amount <= 0:
-				return
-			var block_instance: Block = block_scene.instantiate()
-			block_instance.position = params.position
-			get_tree().get_root().add_child(block_instance)
-			blocks_amount -= 1
-			beam.can_print = true
+			if inventory.selected_slot.can_remove_block(1):
+				var block_instance := inventory.selected_slot.block.prefab.instantiate()
+				block_instance.position = params.position
+				get_tree().get_root().add_child(block_instance)
+				inventory.selected_slot.remove_block(1)
+				beam.can_print = true
 		else:
 			for result in results:
 				var collider = result["collider"]
-				if collider is Block:
+				if collider is BlockBase:
+					var _collider_block: BlockBase = collider
 					if _beam_target != collider:
 						return
-					if blocks_amount >= max_blocks:
+					if inventory.get_slot(_collider_block.block_type).can_add_block(1):
+						var _remove_result: int = collider.remove()
+						inventory.get_slot(_collider_block.block_type).add_block(_remove_result)
+						beam.can_print = bool(_remove_result)
+					else:
 						in_game_ui.warn_block_full()
-						return
-					var _remove_result: int = collider.remove()
-					blocks_amount += _remove_result
-					beam.can_print = bool(_remove_result)
-
-		in_game_ui.block_amount = blocks_amount
 		in_game_ui.update_ui()
 
 
