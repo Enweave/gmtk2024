@@ -48,7 +48,7 @@ script = ExtResource("1_nr4rx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_q83sf")
 autoplay = "default"
-frame_progress = 0.84974
+frame_progress = 0.854702
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 3

@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_qbdhe"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_mk632"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="5_6k4o2"]
-[ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block/block.tscn" id="6_a1h51"]
+[ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="6_a1h51"]
 [ext_resource type="PackedScene" uid="uid://8ouhiscdat65" path="res://actors/traps/spikes/spikes.tscn" id="7_oy6ul"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m14yb"]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_cky3j"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="2_2xihh"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_chkwk"]
-[ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block/block.tscn" id="3_vv6lg"]
+[ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="3_vv6lg"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="4_0430u"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_ibxg7"]

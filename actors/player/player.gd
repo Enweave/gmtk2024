@@ -134,7 +134,7 @@ func process_mouse(_delta):
 		if results.size() == 0 and !_beam_target:
 			if blocks_amount <= 0:
 				return
-			var block_instance: Block = block_scene.instantiate()
+			var block_instance: BlockBase = block_scene.instantiate()
 			block_instance.position = params.position
 			get_tree().get_root().add_child(block_instance)
 			blocks_amount -= 1
@@ -142,7 +142,7 @@ func process_mouse(_delta):
 		else:
 			for result in results:
 				var collider = result["collider"]
-				if collider is Block:
+				if collider is BlockBase:
 					if _beam_target != collider:
 						return
 					if blocks_amount >= max_blocks:
