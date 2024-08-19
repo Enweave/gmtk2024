@@ -87,7 +87,8 @@ func process_inventory(_delta):
 		inventory.switch_slot(BlockBase.BlockType.SIMPLE)
 	elif Input.is_action_just_pressed("switch_slot_2"):
 		inventory.switch_slot(BlockBase.BlockType.FROZEN)
-
+	elif Input.is_action_just_pressed("switch_slot_3"):
+		inventory.switch_slot(BlockBase.BlockType.MAGNET)
 
 func _physics_process(delta):
 	process_gravity(delta)

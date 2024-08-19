@@ -7,6 +7,7 @@ signal slot_switched
 var slots_map: Dictionary = {
 	BlockBase.BlockType.SIMPLE: InventorySlot.new(BlockSimple.new()),
 	BlockBase.BlockType.FROZEN: InventorySlot.new(BlockFrozen.new()),
+	BlockBase.BlockType.MAGNET: InventorySlot.new(BlockMagnet.new())
 }
 
 var selected_slot: InventorySlot = slots_map[BlockBase.BlockType.SIMPLE]

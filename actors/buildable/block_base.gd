@@ -5,7 +5,7 @@ class_name BlockBase
 enum BlockType {
 	SIMPLE,
 	FROZEN,
-	FLOATY,
+	MAGNET,
 	HOT
 }
 
