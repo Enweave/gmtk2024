@@ -61,6 +61,13 @@ var StateAnimationMap: Dictionary = {
 var current_state: PlayerAnimationState = PlayerAnimationState.IDLE
 
 
+func update_camera_bounds(left: int, top: int, right: int, bottom: int):
+	%Camera2D.limit_left = left
+	%Camera2D.limit_top = top
+	%Camera2D.limit_right = right
+	%Camera2D.limit_bottom = bottom
+
+
 func setup_ui():
 	var existing_ui: InGameUi
 	var game_ui: Node = get_tree().get_root().get_node_or_null("/root/GameUI")
