@@ -121,7 +121,7 @@ func _player_walljump():
 
 func player_jump(_delta):
 	if Input.is_action_just_pressed("jump"):
-		if is_on_wall_recently:
+		if is_on_wall_recently and not is_on_floor():
 			_player_walljump()
 		elif jumps_left > 0:
 			_player_jump()
@@ -195,7 +195,10 @@ func process_gravity(delta):
 		if jump_queued:
 			_player_walljump()
 		else:
-			velocity.y = gravity * delta * 5
+			if velocity.y >= 0:
+				velocity.y = gravity * delta * 5
+			else:
+				velocity.y += gravity * delta
 	else:
 		coyote()
 		if velocity.y > 0:
