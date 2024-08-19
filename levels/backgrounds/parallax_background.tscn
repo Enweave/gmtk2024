@@ -55,10 +55,11 @@ _data = {
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.2, 0.2)
-motion_offset = Vector2(-256, -256)
-motion_mirroring = Vector2(512, 512)
+[node name="ParallaxLayer" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(512, 512)
+repeat_times = 10
+follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
 texture_filter = 2
