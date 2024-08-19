@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://bdq4wdfc57egu"]
+
+[ext_resource type="Script" path="res://actors/level_exit/level_exit.gd" id="1_rdpr8"]
+[ext_resource type="Texture2D" uid="uid://ndls02u83vhx" path="res://assets/spritesheets/props/beacon.png" id="2_fkgd3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_puin3"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4816"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqxy2"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mn0c"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pd4b"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07528"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gkan"]
+atlas = ExtResource("2_fkgd3")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k3d88"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_puin3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4816")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqxy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mn0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pd4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07528")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gkan")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_06vbm"]
+radius = 32.0
+
+[node name="LevelExit" type="Node2D" groups=["level_exit"]]
+script = ExtResource("1_rdpr8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.61, 0.61)
+sprite_frames = SubResource("SpriteFrames_k3d88")
+autoplay = "default"
+frame_progress = 0.574334
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_06vbm")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

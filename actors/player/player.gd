@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal death
+
 var scene_root
 
 # health
@@ -81,7 +83,10 @@ func _ready():
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
 	space_state = get_world_2d().direct_space_state
+	health_component.OnDeath.connect(_on_death)
 
+func _on_death():
+	death.emit()
 
 var push_force: int = 2
 

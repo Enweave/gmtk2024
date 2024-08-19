@@ -190,10 +190,18 @@ animations = [{
 radius = 7.0
 height = 40.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_wegfv")
+max_health = null
+weapon_range = null
+weapon_cooldown = null
+SPEED = null
+JUMP_FORCE = null
+WALL_JUMP_FORCE_X = null
+WALL_JUMP_FORCE_Y = null
+NUM_JUMPS_MAX = null
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
