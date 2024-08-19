@@ -26,7 +26,5 @@ func _ready() -> void:
 		var right := int(global_position.x + width / 2)
 		var bottom := int(global_position.y + height / 2)
 		
-		print("CameraBounds: ", left, top, right, bottom)	
-	
 		var player: Player = p as Player
 		player.update_camera_bounds(left, top, right, bottom)
