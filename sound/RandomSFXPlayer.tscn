@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://lp6xjp83jnyv"]
+
+[ext_resource type="Script" path="res://sound/RandomSFXPlayer.gd" id="1_ffdn2"]
+
+[node name="RandomPlayer" type="Node3D"]
+script = ExtResource("1_ffdn2")
+files = Array[String](["res://sound/sfx/footsteps/footsteps0-bounce-4.mp3", "res://sound/sfx/footsteps/footsteps1-bounce-3.mp3", "res://sound/sfx/footsteps/footsteps2-bounce-3.mp3", "res://sound/sfx/footsteps/footsteps3-bounce-4.mp3", "res://sound/sfx/footsteps/footsteps4-bounce-3.mp3", "res://sound/sfx/footsteps/footsteps5-bounce-3.mp3"])
+directory = "res://sound/sfx/footsteps"

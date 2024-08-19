@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
+signal death
+
+var scene_root
+
 # health
 @export var max_health: float = 10
 
@@ -57,6 +61,13 @@ var StateAnimationMap: Dictionary = {
 var current_state: PlayerAnimationState = PlayerAnimationState.IDLE
 
 
+func update_camera_bounds(left: int, top: int, right: int, bottom: int):
+	%Camera2D.limit_left = left
+	%Camera2D.limit_top = top
+	%Camera2D.limit_right = right
+	%Camera2D.limit_bottom = bottom
+
+
 func setup_ui():
 	var existing_ui: InGameUi
 	var game_ui: Node = get_tree().get_root().get_node_or_null("/root/GameUI")
@@ -74,11 +85,15 @@ func setup_ui():
 	in_game_ui.update_ui()
 
 func _ready():
+	scene_root = get_parent()
 	inventory = Inventory.new()
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
 	space_state = get_world_2d().direct_space_state
+	health_component.OnDeath.connect(_on_death)
 
+func _on_death():
+	death.emit()
 
 var push_force: int = 2
 
@@ -138,13 +153,14 @@ func player_jump(_delta):
 func process_mouse(_delta):
 	if Input.is_action_just_pressed("fire"):
 		var mouse_position: Vector2 = get_global_mouse_position()
+		beam.global_position = weapon_hotspot.global_position
 		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 		var _beam_vector: Vector2 = mouse_position - beam.global_position
 		var _distance = min(weapon_range, _beam_vector.length())
 
 		params.position = beam.global_position + _beam_vector.normalized() * _distance
 		beam.global_rotation = _beam_vector.angle() - PI/2
-		beam.global_position = weapon_hotspot.global_position
+		
 		var _beam_target: Node2D = beam.fire(_distance, weapon_cooldown)
 
 		var results: Array[Dictionary] = space_state.intersect_point(params)
@@ -152,7 +168,7 @@ func process_mouse(_delta):
 			if inventory.selected_slot.can_remove_block(1):
 				var block_instance := inventory.selected_slot.block.prefab.instantiate()
 				block_instance.position = params.position
-				get_tree().get_root().add_child(block_instance)
+				scene_root.add_child(block_instance)
 				inventory.selected_slot.remove_block(1)
 				beam.can_print = true
 		else:

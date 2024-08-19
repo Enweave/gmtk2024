@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgchea04160h0"]
+[gd_scene load_steps=17 format=3 uid="uid://dgchea04160h0"]
 
+[ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_ftwcq"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_ggjre"]
 [ext_resource type="Texture2D" uid="uid://bxtw6sixk2hf3" path="res://assets/spritesheets/props/spaceship.png" id="2_28wnn"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_qbdhe"]
@@ -8,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="6_a1h51"]
 [ext_resource type="PackedScene" uid="uid://8ouhiscdat65" path="res://actors/traps/spikes/spikes.tscn" id="7_oy6ul"]
 [ext_resource type="PackedScene" uid="uid://ksty41djvtca" path="res://actors/traps/spikes/spikes_instakill.tscn" id="8_0i617"]
-[ext_resource type="PackedScene" uid="uid://3bmje1s8d2bq" path="res://actors/buildable/block_magnet/block_magnet.tscn" id="9_bidrs"]
+[ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="9_06ujj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m14yb"]
 atlas = ExtResource("2_28wnn")
@@ -48,6 +49,7 @@ gradient = SubResource("Gradient_vq61k")
 width = 512
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_ftwcq")
 
 [node name="spaceship" type="AnimatedSprite2D" parent="."]
 position = Vector2(73, -24)
@@ -78,6 +80,7 @@ polygon = PackedVector2Array(-0.168633, 184.126, 11.973, 184.126, 11.973, -8.677
 metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_mk632")]
+position = Vector2(15, -171)
 
 [node name="Block" parent="." instance=ExtResource("6_a1h51")]
 position = Vector2(18, -130)
@@ -85,26 +88,14 @@ position = Vector2(18, -130)
 [node name="Block2" parent="." instance=ExtResource("6_a1h51")]
 position = Vector2(77, -130)
 
-[node name="Block4" parent="." instance=ExtResource("6_a1h51")]
-position = Vector2(77, -216)
-
-[node name="Block5" parent="." instance=ExtResource("6_a1h51")]
-position = Vector2(51, -219)
-
-[node name="Block6" parent="." instance=ExtResource("6_a1h51")]
-position = Vector2(20, -219)
-
-[node name="Block3" parent="." instance=ExtResource("6_a1h51")]
-position = Vector2(76, -110)
-
 [node name="Spikes" parent="." instance=ExtResource("7_oy6ul")]
 position = Vector2(172, -52)
 
 [node name="Spikes2" parent="." instance=ExtResource("8_0i617")]
 position = Vector2(125, -123)
 
-[node name="BlockMagnet" parent="." instance=ExtResource("9_bidrs")]
-position = Vector2(-27, -59)
+[node name="LevelExit" parent="." instance=ExtResource("9_06ujj")]
+position = Vector2(174, -196)
 
-[node name="BlockMagnet2" parent="." instance=ExtResource("9_bidrs")]
-position = Vector2(148, -86)
+[node name="LevelExit2" parent="." instance=ExtResource("9_06ujj")]
+position = Vector2(-97, -115)

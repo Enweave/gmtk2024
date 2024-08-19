@@ -189,7 +189,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7l1k"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_wegfv")
@@ -207,7 +207,9 @@ position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_w7l1k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 zoom = Vector2(2.735, 2.735)
+limit_smoothed = true
 
 [node name="Beam" parent="." instance=ExtResource("4_v35ri")]
 unique_name_in_owner = true
