@@ -138,13 +138,14 @@ func player_jump(_delta):
 func process_mouse(_delta):
 	if Input.is_action_just_pressed("fire"):
 		var mouse_position: Vector2 = get_global_mouse_position()
+		beam.global_position = weapon_hotspot.global_position
 		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 		var _beam_vector: Vector2 = mouse_position - beam.global_position
 		var _distance = min(weapon_range, _beam_vector.length())
 
 		params.position = beam.global_position + _beam_vector.normalized() * _distance
 		beam.global_rotation = _beam_vector.angle() - PI/2
-		beam.global_position = weapon_hotspot.global_position
+		
 		var _beam_target: Node2D = beam.fire(_distance, weapon_cooldown)
 
 		var results: Array[Dictionary] = space_state.intersect_point(params)
