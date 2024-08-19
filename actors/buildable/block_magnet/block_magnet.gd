@@ -1,7 +1,7 @@
 class_name BlockMagnet extends BlockBase
 
-var magnet_strength: float = -1000.
-var magnet_time_step: float = 0.9
+var magnet_strength: float = -500.
+var magnet_time_step: float = 0.05
 @onready var area: Area2D = %Area2D
 
 func pull_blocks() -> void:

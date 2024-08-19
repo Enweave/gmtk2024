@@ -85,6 +85,15 @@ position = Vector2(18, -130)
 [node name="Block2" parent="." instance=ExtResource("6_a1h51")]
 position = Vector2(77, -130)
 
+[node name="Block4" parent="." instance=ExtResource("6_a1h51")]
+position = Vector2(77, -216)
+
+[node name="Block5" parent="." instance=ExtResource("6_a1h51")]
+position = Vector2(51, -219)
+
+[node name="Block6" parent="." instance=ExtResource("6_a1h51")]
+position = Vector2(20, -219)
+
 [node name="Block3" parent="." instance=ExtResource("6_a1h51")]
 position = Vector2(76, -110)
 
@@ -96,3 +105,6 @@ position = Vector2(125, -123)
 
 [node name="BlockMagnet" parent="." instance=ExtResource("9_bidrs")]
 position = Vector2(-27, -59)
+
+[node name="BlockMagnet2" parent="." instance=ExtResource("9_bidrs")]
+position = Vector2(148, -86)

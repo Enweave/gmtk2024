@@ -1,10 +1,54 @@
-[gd_scene load_steps=24 format=3 uid="uid://3bmje1s8d2bq"]
+[gd_scene load_steps=31 format=3 uid="uid://3bmje1s8d2bq"]
 
 [ext_resource type="Script" path="res://actors/buildable/block_magnet/block_magnet.gd" id="1_nrb8y"]
+[ext_resource type="Texture2D" uid="uid://b6pkcx4flr1ue" path="res://assets/spritesheets/magnetic_thing.png" id="2_40gnm"]
 [ext_resource type="Texture2D" uid="uid://cyyuie7ydr40m" path="res://assets/spritesheets/props/block_magnet.png" id="2_qsc68"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_667te"]
 size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uywxe"]
+atlas = ExtResource("2_40gnm")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0k32q"]
+atlas = ExtResource("2_40gnm")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oft6f"]
+atlas = ExtResource("2_40gnm")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn4vj"]
+atlas = ExtResource("2_40gnm")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uewpl"]
+atlas = ExtResource("2_40gnm")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jk8b5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uywxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0k32q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oft6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn4vj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uewpl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stsdy"]
 atlas = ExtResource("2_qsc68")
@@ -126,6 +170,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Node2D/AnimatedSprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.125, 1.125)]
+}
 
 [sub_resource type="Animation" id="Animation_w3hhm"]
 resource_name = "appear"
@@ -141,6 +197,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Node2D/AnimatedSprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.17, 0.17), Vector2(1.315, 1.315), Vector2(1.145, 1.145)]
 }
 
 [sub_resource type="Animation" id="Animation_lttjx"]
@@ -158,6 +226,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0.578112, 0.984984, 0.6), Color(0.39, 0.989833, 1, 0.333333), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Node2D/AnimatedSprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.333333, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.125, 1.125), Vector2(1.28, 1.28), Vector2(0.51, 0.51), Vector2(1.24, 1.24), Vector2(0.135, 0.135)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_th7cr"]
 _data = {
@@ -167,7 +247,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_50ts7"]
-radius = 64.0
+radius = 90.0
 
 [node name="BlockMagnet" type="RigidBody2D"]
 mass = 0.1
@@ -176,10 +256,20 @@ script = ExtResource("1_nrb8y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_667te")
 
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(1.385, 1.385)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D"]
+modulate = Color(0, 0.733333, 1, 0.447059)
+scale = Vector2(1.125, 1.125)
+sprite_frames = SubResource("SpriteFrames_jk8b5")
+autoplay = "default"
+frame_progress = 0.0414112
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ktb50")
 autoplay = "default"
-frame_progress = 0.744557
+frame_progress = 0.21642
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 unique_name_in_owner = true
