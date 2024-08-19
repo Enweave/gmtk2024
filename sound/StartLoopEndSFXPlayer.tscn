@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwxejk61nrm7"]
+
+[ext_resource type="Script" path="res://sound/StartLoopEndSFXPlayer.gd" id="1_ienrm"]
+
+[node name="StartLoopEndSfxPlayer" type="Node3D"]
+script = ExtResource("1_ienrm")

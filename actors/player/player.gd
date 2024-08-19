@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+var scene_root
+
 # health
 @export var max_health: float = 10
 
@@ -74,6 +76,7 @@ func setup_ui():
 	in_game_ui.update_ui()
 
 func _ready():
+	scene_root = get_parent()
 	inventory = Inventory.new()
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
@@ -153,7 +156,7 @@ func process_mouse(_delta):
 			if inventory.selected_slot.can_remove_block(1):
 				var block_instance := inventory.selected_slot.block.prefab.instantiate()
 				block_instance.position = params.position
-				get_tree().get_root().add_child(block_instance)
+				scene_root.add_child(block_instance)
 				inventory.selected_slot.remove_block(1)
 				beam.can_print = true
 		else:

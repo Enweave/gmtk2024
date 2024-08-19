@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://1w42ljnrebv2"]
+
+[ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/scenes/Menus/MainMenu/MainMenu.tscn" id="1_m161r"]
+[ext_resource type="PackedScene" uid="uid://bi45dpv38o0bw" path="res://maack/scenes/Menus/OptionsMenu/MasterOptionsMenuWithTabs.tscn" id="2_c1iie"]
+[ext_resource type="Script" path="res://maack/scenes/Menus/MainMenu/MainMenu.gd" id="2_jcupt"]
+[ext_resource type="PackedScene" uid="uid://qvwmtoltyh5o" path="res://maack/scenes/Credits/Credits.tscn" id="3_qkcio"]
+
+[node name="MainMenu" instance=ExtResource("1_m161r")]
+script = ExtResource("2_jcupt")
+game_scene_path = "res://maack/scenes/GameScene/GameUI.tscn"
+options_packed_scene = ExtResource("2_c1iie")
+credits_packed_scene = ExtResource("3_qkcio")
+
+[node name="MenuContainer" parent="." index="4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.5
+offset_top = -205.5
+offset_right = 271.5
+offset_bottom = 205.5
+
+[node name="TitlesMargin" parent="MenuContainer/VBoxContainer" index="0"]
+theme_override_constants/margin_top = 100
+
+[node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
+text = "GAME TITLE GOES HERE"
+
+[node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
+visible = false
+text = ""
