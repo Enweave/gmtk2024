@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c2t3ga231e2jp" path="res://assets/spritesheets/player/player-idle.png" id="1_3wp24"]
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_wegfv"]
 [ext_resource type="Texture2D" uid="uid://dvaw3k3wh4e3g" path="res://assets/spritesheets/player/player-run.png" id="2_7oqmh"]
-[ext_resource type="PackedScene" uid="uid://co37m83j8o14e" path="res://actors/player/beam.tscn" id="4_v35ri"]
+[ext_resource type="PackedScene" path="res://actors/player/beam.tscn" id="4_v35ri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1s4o"]
 atlas = ExtResource("2_7oqmh")
@@ -188,7 +188,6 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7l1k"]
 radius = 7.0
-height = 40.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -197,13 +196,14 @@ script = ExtResource("1_wegfv")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -24)
+position = Vector2(0, -17)
+scale = Vector2(1, 0.8)
 sprite_frames = SubResource("SpriteFrames_b88jf")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -20)
+position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_w7l1k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
