@@ -21,7 +21,7 @@ func update_max_health(value: float) -> void:
 
 
 func damage(amount: float) -> void:
-	if is_invulnerable:
+	if is_invulnerable or is_dead:
 		return
 	current_health -= amount #amount
 

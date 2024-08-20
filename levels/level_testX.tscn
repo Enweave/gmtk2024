@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi0tlq3wk3l7a"]
+[gd_scene load_steps=7 format=3 uid="uid://bi0tlq3wk3l7a"]
 
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_4islm"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_cm0ya"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_j74by"]
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="4_65gab"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="5_8qf1x"]
+[ext_resource type="PackedScene" uid="uid://h44awitvg32d" path="res://actors/enemies/baneling/baneling.tscn" id="6_lap4a"]
 
 [node name="Level2" type="Node2D"]
 
@@ -23,7 +24,13 @@ position = Vector2(2148, -659)
 position = Vector2(1165, -223)
 
 [node name="Block2" parent="." instance=ExtResource("4_65gab")]
-position = Vector2(1594, -375)
+position = Vector2(2242, -776)
+
+[node name="Block3" parent="." instance=ExtResource("4_65gab")]
+position = Vector2(2242, -736)
+
+[node name="Block4" parent="." instance=ExtResource("4_65gab")]
+position = Vector2(2205, -728)
 
 [node name="Killz" parent="." instance=ExtResource("5_8qf1x")]
 position = Vector2(88, 125)
@@ -41,3 +48,21 @@ offset_top = -294.0
 offset_right = 1147.0
 offset_bottom = -271.0
 text = "LMB To Place Block"
+
+[node name="Baneling" parent="." instance=ExtResource("6_lap4a")]
+position = Vector2(2283, -667)
+
+[node name="Baneling2" parent="." instance=ExtResource("6_lap4a")]
+position = Vector2(2242, -634)
+
+[node name="Baneling3" parent="." instance=ExtResource("6_lap4a")]
+position = Vector2(2326, -718)
+
+[node name="Baneling5" parent="." instance=ExtResource("6_lap4a")]
+position = Vector2(2294, -766)
+
+[node name="Baneling6" parent="." instance=ExtResource("6_lap4a")]
+position = Vector2(2355, -777)
+
+[node name="Baneling4" parent="." instance=ExtResource("6_lap4a")]
+position = Vector2(2336, -633)
