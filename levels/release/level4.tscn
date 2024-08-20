@@ -118,12 +118,14 @@ position = Vector2(820, -146)
 position = Vector2(820, -176)
 
 [node name="LevelExit" parent="." instance=ExtResource("6_v48ho")]
-position = Vector2(1121, -262)
+position = Vector2(1120, -249)
 
 [node name="CameraBounds" parent="." instance=ExtResource("7_itlqq")]
-position = Vector2(483, -261)
+visible = false
+position = Vector2(485, -239)
 width = 1587
 height = 655
+metadata/_edit_lock_ = true
 
 [node name="FrozenBlock" parent="." instance=ExtResource("8_r5wle")]
 position = Vector2(-276, -399)
