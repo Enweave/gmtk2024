@@ -9,4 +9,5 @@ next_scene = "res://maack/scenes/EndCredits/EndCredits.tscn"
 main_menu_scene = "res://maack/scenes/Menus/MainMenu/MainMenu.tscn"
 
 [node name="WinMessage" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
-text = "Win title goes here!"
+text = "[Game complete] text goes here. Also, you've finished all them levels without game crashing. That's new!"
+autowrap_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjehp5lk7v5hp"]
+[gd_scene load_steps=14 format=3 uid="uid://bjehp5lk7v5hp"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_ar5vy"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_g77wh"]
@@ -10,6 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://dviiracpaoc3t" path="res://actors/buildable/block_frozen/block_frozen.tscn" id="8_y813v"]
 [ext_resource type="PackedScene" uid="uid://3bmje1s8d2bq" path="res://actors/buildable/block_magnet/block_magnet.tscn" id="9_nvbq0"]
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="10_tkd5c"]
+[ext_resource type="PackedScene" uid="uid://h44awitvg32d" path="res://actors/enemies/baneling/baneling.tscn" id="11_fb0ev"]
+
+[sub_resource type="Gradient" id="Gradient_jy7ta"]
+offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ge7ml"]
+gradient = SubResource("Gradient_jy7ta")
+width = 512
 
 [node name="Level6" type="Node2D"]
 script = ExtResource("1_ar5vy")
@@ -60,3 +69,15 @@ position = Vector2(396, -823)
 
 [node name="Block4" parent="." instance=ExtResource("10_tkd5c")]
 position = Vector2(470, -821)
+
+[node name="abyss" type="Polygon2D" parent="."]
+texture_filter = 1
+position = Vector2(-1736, 115)
+scale = Vector2(300, 4.372)
+texture = SubResource("GradientTexture1D_ge7ml")
+texture_rotation = 1.5708
+polygon = PackedVector2Array(-0.168633, 184.126, 11.973, 184.126, 11.973, -8.67754, 11.973, -35.9191, -0.168636, -35.9191)
+metadata/_edit_group_ = true
+
+[node name="Baneling" parent="." instance=ExtResource("11_fb0ev")]
+position = Vector2(429, -655)

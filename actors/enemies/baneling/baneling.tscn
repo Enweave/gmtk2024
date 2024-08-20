@@ -92,7 +92,7 @@ script = ExtResource("1_123j1")
 unique_name_in_owner = true
 files = Array[String](["res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-3.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-4.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-5.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-6.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-7.mp3"])
 directory = "res://sound/sfx/footsteps"
-volume_db = -10.0
+volume_db = -15.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

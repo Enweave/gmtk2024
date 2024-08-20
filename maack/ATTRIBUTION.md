@@ -1,5 +1,5 @@
 
-# To be continued...??
+# Game title goes here
 
 Made by [Enweave](https://enweave.itch.io/) and [Kyugetsuki](https://itch.io/profile/kyugetsuki) for the [GMTK Game Jam 2024](https://itch.io/jam/gmtk-2024)
 

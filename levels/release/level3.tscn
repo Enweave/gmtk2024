@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://deutlwkhauia4"]
+[gd_scene load_steps=13 format=3 uid="uid://deutlwkhauia4"]
 
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_2n285"]
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_abdrb"]
@@ -9,6 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="7_uyi34"]
 [ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="8_s65pn"]
 [ext_resource type="PackedScene" uid="uid://dviiracpaoc3t" path="res://actors/buildable/block_frozen/block_frozen.tscn" id="9_302ti"]
+[ext_resource type="PackedScene" uid="uid://h44awitvg32d" path="res://actors/enemies/baneling/baneling.tscn" id="10_jnyt7"]
+
+[sub_resource type="Gradient" id="Gradient_vq61k"]
+offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e22u5"]
+gradient = SubResource("Gradient_vq61k")
+width = 512
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_abdrb")
@@ -96,3 +105,18 @@ offset_top = -131.0
 offset_right = 848.0
 offset_bottom = -108.0
 text = "1/2/3 Select Block Type"
+
+[node name="Baneling" parent="." instance=ExtResource("10_jnyt7")]
+position = Vector2(654, -72)
+
+[node name="Baneling2" parent="." instance=ExtResource("10_jnyt7")]
+position = Vector2(1235, -70)
+
+[node name="abyss" type="Polygon2D" parent="."]
+texture_filter = 1
+position = Vector2(-1741, 174)
+scale = Vector2(300, 4.372)
+texture = SubResource("GradientTexture1D_e22u5")
+texture_rotation = 1.5708
+polygon = PackedVector2Array(-0.168633, 184.126, 11.973, 184.126, 11.973, -8.67754, 11.973, -35.9191, -0.168636, -35.9191)
+metadata/_edit_group_ = true

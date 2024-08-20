@@ -42,6 +42,7 @@ var is_on_wall_recently: bool = false
 
 # animation
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
+@onready var JumpSprite: AnimatedSprite2D = %JumpSprite
 
 var in_game_ui: InGameUi
 enum PlayerAnimationState {
@@ -150,6 +151,8 @@ func _player_jump():
 	current_state = PlayerAnimationState.JUMP
 	jump_queued = false
 	JumpSfxPlayer.play_random_sound()
+	JumpSprite.stop()
+	JumpSprite.play("fire")
 
 func _player_walljump():
 	velocity.y = -WALL_JUMP_FORCE_Y
@@ -158,6 +161,8 @@ func _player_walljump():
 	is_on_wall_recently = false
 	jump_queued = false
 	JumpSfxPlayer.play_random_sound()
+	JumpSprite.stop()
+	JumpSprite.play("fire")
 
 func player_jump(_delta):
 	if Input.is_action_just_pressed("jump"):

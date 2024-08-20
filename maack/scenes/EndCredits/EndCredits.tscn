@@ -33,6 +33,38 @@ stretch_mode = 5
 [node name="ScrollContainer" parent="." index="3"]
 scroll_vertical = 0
 
+[node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
+text = "[center][font_size=64]Game title goes here[/font_size]
+
+Made by [url=https://enweave.itch.io/]Enweave[/url] and [url=https://itch.io/profile/kyugetsuki]Kyugetsuki[/url] for the [url=https://itch.io/jam/gmtk-2024]GMTK Game Jam 2024[/url]
+
+[font_size=48]Tools[/font_size]
+[font_size=24]Godot[/font_size]
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
+Source: [url=https://godotengine.org/]godotengine.org[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url] 
+
+[font_size=24]Git[/font_size]
+Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
+Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
+License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
+
+[font_size=24]Jetbrains Rider[/font_size]
+Author: [url=https://www.jetbrains.com/]Jetbrains[/url]
+Source: [url=https://www.jetbrains.com/rider/]Jetbrains Rider[/url]
+License: [url=https://www.jetbrains.com/legal/docs/privacy/privacy.html]Jetbrains License[/url]
+
+[font_size=24]Bitwig Studio[/font_size]
+Author: [url=https://www.bitwig.com/]Bitwig[/url]
+Source: [url=https://www.bitwig.com/]Bitwig Studio[/url]
+License: [url=https://www.bitwig.com/eula/]Bitwig License[/url]
+
+[font_size=24]Godot Game Template[/font_size]
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
+License: [url=LICENSE.txt]MIT License[/url]
+[/center]"
+
 [node name="CenterContainer" type="CenterContainer" parent="." index="4"]
 layout_mode = 0
 anchor_right = 1.0
