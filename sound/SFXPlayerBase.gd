@@ -1,14 +1,14 @@
-extends Node3D
+extends Node
 
 class_name SFXPlayerBase
 
 enum TypeOfPlayer {
-	AUDIO_STREAM_PLAYER_3D,
+	AUDIO_STREAM_PLAYER_2D,
 	AUDIO_STREAM_PLAYER
 }
 ## Pick type depending on scene.
-## AUDIO_STREAM_PLAYER for UI, AUDIO_STREAM_PLAYER_3D for 3D scenes.
-@export var type_of_player: TypeOfPlayer = TypeOfPlayer.AUDIO_STREAM_PLAYER_3D
+## AUDIO_STREAM_PLAYER for UI, AUDIO_STREAM_PLAYER_2D for 2D scenes.
+@export var type_of_player: TypeOfPlayer = TypeOfPlayer.AUDIO_STREAM_PLAYER_2D
 @export var bus_name: String = "SFX"
 
 ## Volume of the player at initialization.
@@ -28,19 +28,19 @@ enum TypeOfPlayer {
 var audio_stream_player
 
 func _create_new_player():
-	if type_of_player == TypeOfPlayer.AUDIO_STREAM_PLAYER_3D:
-		audio_stream_player = AudioStreamPlayer3D.new()
-		audio_stream_player.attenuation_filter_cutoff_hz = 20500
+	if type_of_player == TypeOfPlayer.AUDIO_STREAM_PLAYER_2D:
+		audio_stream_player = AudioStreamPlayer2D.new()
+#		audio_stream_player.attenuation_filter_cutoff_hz = 20500
 	else:
 		audio_stream_player = AudioStreamPlayer.new()
 	audio_stream_player.autoplay = false
 	audio_stream_player.bus = bus_name
 	audio_stream_player.volume_db = volume_db
 
-	audio_stream_player.max_db = max_db
-	audio_stream_player.unit_size = unit_size
+#	audio_stream_player.max_db = max_db
+#	audio_stream_player.unit_size = unit_size
 
 	# https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer3d.html#enum-audiostreamplayer3d-attenuationmodel
-	audio_stream_player.attenuation_model = 1 # ATTENUATION_INVERSE_SQUARE_DISTANCE
+#	audio_stream_player.attenuation_model = 1 # ATTENUATION_INVERSE_SQUARE_DISTANCE
 	add_child(audio_stream_player)
 	

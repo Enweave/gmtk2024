@@ -18,6 +18,7 @@ var player: Player = null
 var current_speed: float = PATROL_SPEED
 var patrol_idle: bool = true
 var last_patrol_direction: int = 1
+@onready var FootstepsPlayer: RandomSFXPlayer = %FootstepsPlayer
 
 
 func _ready() -> void:
@@ -32,7 +33,10 @@ func _ready() -> void:
 
 	timer.start()
 	health_component.OnDeath.connect(explode)
+	%FootstepsTimer.connect("timeout", _on_footsteps_timer_timeout)
 
+func _on_footsteps_timer_timeout():
+	FootstepsPlayer.play_random_sound()
 
 func _on_patrol_timeout() -> void:
 	if player:
@@ -78,8 +82,8 @@ func explode():
 				var _target: RigidBody2D = target as RigidBody2D
 				_target.apply_central_impulse((target.global_position - self.global_position).normalized() * explosion_force)
 			if HealthComponent.FIELD_NAME in target:
-				var health_component: HealthComponent = target[HealthComponent.FIELD_NAME]
-				health_component.damage(damage)
+				var _health_component: HealthComponent = target[HealthComponent.FIELD_NAME]
+				_health_component.damage(damage)
 
 	health_component.is_dead = true
 	var explosion := explosion_scene.instantiate()

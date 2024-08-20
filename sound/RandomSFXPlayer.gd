@@ -29,6 +29,7 @@ var last_played_index: int = -1
 
 func _ready():
 	_create_new_player()
+	audio_stream_player.max_polyphony = 4
 
 
 func play_random_sound():

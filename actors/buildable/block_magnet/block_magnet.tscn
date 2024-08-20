@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://3bmje1s8d2bq"]
+[gd_scene load_steps=32 format=3 uid="uid://3bmje1s8d2bq"]
 
 [ext_resource type="Script" path="res://actors/buildable/block_magnet/block_magnet.gd" id="1_nrb8y"]
 [ext_resource type="Texture2D" uid="uid://b6pkcx4flr1ue" path="res://assets/spritesheets/magnetic_thing.png" id="2_40gnm"]
 [ext_resource type="Texture2D" uid="uid://cyyuie7ydr40m" path="res://assets/spritesheets/props/block_magnet.png" id="2_qsc68"]
+[ext_resource type="AudioStream" uid="uid://b0pyhseb0ob8e" path="res://sound/sfx/magnet/magnet loop-bounce-2.mp3" id="4_brk14"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_667te"]
 size = Vector2(16, 16)
@@ -285,3 +286,10 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_50ts7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_brk14")
+volume_db = -6.338
+autoplay = true
+max_distance = 305.0
+bus = &"SFX"

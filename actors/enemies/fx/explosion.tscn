@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4hyugemai5rg"]
+[gd_scene load_steps=10 format=3 uid="uid://b4hyugemai5rg"]
 
 [ext_resource type="Script" path="res://actors/enemies/fx/explosion.gd" id="1_hd067"]
 [ext_resource type="Texture2D" uid="uid://dcj2m0umsn1u4" path="res://assets/spritesheets/enemy/enemy-death.png" id="2_vgnsg"]
+[ext_resource type="PackedScene" uid="uid://lp6xjp83jnyv" path="res://sound/RandomSFXPlayer.tscn" id="3_4c1gp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bidym"]
 atlas = ExtResource("2_vgnsg")
@@ -54,3 +55,8 @@ unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_54ad3")
 frame = 4
 frame_progress = 1.0
+
+[node name="RandomPlayer" parent="." instance=ExtResource("3_4c1gp")]
+unique_name_in_owner = true
+files = Array[String](["res://sound/sfx/explosion/Grid Shot-Explosion-bounce-1.mp3", "res://sound/sfx/explosion/Grid Shot-Explosion-bounce-2.mp3", "res://sound/sfx/explosion/Grid Shot-Explosion-bounce-3.mp3", "res://sound/sfx/explosion/Grid Shot-Explosion-bounce-4.mp3"])
+directory = "res://sound/sfx/explosion"

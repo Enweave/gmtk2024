@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cj8ovb1la3pyw"
+path="res://.godot/imported/Grid Shot-Explosion-bounce-4.mp3-0037b95edcc3b10834d5dd6cf623cc27.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/explosion/Grid Shot-Explosion-bounce-4.mp3"
+dest_files=["res://.godot/imported/Grid Shot-Explosion-bounce-4.mp3-0037b95edcc3b10834d5dd6cf623cc27.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://13i56snp3lcx"]
+[gd_scene load_steps=10 format=3 uid="uid://13i56snp3lcx"]
 
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_cky3j"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="2_2xihh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="4_0430u"]
 [ext_resource type="PackedScene" uid="uid://dviiracpaoc3t" path="res://actors/buildable/block_frozen/block_frozen.tscn" id="6_tsm8b"]
 [ext_resource type="PackedScene" uid="uid://h44awitvg32d" path="res://actors/enemies/baneling/baneling.tscn" id="7_jleb7"]
+[ext_resource type="PackedScene" uid="uid://3bmje1s8d2bq" path="res://actors/buildable/block_magnet/block_magnet.tscn" id="8_8k0qy"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_ibxg7"]
 
@@ -46,3 +47,6 @@ position = Vector2(203, -37)
 
 [node name="Baneling" parent="." instance=ExtResource("7_jleb7")]
 position = Vector2(-33, -23)
+
+[node name="BlockMagnet" parent="." instance=ExtResource("8_8k0qy")]
+position = Vector2(276, -109)

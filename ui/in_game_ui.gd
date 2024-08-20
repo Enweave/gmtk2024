@@ -4,6 +4,7 @@ class_name InGameUi
 var health_component: HealthComponent
 var inventory: Inventory
 var slots: Array
+@onready var death_sfx_player : AudioStreamPlayer = %DeathPlayer
 
 func warn_block_full() -> void:
 	%BlockAnimationPlayer.play("warn")
@@ -32,10 +33,15 @@ func _on_damage(_amount: float) -> void:
 func _on_heal(_amount: float) -> void:
 	update_ui()
 		
+func _on_death():
+	death_sfx_player.play()
+	print("Player died")
+	update_ui()
+
 func assign_health_component(_health_component: HealthComponent) -> void:
 	health_component = _health_component
 	health_component.OnDamage.connect(_on_damage)
-	health_component.OnDeath.connect(update_ui)
+	health_component.OnDeath.connect(_on_death)
 	health_component.OnHeal.connect(_on_heal)
 	
 	

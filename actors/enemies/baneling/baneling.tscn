@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://h44awitvg32d"]
+[gd_scene load_steps=17 format=3 uid="uid://h44awitvg32d"]
 
 [ext_resource type="Texture2D" uid="uid://fe21ivghx83m" path="res://assets/spritesheets/enemy/crab-idle.png" id="1_8olvs"]
 [ext_resource type="Script" path="res://actors/enemies/baneling/baneling.gd" id="1_123j1"]
+[ext_resource type="PackedScene" uid="uid://lp6xjp83jnyv" path="res://sound/RandomSFXPlayer.tscn" id="2_f7g46"]
 [ext_resource type="Texture2D" uid="uid://bwkaetha0dy35" path="res://assets/spritesheets/enemy/crab-walk.png" id="2_y7skv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kkflx"]
@@ -87,6 +88,12 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_123j1")
 
+[node name="FootstepsPlayer" parent="." instance=ExtResource("2_f7g46")]
+unique_name_in_owner = true
+files = Array[String](["res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-3.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-4.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-5.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-6.mp3", "res://sound/sfx/footsteps/530384__nox_sound__footsteps_boots_gritty_ground_stones_leaves_mono-bounce-7.mp3"])
+directory = "res://sound/sfx/footsteps"
+volume_db = -10.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -1)
@@ -112,6 +119,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="trigger"]
 shape = SubResource("CircleShape2D_gdxxr")
+
+[node name="FootstepsTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+autostart = true
 
 [connection signal="body_entered" from="vision" to="." method="_on_vision_area_body_entered"]
 [connection signal="body_exited" from="vision" to="." method="_on_vision_area_body_exited"]

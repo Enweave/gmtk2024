@@ -60,6 +60,28 @@ var StateAnimationMap: Dictionary = {
 
 var current_state: PlayerAnimationState = PlayerAnimationState.IDLE
 
+# sound 
+@onready var footsteps_timer: Timer = %FootstepsTimer
+@onready var footsteps_sfx_player: RandomSFXPlayer = %FootstepsSFXPlayer
+@onready var JumpSfxPlayer: RandomSFXPlayer = %JumpSfxPlayer
+
+
+func _play_footsteps_sound():
+	if is_on_floor():
+		footsteps_sfx_player.play_random_sound()
+
+func _on_footsteps_timer_timeout():
+	_play_footsteps_sound()
+
+func _toggle_footsteps_sound(_is_on: bool):
+	if _is_on:
+		if footsteps_timer.is_stopped():
+			_play_footsteps_sound()
+			footsteps_timer.start()
+	else:
+		if !footsteps_timer.is_stopped():
+			footsteps_timer.stop()
+
 
 func update_camera_bounds(left: int, top: int, right: int, bottom: int):
 	%Camera2D.limit_left = left
@@ -91,6 +113,7 @@ func _ready():
 	setup_ui()
 	space_state = get_world_2d().direct_space_state
 	health_component.OnDeath.connect(_on_death)
+	footsteps_timer.connect("timeout", _on_footsteps_timer_timeout)
 
 func _on_death():
 	death.emit()
@@ -126,6 +149,7 @@ func _player_jump():
 	jumps_left -= 1
 	current_state = PlayerAnimationState.JUMP
 	jump_queued = false
+	JumpSfxPlayer.play_random_sound()
 
 func _player_walljump():
 	velocity.y = -WALL_JUMP_FORCE_Y
@@ -133,6 +157,7 @@ func _player_walljump():
 	current_state = PlayerAnimationState.JUMP
 	is_on_wall_recently = false
 	jump_queued = false
+	JumpSfxPlayer.play_random_sound()
 
 func player_jump(_delta):
 	if Input.is_action_just_pressed("jump"):
@@ -226,7 +251,8 @@ func player_run(_delta):
 	var direction: float = Input.get_axis("move_left", "move_right")
 
 	if direction != 0:
-		current_state = PlayerAnimationState.RUN
+		if is_on_floor():
+			current_state = PlayerAnimationState.RUN
 		velocity.x = move_toward(velocity.x, direction * SPEED, FRICTION)
 		animated_sprite.flip_h = direction < 0
 		if direction < 0:
@@ -242,3 +268,8 @@ func player_run(_delta):
 func update_animations():
 	if animated_sprite.animation != StateAnimationMap[current_state]:
 		animated_sprite.play(StateAnimationMap[current_state])
+		
+	if current_state == PlayerAnimationState.RUN:
+		_toggle_footsteps_sound(true)
+	else:
+		_toggle_footsteps_sound(false)

@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://sound/StartLoopEndSFXPlayer.gd" id="1_ienrm"]
 
-[node name="StartLoopEndSfxPlayer" type="Node3D"]
+[node name="StartLoopEndSfxPlayer" type="Node2D"]
 script = ExtResource("1_ienrm")
