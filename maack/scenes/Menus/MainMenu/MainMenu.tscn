@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://1w42ljnrebv2"]
+[gd_scene load_steps=6 format=3 uid="uid://1w42ljnrebv2"]
 
 [ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/scenes/Menus/MainMenu/MainMenu.tscn" id="1_m161r"]
 [ext_resource type="PackedScene" uid="uid://bi45dpv38o0bw" path="res://maack/scenes/Menus/OptionsMenu/MasterOptionsMenuWithTabs.tscn" id="2_c1iie"]
 [ext_resource type="Script" path="res://maack/scenes/Menus/MainMenu/MainMenu.gd" id="2_jcupt"]
 [ext_resource type="PackedScene" uid="uid://qvwmtoltyh5o" path="res://maack/scenes/Credits/Credits.tscn" id="3_qkcio"]
+[ext_resource type="Texture2D" uid="uid://dpqbvxgba5m76" path="res://assets/spritesheets/Clouds 3/1.png" id="5_glq4o"]
 
 [node name="MainMenu" instance=ExtResource("1_m161r")]
 script = ExtResource("2_jcupt")
 game_scene_path = "res://maack/scenes/GameScene/GameUI.tscn"
 options_packed_scene = ExtResource("2_c1iie")
 credits_packed_scene = ExtResource("3_qkcio")
+
+[node name="BackgroundTextureRect" parent="." index="2"]
+modulate = Color(0.881175, 0.6045, 0.93, 0.435294)
+texture = ExtResource("5_glq4o")
+stretch_mode = 6
 
 [node name="MenuContainer" parent="." index="4"]
 anchors_preset = 8
@@ -26,7 +32,7 @@ offset_bottom = 205.5
 theme_override_constants/margin_top = 100
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
-text = "GAME TITLE GOES HERE"
+text = "STRANDED"
 
 [node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
 visible = false
