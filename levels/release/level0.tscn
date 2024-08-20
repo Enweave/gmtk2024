@@ -39,6 +39,28 @@ offset_right = 1204.0
 offset_bottom = -328.0
 text = "LMB To Pick Up Block"
 
+[node name="PickUpLabel2" type="Label" parent="."]
+offset_left = 35.0
+offset_top = -89.0
+offset_right = 132.0
+offset_bottom = -66.0
+text = "AD To Move"
+
+[node name="PickUpLabel3" type="Label" parent="."]
+offset_left = 144.0
+offset_top = -107.0
+offset_right = 257.0
+offset_bottom = -84.0
+text = "Space To Jump"
+
+[node name="PickUpLabel4" type="Label" parent="."]
+offset_left = 227.0
+offset_top = -214.0
+offset_right = 361.0
+offset_bottom = -165.0
+text = "A/D + Space 
+To Wall Jump"
+
 [node name="PlaceLabel" type="Label" parent="."]
 offset_left = 1043.0
 offset_top = -316.0
