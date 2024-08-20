@@ -7,6 +7,7 @@ const patrol_time: float = 1.0
 
 @export var max_health: float = 3
 @export var damage: float = 3
+@export var explosion_scene : PackedScene = preload("res://actors/enemies/fx/explosion.tscn")
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var vision_area: Area2D = %vision
@@ -69,6 +70,9 @@ func _on_trigger_body_entered(body: Node) -> void:
 		player = body as Player
 		player.health_component.damage(damage)
 		health_component.instakill()
+		var explosion := explosion_scene.instantiate()
+		explosion.global_position = global_position
+		self.get_parent().add_child(explosion)
 		self.queue_free()
 
 func update_animations():
