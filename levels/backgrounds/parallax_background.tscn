@@ -5,6 +5,8 @@
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
 [node name="ParallaxLayer2" type="Parallax2D" parent="."]
+repeat_size = Vector2(576, 0)
+repeat_times = 3
 follow_viewport = false
 ignore_camera_scroll = true
 
