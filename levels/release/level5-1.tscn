@@ -1,0 +1,497 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdr4w1bu71lff"]
+
+[ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_7gfsx"]
+[ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_1i350"]
+[ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_b3mxk"]
+[ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="4_qe5pl"]
+[ext_resource type="PackedScene" uid="uid://ksty41djvtca" path="res://actors/traps/spikes/spikes_instakill.tscn" id="5_qvnx6"]
+[ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="6_25rvu"]
+[ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="7_jb1f3"]
+[ext_resource type="PackedScene" uid="uid://dviiracpaoc3t" path="res://actors/buildable/block_frozen/block_frozen.tscn" id="8_hvy8a"]
+
+[node name="Level5-1" type="Node2D"]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_7gfsx")]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_1i350")
+format = 2
+layer_0/name = "ground"
+layer_0/tile_data = PackedInt32Array(1245184, 851968, 7, 1310720, 196608, 3, 1376256, 196608, 4, 1441792, 851968, 1610612743, 1245185, 65536, 7, 1310721, 65536, 8, 1376257, 917504, 1610612744, 1441793, 524288, 3, 1245186, 393216, 7, 1310722, 917504, 1610612744, 1376258, 917504, 1610612744, 1441794, 851968, 1610612745, 1245187, 1048576, 7, 1310723, 983040, 1610612746, 1376259, 917504, 1610612746, 1441795, 851968, 1610612746, 1245188, 851968, 7, 1310724, 917504, 1610612743, 1376260, 917504, 1610612743, 1441796, 851968, 1610612743, 1245189, 65536, 7, 1310725, 65536, 8, 1376261, 917504, 1610612744, 1441797, 851968, 1610612744, 1245190, 524288, 7, 1310726, 917504, 1610612744, 1376262, 917504, 1610612744, 1441798, 524288, 3, 1245191, 1048576, 7, 1310727, 983040, 1610612746, 1376263, 917504, 1610612746, 1441799, 851968, 1610612746, 2555922, 655360, 6, 2621458, 655360, 7, 2555923, 720896, 6, 2621459, 720896, 7, 2555924, 655360, 6, 2621460, 655360, 7, 2555925, 720896, 6, 2621461, 720896, 7, 2555926, 655360, 6, 2621462, 655360, 7, 2555927, 720896, 6, 2621463, 720896, 7, 2555928, 655360, 6, 2621464, 655360, 7, 1179673, 1179648, 10, 1245209, 655360, 7, 2555929, 720896, 6, 2621465, 720896, 7, 1179674, 1245184, 10, 1245210, 720896, 7, 1179675, 655360, 6, 1245211, 655360, 7, 1179676, 720896, 6, 1245212, 720896, 7, 1179677, 655360, 6, 1245213, 655360, 7, 1179678, 720896, 6, 1245214, 720896, 7, 1179679, 655360, 6, 1245215, 655360, 7, 1179680, 720896, 6, 1245216, 720896, 7, 1179681, 655360, 6, 1245217, 655360, 7, 1179682, 720896, 6, 1245218, 720896, 7, 1179683, 1179648, 10, 1245219, 655360, 7, 1179684, 1245184, 10, 1245220, 720896, 7, 1245227, 851968, 6, 1310763, 851968, 7, 1376299, 196608, 3, 1441835, 196608, 4, 1507371, 851968, 9, 1572907, 851968, 8, 1638443, 851968, 9, 1703979, 851968, 8, 1769515, 851968, 9, 1835051, 851968, 8, 1900587, 851968, 9, 1966123, 851968, 8, 2031659, 851968, 10, 2097195, 851968, 11, 2555947, 851968, 6, 2621483, 851968, 7, 2687019, 851968, 9, 2752555, 851968, 8, 2818091, 851968, 9, 2883627, 851968, 8, 2949163, 851968, 9, 3014699, 851968, 8, 3080235, 851968, 9, 3145771, 851968, 8, 3211307, 851968, 9, 3276843, 851968, 8, 3342379, 851968, 10, 3407915, 851968, 11, 1245228, 917504, 6, 1310764, 917504, 7, 1376300, 917504, 8, 1441836, 983040, 9, 1507372, 983040, 9, 1572908, 917504, 9, 1638444, 983040, 9, 1703980, 983040, 9, 1769516, 917504, 8, 1835052, 983040, 9, 1900588, 917504, 8, 1966124, 983040, 9, 2031660, 917504, 10, 2097196, 917504, 11, 2555948, 917504, 6, 2621484, 917504, 7, 2687020, 917504, 8, 2752556, 983040, 9, 2818092, 983040, 9, 2883628, 917504, 9, 2949164, 983040, 9, 3014700, 983040, 9, 3080236, 917504, 8, 3145772, 983040, 9, 3211308, 917504, 8, 3276844, 983040, 9, 3342380, 917504, 10, 3407916, 917504, 11, 4325420, 655360, 6, 4390956, 655360, 7, 1245229, 983040, 6, 1310765, 983040, 7, 1376301, 983040, 8, 1441837, 983040, 9, 1507373, 983040, 8, 1572909, 983040, 9, 1638445, 983040, 8, 1703981, 983040, 9, 1769517, 983040, 8, 1835053, 917504, 9, 1900589, 983040, 8, 1966125, 983040, 9, 2031661, 983040, 10, 2097197, 983040, 11, 2555949, 983040, 6, 2621485, 983040, 7, 2687021, 983040, 8, 2752557, 983040, 9, 2818093, 983040, 8, 2883629, 983040, 9, 2949165, 983040, 8, 3014701, 983040, 9, 3080237, 983040, 8, 3145773, 917504, 9, 3211309, 983040, 8, 3276845, 983040, 9, 3342381, 983040, 10, 3407917, 983040, 11, 4325421, 720896, 6, 4390957, 720896, 7, 1245230, 1048576, 6, 1310766, 1048576, 7, 1376302, 1048576, 7, 1441838, 1048576, 8, 1507374, 1048576, 9, 1572910, 1048576, 10, 1638446, 1048576, 9, 1703982, 1048576, 10, 1769518, 1048576, 7, 1835054, 1048576, 8, 1900590, 1048576, 9, 1966126, 1048576, 10, 2031662, 1048576, 10, 2097198, 1048576, 11, 2555950, 1048576, 6, 2621486, 1048576, 7, 2687022, 1048576, 7, 2752558, 1048576, 8, 2818094, 1048576, 9, 2883630, 1048576, 10, 2949166, 1048576, 9, 3014702, 1048576, 10, 3080238, 1048576, 7, 3145774, 1048576, 8, 3211310, 1048576, 9, 3276846, 1048576, 10, 3342382, 1048576, 10, 3407918, 1048576, 11, 4325422, 655360, 6, 4390958, 655360, 7, 4325423, 720896, 6, 4390959, 720896, 7, 4325424, 655360, 6, 4390960, 655360, 7, 4325425, 720896, 6, 4390961, 720896, 7, 4325426, 655360, 6, 4390962, 655360, 7, 4325427, 720896, 6, 4390963, 720896, 7, 4325428, 655360, 6, 4390964, 655360, 7, 4325429, 720896, 6, 4390965, 720896, 7, 4325430, 655360, 6, 4390966, 655360, 7, 4325431, 720896, 6, 4390967, 720896, 7, 4325432, 655360, 6, 4390968, 655360, 7, 4325433, 720896, 6, 4390969, 720896, 7, 4325434, 655360, 6, 4390970, 655360, 7, 4325435, 720896, 6, 4390971, 720896, 7, 1900604, 851968, 6, 1966140, 851968, 7, 2031676, 851968, 9, 2097212, 851968, 8, 2162748, 851968, 9, 2228284, 851968, 8, 2293820, 851968, 9, 2359356, 851968, 8, 2424892, 851968, 9, 2490428, 851968, 8, 2555964, 851968, 9, 2621500, 851968, 8, 2687036, 851968, 10, 2752572, 851968, 11, 3145788, 851968, 6, 3211324, 851968, 7, 3276860, 851968, 9, 3342396, 851968, 8, 3407932, 851968, 9, 3473468, 851968, 8, 3539004, 851968, 9, 3604540, 851968, 8, 3670076, 851968, 9, 3735612, 851968, 8, 3801148, 851968, 9, 3866684, 851968, 8, 3932220, 851968, 10, 3997756, 851968, 11, 1900605, 917504, 6, 1966141, 917504, 7, 2031677, 917504, 8, 2097213, 983040, 9, 2162749, 983040, 9, 2228285, 917504, 9, 2293821, 983040, 9, 2359357, 983040, 9, 2424893, 917504, 8, 2490429, 983040, 9, 2555965, 917504, 8, 2621501, 983040, 9, 2687037, 917504, 10, 2752573, 917504, 11, 3145789, 917504, 6, 3211325, 917504, 7, 3276861, 917504, 8, 3342397, 983040, 9, 3407933, 983040, 9, 3473469, 917504, 9, 3539005, 983040, 9, 3604541, 983040, 9, 3670077, 917504, 8, 3735613, 983040, 9, 3801149, 917504, 8, 3866685, 983040, 9, 3932221, 917504, 10, 3997757, 917504, 11, 1900606, 983040, 6, 1966142, 983040, 7, 2031678, 983040, 8, 2097214, 983040, 9, 2162750, 983040, 8, 2228286, 983040, 9, 2293822, 983040, 8, 2359358, 983040, 9, 2424894, 983040, 8, 2490430, 917504, 9, 2555966, 983040, 8, 2621502, 983040, 9, 2687038, 983040, 10, 2752574, 983040, 11, 3145790, 983040, 6, 3211326, 983040, 7, 3276862, 983040, 8, 3342398, 983040, 9, 3407934, 983040, 8, 3473470, 983040, 9, 3539006, 983040, 8, 3604542, 983040, 9, 3670078, 983040, 8, 3735614, 917504, 9, 3801150, 983040, 8, 3866686, 983040, 9, 3932222, 983040, 10, 3997758, 983040, 11, 1900607, 1048576, 6, 1966143, 1048576, 7, 2031679, 1048576, 7, 2097215, 1048576, 8, 2162751, 1048576, 9, 2228287, 1048576, 10, 2293823, 1048576, 9, 2359359, 1048576, 10, 2424895, 1048576, 7, 2490431, 1048576, 8, 2555967, 1048576, 9, 2621503, 1048576, 10, 2687039, 1048576, 10, 2752575, 1048576, 11, 3145791, 1048576, 6, 3211327, 1048576, 7, 3276863, 1048576, 7, 3342399, 1048576, 8, 3407935, 1048576, 9, 3473471, 1048576, 10, 3539007, 1048576, 9, 3604543, 1048576, 10, 3670079, 1048576, 7, 3735615, 1048576, 8, 3801151, 1048576, 9, 3866687, 1048576, 10, 3932223, 1048576, 10, 3997759, 1048576, 11, 1376255, 131072, 3, 1441791, 131072, 4, 1179653, 65536, 6, 1179649, 65536, 6, 1179650, 393216, 6, 1179654, 524288, 6, 1507334, 524288, 4, 1507329, 524288, 4, 1376298, 131072, 3, 1441834, 131072, 4, 983065, 1179648, 7, 1048601, 1179648, 8, 1114137, 1179648, 9, 983066, 1245184, 7, 1048602, 1245184, 8, 1114138, 1245184, 9, 983075, 1179648, 7, 1048611, 1179648, 8, 1114147, 1179648, 9, 983076, 1245184, 7, 1048612, 1245184, 8, 1114148, 1245184, 9)
+
+[node name="Player" parent="." instance=ExtResource("3_b3mxk")]
+position = Vector2(101, 260)
+
+[node name="Killz" parent="." instance=ExtResource("4_qe5pl")]
+position = Vector2(-1, 1156)
+
+[node name="SpikeGroup" type="Node2D" parent="."]
+
+[node name="Spikes10" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 340)
+
+[node name="Spikes11" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 310)
+
+[node name="Spikes28" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 279)
+
+[node name="Spikes30" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 249)
+
+[node name="Spikes24" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 399)
+
+[node name="Spikes32" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 429)
+
+[node name="Spikes34" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 458)
+
+[node name="Spikes26" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 369)
+
+[node name="Spikes45" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 189)
+
+[node name="Spikes46" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 159)
+
+[node name="Spikes47" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 128)
+
+[node name="Spikes48" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 98)
+
+[node name="Spikes49" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 218)
+
+[node name="Spikes98" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 718)
+
+[node name="Spikes99" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 688)
+
+[node name="Spikes100" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 657)
+
+[node name="Spikes101" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 627)
+
+[node name="Spikes102" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 777)
+
+[node name="Spikes103" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 807)
+
+[node name="Spikes104" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 836)
+
+[node name="Spikes105" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 747)
+
+[node name="Spikes106" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 567)
+
+[node name="Spikes107" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 537)
+
+[node name="Spikes108" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 506)
+
+[node name="Spikes109" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 476)
+
+[node name="Spikes110" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(667, 596)
+
+[node name="Spikes13" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(-64, 102)
+
+[node name="Spikes14" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(-33, 102)
+
+[node name="Spikes16" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(978, 760)
+
+[node name="Spikes17" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(-2, 102)
+
+[node name="Spikes18" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(29, 102)
+
+[node name="Spikes19" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(1009, 760)
+
+[node name="Spikes23" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(707, 613)
+
+[node name="Spikes25" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(738, 613)
+
+[node name="Spikes29" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(975, 456)
+
+[node name="Spikes31" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(1006, 456)
+
+[node name="Spikes21" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(60, 103)
+
+[node name="Spikes22" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(91, 103)
+
+[node name="Spikes50" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(122, 102)
+
+[node name="Spikes51" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(153, 102)
+
+[node name="Spikes52" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(182, 102)
+
+[node name="Spikes53" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(-64, 102)
+
+[node name="Spikes54" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(-33, 102)
+
+[node name="Spikes55" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(-2, 102)
+
+[node name="Spikes56" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(29, 102)
+
+[node name="Spikes57" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(60, 103)
+
+[node name="Spikes58" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(91, 103)
+
+[node name="Spikes59" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(122, 102)
+
+[node name="Spikes60" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(153, 102)
+
+[node name="Spikes61" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(182, 102)
+
+[node name="Spikes62" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(91, 704)
+
+[node name="Spikes63" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(122, 704)
+
+[node name="Spikes64" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(153, 704)
+
+[node name="Spikes65" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(184, 704)
+
+[node name="Spikes66" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 705)
+
+[node name="Spikes67" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(246, 705)
+
+[node name="Spikes68" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(277, 704)
+
+[node name="Spikes69" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(308, 704)
+
+[node name="Spikes70" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(337, 704)
+
+[node name="Spikes71" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(91, 704)
+
+[node name="Spikes72" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(122, 704)
+
+[node name="Spikes73" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(153, 704)
+
+[node name="Spikes74" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(184, 704)
+
+[node name="Spikes75" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(215, 705)
+
+[node name="Spikes76" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(246, 705)
+
+[node name="Spikes77" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(277, 704)
+
+[node name="Spikes78" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(308, 704)
+
+[node name="Spikes79" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(337, 704)
+
+[node name="Spikes80" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(372, 704)
+
+[node name="Spikes81" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(403, 704)
+
+[node name="Spikes82" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(434, 704)
+
+[node name="Spikes83" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(465, 704)
+
+[node name="Spikes84" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(647, 1132)
+
+[node name="Spikes85" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(678, 1132)
+
+[node name="Spikes86" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(709, 1131)
+
+[node name="Spikes87" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(740, 1131)
+
+[node name="Spikes88" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(769, 1131)
+
+[node name="Spikes89" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(372, 704)
+
+[node name="Spikes90" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(403, 704)
+
+[node name="Spikes91" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(434, 704)
+
+[node name="Spikes92" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(465, 704)
+
+[node name="Spikes121" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(253, 453)
+
+[node name="Spikes122" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(284, 453)
+
+[node name="Spikes123" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(315, 453)
+
+[node name="Spikes124" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(346, 453)
+
+[node name="Spikes125" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(377, 454)
+
+[node name="Spikes126" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(408, 454)
+
+[node name="Spikes127" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(439, 453)
+
+[node name="Spikes128" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(470, 453)
+
+[node name="Spikes129" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(499, 453)
+
+[node name="Spikes130" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(253, 453)
+
+[node name="Spikes131" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(284, 453)
+
+[node name="Spikes132" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(315, 453)
+
+[node name="Spikes133" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(346, 453)
+
+[node name="Spikes134" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(377, 454)
+
+[node name="Spikes135" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(408, 454)
+
+[node name="Spikes136" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(439, 453)
+
+[node name="Spikes137" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(470, 453)
+
+[node name="Spikes138" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(499, 453)
+
+[node name="Spikes139" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(534, 453)
+
+[node name="Spikes140" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(565, 453)
+
+[node name="Spikes141" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(596, 453)
+
+[node name="Spikes142" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(627, 453)
+
+[node name="Spikes143" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(534, 453)
+
+[node name="Spikes144" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(565, 453)
+
+[node name="Spikes145" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(596, 453)
+
+[node name="Spikes146" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(627, 453)
+
+[node name="Spikes93" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(647, 1132)
+
+[node name="Spikes94" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(678, 1132)
+
+[node name="Spikes95" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(709, 1131)
+
+[node name="Spikes96" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(740, 1131)
+
+[node name="Spikes97" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(769, 1131)
+
+[node name="Spikes167" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(801, 1132)
+
+[node name="Spikes168" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(832, 1132)
+
+[node name="Spikes169" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(863, 1131)
+
+[node name="Spikes170" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(894, 1131)
+
+[node name="Spikes171" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(923, 1131)
+
+[node name="Spikes172" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(801, 1132)
+
+[node name="Spikes173" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(832, 1132)
+
+[node name="Spikes174" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(863, 1131)
+
+[node name="Spikes175" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(894, 1131)
+
+[node name="Spikes176" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(923, 1131)
+
+[node name="Spikes111" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(487, 1132)
+
+[node name="Spikes112" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(518, 1132)
+
+[node name="Spikes113" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(549, 1131)
+
+[node name="Spikes114" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(580, 1131)
+
+[node name="Spikes115" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(609, 1131)
+
+[node name="Spikes116" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(487, 1132)
+
+[node name="Spikes117" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(518, 1132)
+
+[node name="Spikes118" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(549, 1131)
+
+[node name="Spikes119" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(580, 1131)
+
+[node name="Spikes120" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(609, 1131)
+
+[node name="Spikes147" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(332, 1132)
+
+[node name="Spikes148" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(363, 1132)
+
+[node name="Spikes149" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(394, 1131)
+
+[node name="Spikes150" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(425, 1131)
+
+[node name="Spikes151" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(454, 1131)
+
+[node name="Spikes152" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(332, 1132)
+
+[node name="Spikes153" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(363, 1132)
+
+[node name="Spikes154" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(394, 1131)
+
+[node name="Spikes155" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(425, 1131)
+
+[node name="Spikes156" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(454, 1131)
+
+[node name="Spikes157" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(172, 1132)
+
+[node name="Spikes158" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(203, 1132)
+
+[node name="Spikes159" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(234, 1131)
+
+[node name="Spikes160" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(265, 1131)
+
+[node name="Spikes161" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(294, 1131)
+
+[node name="Spikes162" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(172, 1132)
+
+[node name="Spikes163" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(203, 1132)
+
+[node name="Spikes164" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(234, 1131)
+
+[node name="Spikes165" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(265, 1131)
+
+[node name="Spikes166" parent="SpikeGroup" instance=ExtResource("5_qvnx6")]
+position = Vector2(294, 1131)
+
+[node name="LevelExit" parent="." instance=ExtResource("6_25rvu")]
+position = Vector2(495, 279)
+
+[node name="CameraBounds" parent="." instance=ExtResource("7_jb1f3")]
+visible = false
+position = Vector2(684, 389)
+width = 1372
+height = 1525
+metadata/_edit_lock_ = true
+
+[node name="FrozenBlock" parent="." instance=ExtResource("8_hvy8a")]
+position = Vector2(43, 260)
