@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="7_grrnm"]
 [ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="8_vielu"]
 
-[node name="Level0" type="Node2D"]
+[node name="Level1" type="Node2D"]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_tx7w7")]
 
