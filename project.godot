@@ -23,6 +23,7 @@ SceneLoader="*res://addons/maaacks_game_template/base/scenes/Autoloads/SceneLoad
 ProjectMusicController="*res://addons/maaacks_game_template/base/scenes/Autoloads/ProjectMusicController.tscn"
 ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/Autoloads/ProjectUISoundController.tscn"
 GlobalSoundPlayer="*res://sound/GlobalSoundPlayer.gd"
+GlobalPlayerState="*res://actors/player/player_state.gd"
 
 [display]
 

@@ -21,7 +21,7 @@ func update_ui() -> void:
 		
 	for slot in slots:
 		var _slot: SlotWidget = slot
-		_slot.set_quantity(slot.inventory_slot.current_blocks)
+		_slot.set_quantity(slot.inventory_slot.current_blocks, slot.inventory_slot.MAX_BLOCKS)
 		if _slot.inventory_slot.is_selected:
 			_slot.modulate = Color(1, 1, 1)
 		else:

@@ -5,6 +5,9 @@ signal death
 
 var scene_root
 
+# state
+var player_state : PlayerState
+
 # health
 @export var max_health: float = 10
 
@@ -108,8 +111,9 @@ func setup_ui():
 	in_game_ui.update_ui()
 
 func _ready():
+	player_state = GlobalPlayerState as PlayerState
 	scene_root = get_parent()
-	inventory = Inventory.new()
+	inventory = Inventory.new(player_state)
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
 	space_state = get_world_2d().direct_space_state

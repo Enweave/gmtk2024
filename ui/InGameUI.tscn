@@ -134,6 +134,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/separation = 15
 
 [node name="SlotWidget" parent="MarginContainer/Slots" instance=ExtResource("2_xogei")]
 layout_mode = 2
