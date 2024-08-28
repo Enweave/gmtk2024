@@ -77,13 +77,11 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Health"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 31
 text = "HEALTH:"
 
 [node name="HealthValue" type="Label" parent="MarginContainer/HBoxContainer/Health"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 31
 text = "10"
 
 [node name="BlockCount" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -132,7 +130,7 @@ theme_override_font_sizes/font_size = 56
 
 [node name="Slots" type="HBoxContainer" parent="MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
