@@ -8,6 +8,12 @@ var scene_root
 # state
 var player_state : PlayerState
 
+# cursor grid
+var cursor_scene: PackedScene = preload("res://actors/player/grid_cursor.tscn")
+var grid_cursor: GridCursor
+var cursor_grid_size: int = 16
+var use_cursor_grid: bool = true
+
 # health
 @export var max_health: float = 10
 
@@ -119,6 +125,11 @@ func _ready():
 	space_state = get_world_2d().direct_space_state
 	health_component.OnDeath.connect(_on_death)
 	footsteps_timer.connect("timeout", _on_footsteps_timer_timeout)
+	if use_cursor_grid:
+		grid_cursor = cursor_scene.instantiate()
+		grid_cursor.rebuild_rectangle(cursor_grid_size)
+		scene_root.add_child.call_deferred(grid_cursor)
+		
 
 func _on_death():
 	death.emit()
@@ -185,8 +196,13 @@ func player_jump(_delta):
 
 
 func process_mouse(_delta):
+	var mouse_position: Vector2 = get_global_mouse_position()
+	var mouse_position_grid_snapped: Vector2 = Vector2.ZERO
+	
+	if use_cursor_grid:
+		mouse_position_grid_snapped = grid_cursor.snap_to_grid(mouse_position)
+		
 	if Input.is_action_just_pressed("fire"):
-		var mouse_position: Vector2 = get_global_mouse_position()
 		beam.global_position = weapon_hotspot.global_position
 		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 		var _beam_vector: Vector2 = mouse_position - beam.global_position
@@ -201,7 +217,10 @@ func process_mouse(_delta):
 		if results.size() == 0 and !_beam_target:
 			if inventory.selected_slot.can_remove_block(1):
 				var block_instance := inventory.selected_slot.block.prefab.instantiate()
-				block_instance.position = params.position
+				if use_cursor_grid:
+					block_instance.global_position = mouse_position_grid_snapped
+				else:
+					block_instance.global_position = params.position
 				scene_root.add_child(block_instance)
 				inventory.selected_slot.remove_block(1)
 				beam.can_print = true

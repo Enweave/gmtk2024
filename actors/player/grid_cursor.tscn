@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bygnrariu7g4n"]
+
+[ext_resource type="Script" path="res://actors/player/grid_cursor.gd" id="1_2lxdm"]
+
+[node name="cursor" type="Node2D"]
+z_index = 100
+script = ExtResource("1_2lxdm")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(1, 1, 1, 0.317647)
