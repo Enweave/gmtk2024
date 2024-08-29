@@ -5,7 +5,7 @@ class_name InventorySlot
 signal quantity_changed
 
 var block: BlockBase = null
-var MAX_BLOCKS: int = 10
+var MAX_BLOCKS: int = 3
 var current_blocks: int = 0
 var is_selected: bool = false
 var unlocked: bool = false

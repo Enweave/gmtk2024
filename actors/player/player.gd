@@ -16,7 +16,7 @@ var health_component: HealthComponent
 var space_state: PhysicsDirectSpaceState2D
 var inventory : Inventory
 
-@export var weapon_range: float = 400
+@export var weapon_range: float = 200
 @export var weapon_cooldown: float = 0.2
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var weapon_hotspot: Node2D = %WeaponHotSpot
@@ -29,9 +29,9 @@ var inventory : Inventory
 var FRICTION: float = SPEED/10
 
 # jump and gravity
-@export var JUMP_FORCE: float = 300.
-@export var WALL_JUMP_FORCE_X: float = 325.
-@export var WALL_JUMP_FORCE_Y: float = 400.
+@export var JUMP_FORCE: float = 250.
+@export var WALL_JUMP_FORCE_X: float = 300.
+@export var WALL_JUMP_FORCE_Y: float = 255.
 @export var NUM_JUMPS_MAX: int = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
