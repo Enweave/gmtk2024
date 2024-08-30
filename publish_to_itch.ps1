@@ -2,7 +2,7 @@
 $BUTLER_PATH = "$ENV:AppData\itch\apps\butler\butler.exe"
 $GODOT_PATH = "C:\stuff\Godot_v4.3-stable_win64.exe"
 $ITCH_USER = "enweave"
-$ITCH_GAME = "stranded"
+$ITCH_GAME = "stranded-post-jam"
 $ITCH_CHANNEL = "web"
 $GODOT_TEMPLATE = "`"Web`""
 $EXPORT = "--export-debug" # "--export-debug" or "--export-release"
