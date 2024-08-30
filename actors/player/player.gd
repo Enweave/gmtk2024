@@ -235,9 +235,7 @@ func process_mouse(_delta):
 						var _remove_result: int = collider.remove()
 						inventory.get_slot(_collider_block.block_type).add_block(_remove_result)
 						beam.can_print = bool(_remove_result)
-					else:
-						in_game_ui.warn_block_full()
-		in_game_ui.update_ui()
+
 
 
 func coyote():

@@ -3,6 +3,7 @@ extends RefCounted
 class_name InventorySlot
 
 signal quantity_changed
+signal blocks_full
 
 var block: BlockBase = null
 var MAX_BLOCKS: int = 10
@@ -20,7 +21,10 @@ func _init(_block_class: BlockBase, _current_blocks: int = 0) -> void:
 		unlocked = true
 
 func can_add_block(_quantity: int = 1) -> bool:
-	return (current_blocks+_quantity) < MAX_BLOCKS	
+	var _can_add: bool = (current_blocks+_quantity) <= MAX_BLOCKS
+	if not _can_add:
+		blocks_full.emit()
+	return _can_add
 
 func add_block(_quantity: int = 1) -> void:
 	unlocked = true
