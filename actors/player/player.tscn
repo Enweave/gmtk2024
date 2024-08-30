@@ -349,8 +349,7 @@ limit_smoothed = true
 
 [node name="Beam" parent="." instance=ExtResource("4_v35ri")]
 unique_name_in_owner = true
-position = Vector2(10, -20.95)
-beam_color = Color(0.385027, 0.567829, 0.967246, 1)
+top_level = true
 
 [node name="WeaponPivot" type="Node2D" parent="."]
 unique_name_in_owner = true

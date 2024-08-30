@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6brrqwolhdbn"]
+
+[ext_resource type="Script" path="res://actors/player/crosshair.gd" id="1_8u5a0"]
+[ext_resource type="Texture2D" uid="uid://pyrgu1e7l2ja" path="res://assets/spritesheets/cursor/cursor.png" id="2_a6uk8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnhod"]
+atlas = ExtResource("2_a6uk8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi55r"]
+atlas = ExtResource("2_a6uk8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_18mbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnhod")
+}],
+"loop": false,
+"name": &"invalid",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi55r")
+}],
+"loop": false,
+"name": &"valid",
+"speed": 5.0
+}]
+
+[node name="Crosshair" type="Node2D"]
+z_index = 100
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_8u5a0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_18mbg")
+animation = &"valid"
+autoplay = "valid"
