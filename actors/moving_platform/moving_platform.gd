@@ -21,13 +21,13 @@ var _time_elapsed: float = 0
 var _timer: Timer
 var _tick_time: float = 0.01
 
-@export_range(1, 10, 1) var width_cells: int = 2:
+@export_range(1, 10, 1) var width_cells: int:
 	set (value):
 		width_cells = value
 		print(width_cells)
 		update_dimenstions()
 
-@export_range(1, 10, 1) var height_cells: int = 1:
+@export_range(1, 10, 1) var height_cells: int:
 	set (value):
 		height_cells = value
 		update_dimenstions()

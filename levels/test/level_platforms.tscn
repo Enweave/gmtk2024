@@ -43,6 +43,7 @@ path_time = 2.0
 path2d = NodePath("../Path2D")
 rest_time = 0.0
 width_cells = 4
+height_cells = 1
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(132, -169)
@@ -84,7 +85,6 @@ position = Vector2(-312, -56)
 
 [node name="BlockMagnet" parent="." instance=ExtResource("10_5wwct")]
 position = Vector2(-144, -16)
-prefab = null
 
 [node name="abyss" parent="." instance=ExtResource("11_8l61c")]
 position = Vector2(-1936, 176)
