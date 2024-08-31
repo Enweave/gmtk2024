@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://balkjukooeb6r"]
+
+[sub_resource type="Gradient" id="Gradient_yw0gw"]
+offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kyoll"]
+gradient = SubResource("Gradient_yw0gw")
+width = 512
+
+[node name="abyss" type="Polygon2D"]
+texture_filter = 1
+position = Vector2(-1741, 174)
+scale = Vector2(300, 4.372)
+texture = SubResource("GradientTexture1D_kyoll")
+texture_rotation = 1.5708
+polygon = PackedVector2Array(-0.168633, 184.126, 11.973, 184.126, 11.973, -8.67754, 11.973, -35.9191, -0.168636, -35.9191)
+metadata/_edit_group_ = true

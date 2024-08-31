@@ -253,6 +253,7 @@ radius = 90.0
 [node name="BlockMagnet" type="RigidBody2D"]
 mass = 0.1
 script = ExtResource("1_nrb8y")
+prefab = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_667te")

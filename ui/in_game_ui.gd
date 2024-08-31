@@ -50,6 +50,7 @@ func assign_inventory(_inventory: Inventory) -> void:
 	for slot in inventory.slots_map.values():
 		slot.quantity_changed.connect(update_ui)
 	inventory.slot_switched.connect(update_ui)
+	inventory.blocks_full.connect(warn_block_full)
 
 	var _slots : HBoxContainer = %Slots
 	slots = []

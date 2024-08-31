@@ -2,22 +2,27 @@ extends CharacterBody2D
 class_name Player
 
 signal death
-
 var scene_root
-
 # state
-var player_state : PlayerState
+var player_state: PlayerState
+# cursor 
+var grid_cursor_scene: PackedScene = preload("res://actors/player/grid_cursor.tscn")
+var grid_cursor: GridCursor
+var cursor_grid_size: int = 16
+var use_cursor_grid: bool = false
 
 # health
 @export var max_health: float = 10
 
 var health_component: HealthComponent
 # weapon
+var target_params: PhysicsPointQueryParameters2D
 var space_state: PhysicsDirectSpaceState2D
-var inventory : Inventory
+var inventory: Inventory
 
 @export var weapon_range: float = 200
 @export var weapon_cooldown: float = 0.2
+
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var weapon_hotspot: Node2D = %WeaponHotSpot
 @onready var beam: Beam = %Beam
@@ -74,8 +79,10 @@ func _play_footsteps_sound():
 	if is_on_floor():
 		footsteps_sfx_player.play_random_sound()
 
+
 func _on_footsteps_timer_timeout():
 	_play_footsteps_sound()
+
 
 func _toggle_footsteps_sound(_is_on: bool):
 	if _is_on:
@@ -110,6 +117,7 @@ func setup_ui():
 	in_game_ui.assign_inventory(inventory)
 	in_game_ui.update_ui()
 
+
 func _ready():
 	player_state = GlobalPlayerState as PlayerState
 	scene_root = get_parent()
@@ -120,10 +128,20 @@ func _ready():
 	health_component.OnDeath.connect(_on_death)
 	footsteps_timer.connect("timeout", _on_footsteps_timer_timeout)
 
+	beam.scene_root = scene_root
+	beam.inventory = inventory
+	target_params = PhysicsPointQueryParameters2D.new()
+	if use_cursor_grid:
+		grid_cursor = grid_cursor_scene.instantiate()
+		grid_cursor.rebuild_rectangle(cursor_grid_size)
+		scene_root.add_child.call_deferred(grid_cursor)
+
+
 func _on_death():
 	death.emit()
 
 var push_force: int = 2
+
 
 func process_inventory(_delta):
 	if Input.is_action_just_pressed("switch_slot_1"):
@@ -132,12 +150,15 @@ func process_inventory(_delta):
 		inventory.switch_slot(BlockBase.BlockType.FROZEN)
 	elif Input.is_action_just_pressed("switch_slot_3"):
 		inventory.switch_slot(BlockBase.BlockType.MAGNET)
+	elif Input.is_action_just_pressed("switch_slot_4"):
+		inventory.switch_slot(BlockBase.BlockType.STICKY)
+
 
 func _physics_process(delta):
 	process_gravity(delta)
 	player_run(delta)
 	player_jump(delta)
-	process_mouse(delta)
+
 	move_and_slide()
 	update_animations()
 	process_inventory(delta)
@@ -149,6 +170,10 @@ func _physics_process(delta):
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 
+func _process(_delta):
+	process_aim_and_fire(_delta)
+
+
 func _player_jump():
 	velocity.y = -JUMP_FORCE
 	jumps_left -= 1
@@ -157,6 +182,7 @@ func _player_jump():
 	JumpSfxPlayer.play_random_sound()
 	JumpSprite.stop()
 	JumpSprite.play("fire")
+
 
 func _player_walljump():
 	velocity.y = -WALL_JUMP_FORCE_Y
@@ -167,6 +193,7 @@ func _player_walljump():
 	JumpSfxPlayer.play_random_sound()
 	JumpSprite.stop()
 	JumpSprite.play("fire")
+
 
 func player_jump(_delta):
 	if Input.is_action_just_pressed("jump"):
@@ -184,48 +211,48 @@ func player_jump(_delta):
 			jump_queued = false
 
 
-func process_mouse(_delta):
+func process_aim_and_fire(_delta):
+	var mouse_position: Vector2 = get_global_mouse_position()
+	var target_position: Vector2 = Vector2.ZERO
+	var target_position_grid_snapped: Vector2 = Vector2.ZERO
+
+	var _beam_vector: Vector2 = mouse_position - beam.global_position
+	var distance: float
+
+	var target_unoccupied: bool = true
+	var target_in_range: bool = false
+	var target_pickable: bool = false
+
+	beam.global_position = weapon_hotspot.global_position
+	
+	if _beam_vector.length() <= weapon_range:
+		target_in_range = true
+		distance = _beam_vector.length()
+	else:
+		distance = weapon_range
+
+	target_position = beam.global_position + _beam_vector.normalized() * distance
+	target_params.position = target_position
+
+	if use_cursor_grid:
+		for i in space_state.intersect_point(target_params):
+			target_unoccupied = false
+			if i.collider is BlockBase:
+				target_pickable = true
+				break
+		target_position_grid_snapped = grid_cursor.snap_to_grid(target_position, target_in_range, target_unoccupied, target_pickable)
+
 	if Input.is_action_just_pressed("fire"):
-		var mouse_position: Vector2 = get_global_mouse_position()
-		beam.global_position = weapon_hotspot.global_position
-		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
-		var _beam_vector: Vector2 = mouse_position - beam.global_position
-		var _distance = min(weapon_range, _beam_vector.length())
-
-		params.position = beam.global_position + _beam_vector.normalized() * _distance
-		beam.global_rotation = _beam_vector.angle() - PI/2
-		
-		var _beam_target: Node2D = beam.fire(_distance, weapon_cooldown)
-
-		var results: Array[Dictionary] = space_state.intersect_point(params)
-		if results.size() == 0 and !_beam_target:
-			if inventory.selected_slot.can_remove_block(1):
-				var block_instance := inventory.selected_slot.block.prefab.instantiate()
-				block_instance.position = params.position
-				scene_root.add_child(block_instance)
-				inventory.selected_slot.remove_block(1)
-				beam.can_print = true
-		else:
-			for result in results:
-				var collider = result["collider"]
-				if collider is BlockBase:
-					var _collider_block: BlockBase = collider
-					if _beam_target != collider:
-						return
-					if inventory.get_slot(_collider_block.block_type).can_add_block(1):
-						var _remove_result: int = collider.remove()
-						inventory.get_slot(_collider_block.block_type).add_block(_remove_result)
-						beam.can_print = bool(_remove_result)
-					else:
-						in_game_ui.warn_block_full()
-		in_game_ui.update_ui()
+		if !use_cursor_grid:
+			target_unoccupied = space_state.intersect_point(target_params).size() == 0
+		beam.shoot(target_position, weapon_cooldown, target_unoccupied, target_in_range, target_position_grid_snapped, use_cursor_grid)
 
 
 func coyote():
 	if not coyote_triggered:
 		coyote_triggered = true
 		await get_tree().create_timer(coyote_time).timeout
-		is_on_wall_recently = false	
+		is_on_wall_recently = false
 		if not is_on_floor():
 			current_num_jumps_max = NUM_JUMPS_MAX - 1
 			jumps_left = min(jumps_left, current_num_jumps_max)
@@ -277,7 +304,7 @@ func player_run(_delta):
 func update_animations():
 	if animated_sprite.animation != StateAnimationMap[current_state]:
 		animated_sprite.play(StateAnimationMap[current_state])
-		
+
 	if current_state == PlayerAnimationState.RUN:
 		_toggle_footsteps_sound(true)
 	else:
