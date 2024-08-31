@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3467y3dqqqb"]
+[gd_scene load_steps=16 format=3 uid="uid://b3467y3dqqqb"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_kbsli"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_o2i7g"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="5_nqk23"]
 [ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="6_4mmlp"]
 [ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="7_ynb2x"]
+[ext_resource type="PackedScene" uid="uid://balkjukooeb6r" path="res://levels/backgrounds/abyss.tscn" id="11_g6s4j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m14yb"]
 atlas = ExtResource("4_nb4v6")
@@ -39,14 +40,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="Gradient" id="Gradient_yw0gw"]
-offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_kyoll"]
-gradient = SubResource("Gradient_yw0gw")
-width = 512
 
 [node name="Level0" type="Node2D"]
 script = ExtResource("1_kbsli")
@@ -136,11 +129,4 @@ position = Vector2(750, -294)
 width = 1635
 metadata/_edit_lock_ = true
 
-[node name="abyss" type="Polygon2D" parent="."]
-texture_filter = 1
-position = Vector2(-1741, 174)
-scale = Vector2(300, 4.372)
-texture = SubResource("GradientTexture1D_kyoll")
-texture_rotation = 1.5708
-polygon = PackedVector2Array(-0.168633, 184.126, 11.973, 184.126, 11.973, -8.67754, 11.973, -35.9191, -0.168636, -35.9191)
-metadata/_edit_group_ = true
+[node name="abyss" parent="." instance=ExtResource("11_g6s4j")]
