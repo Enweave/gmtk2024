@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bffndon47d1cc"]
+[gd_scene load_steps=14 format=3 uid="uid://bffndon47d1cc"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_pcvlg"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="3_783sv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="7_pvtkl"]
 [ext_resource type="PackedScene" uid="uid://3bmje1s8d2bq" path="res://actors/buildable/block_magnet/block_magnet.tscn" id="8_ohshv"]
 [ext_resource type="PackedScene" uid="uid://dviiracpaoc3t" path="res://actors/buildable/block_frozen/block_frozen.tscn" id="9_pekub"]
+[ext_resource type="PackedScene" uid="uid://kxygy872wlwa" path="res://actors/moving_platform/moving_platform.tscn" id="10_cgr7b"]
 
 [sub_resource type="Gradient" id="Gradient_qf5ro"]
 offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
@@ -17,6 +18,12 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hbh2f"]
 gradient = SubResource("Gradient_qf5ro")
 width = 512
+
+[sub_resource type="Curve2D" id="Curve2D_qcsay"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -24, -136, 0, 0, 0, 0, -24, -48)
+}
+point_count = 2
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_pcvlg")
@@ -59,3 +66,10 @@ position = Vector2(80, -64)
 
 [node name="Block2" parent="." instance=ExtResource("9_pekub")]
 position = Vector2(160, -48)
+
+[node name="MovingPlatform" parent="." node_paths=PackedStringArray("path2d") instance=ExtResource("10_cgr7b")]
+position = Vector2(24, -168)
+path2d = NodePath("../Path2D")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_qcsay")
