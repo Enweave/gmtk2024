@@ -12,7 +12,8 @@ func _on_blocks_full() -> void:
 var slots_map: Dictionary = {
 	BlockBase.BlockType.SIMPLE: InventorySlot.new(BlockSimple.new()),
 	BlockBase.BlockType.FROZEN: InventorySlot.new(BlockFrozen.new()),
-	BlockBase.BlockType.MAGNET: InventorySlot.new(BlockMagnet.new())
+	BlockBase.BlockType.MAGNET: InventorySlot.new(BlockMagnet.new()),
+	BlockBase.BlockType.STICKY: InventorySlot.new(BlockSticky.new())
 }
 
 var selected_slot: InventorySlot = slots_map[BlockBase.BlockType.SIMPLE]

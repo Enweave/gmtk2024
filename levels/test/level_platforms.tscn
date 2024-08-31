@@ -84,6 +84,7 @@ position = Vector2(-312, -56)
 
 [node name="BlockMagnet" parent="." instance=ExtResource("10_5wwct")]
 position = Vector2(-144, -16)
+prefab = null
 
 [node name="abyss" parent="." instance=ExtResource("11_8l61c")]
 position = Vector2(-1936, 176)

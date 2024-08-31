@@ -5,11 +5,12 @@ enum BlockType {
 	SIMPLE,
 	FROZEN,
 	MAGNET,
+	STICKY,
 	HOT
 }
 var UI_Texture_path: String = ""
 
-@export var prefab: PackedScene
+var prefab: PackedScene
 
 @onready var anim_player = %AnimationPlayer
 

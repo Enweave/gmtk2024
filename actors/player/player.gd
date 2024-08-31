@@ -150,6 +150,8 @@ func process_inventory(_delta):
 		inventory.switch_slot(BlockBase.BlockType.FROZEN)
 	elif Input.is_action_just_pressed("switch_slot_3"):
 		inventory.switch_slot(BlockBase.BlockType.MAGNET)
+	elif Input.is_action_just_pressed("switch_slot_4"):
+		inventory.switch_slot(BlockBase.BlockType.STICKY)
 
 
 func _physics_process(delta):
