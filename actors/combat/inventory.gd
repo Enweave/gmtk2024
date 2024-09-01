@@ -1,10 +1,11 @@
 extends RefCounted
-
 class_name Inventory
 signal slot_switched
 signal blocks_full
-
 var player_state: PlayerState
+var _selected_slot_index: int = 0
+var _last_slot_index: int = 3
+
 
 func _on_blocks_full() -> void:
 	blocks_full.emit()
@@ -18,14 +19,25 @@ var slots_map: Dictionary = {
 
 var selected_slot: InventorySlot = slots_map[BlockBase.BlockType.SIMPLE]
 
+
 func get_slot(_block_type: BlockBase.BlockType) -> InventorySlot:
 	return slots_map[_block_type]
 
+
+func get_block_type_from_index(_index: int) -> BlockBase.BlockType:
+	for slot in slots_map.keys():
+		if slot == _index:
+			return slot
+	return BlockBase.BlockType.SIMPLE
+
+
 func _init(_player_state: PlayerState) -> void:
 	player_state = _player_state
+	_last_slot_index = slots_map.size() - 1
 	switch_slot(player_state.selected_slot, false)
 	for slot in slots_map.values():
 		slot.blocks_full.connect(_on_blocks_full)
+
 
 func switch_slot(_block_type: BlockBase.BlockType, _update_state: bool = true) -> void:
 	for slot in slots_map.values():
@@ -35,3 +47,21 @@ func switch_slot(_block_type: BlockBase.BlockType, _update_state: bool = true) -
 	slot_switched.emit()
 	if _update_state:
 		player_state.switch_slot(_block_type)
+
+	_selected_slot_index = int(_block_type)
+
+
+func next_slot():
+	var next_slot_index: int = _selected_slot_index + 1
+	if next_slot_index > _last_slot_index:
+		next_slot_index = 0
+	
+	switch_slot(get_block_type_from_index(next_slot_index))
+
+
+func previous_slot():
+	var previous_slot_index: int = _selected_slot_index - 1
+	if previous_slot_index < 0:
+		previous_slot_index = _last_slot_index
+
+	switch_slot(get_block_type_from_index(previous_slot_index))
