@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://xq1mj1yf0gj8" path="res://assets/spritesheets/props/block.png" id="2_ragku"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u56c2"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="Animation" id="Animation_6r0uf"]
 length = 0.001
@@ -68,7 +68,6 @@ max_contacts_reported = 1
 script = ExtResource("1_w368x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_u56c2")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
