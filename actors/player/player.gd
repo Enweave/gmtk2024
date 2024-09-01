@@ -5,8 +5,7 @@ signal death
 var scene_root
 # state
 var player_state: PlayerState
-# cursor 
-var input_is_mouse: bool = true
+# cursor
 var is_aiming: bool = false
 var crosshair: Crosshair
 var crosshair_scene: PackedScene = preload("res://actors/player/crosshair.tscn")
@@ -15,20 +14,19 @@ var grid_cursor_scene: PackedScene = preload("res://actors/player/grid_cursor.ts
 var grid_cursor: GridCursor
 var cursor_grid_size: int = 16
 var use_cursor_grid: bool = false
-var gamepad_crosshair_speed: float = 200
+var gamepad_crosshair_speed: float = 250
 var gamepad_crosshair_momentum: float = 0
-var gamepad_crosshair_momentum_delta: float = 1.3
-var gamepad_crosshair_range_x: float = 250
-var gamepad_crosshair_range_y: float = 130
+var gamepad_crosshair_momentum_delta: float = 0.7
+var gamepad_crosshair_range_x: float = 440
+var gamepad_crosshair_range_y: float = 255
 var gamepad_crosshair_offset: Vector2 = Vector2.ZERO
-
 
 # camera stuff
 @onready var player_camera: Camera2D = %Camera2D
 
 var camera_interpolation: float = 8.
-var max_camera_offset_x: int = 160
-var max_camera_offset_y: int = 90
+var max_camera_offset_x: int = 220
+var max_camera_offset_y: int = 140
 
 # health
 @export var max_health: float = 10
@@ -39,7 +37,7 @@ var target_params: PhysicsPointQueryParameters2D
 var space_state: PhysicsDirectSpaceState2D
 var inventory: Inventory
 
-@export var weapon_range: float = 200
+@export var weapon_range: float = 400
 @export var weapon_cooldown: float = 0.2
 
 @onready var weapon_pivot: Node2D = %WeaponPivot
@@ -138,8 +136,12 @@ func setup_ui():
 
 
 func _ready():
-	player_state = GlobalPlayerState as PlayerState
 	scene_root = get_parent()
+	crosshair = crosshair_scene.instantiate()
+	scene_root.add_child.call_deferred(crosshair)
+	player_state = GlobalPlayerState as PlayerState
+	player_state.asign_player(self)
+	
 	inventory = Inventory.new(player_state)
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
@@ -154,15 +156,7 @@ func _ready():
 		grid_cursor = grid_cursor_scene.instantiate()
 		grid_cursor.rebuild_rectangle(cursor_grid_size)
 		scene_root.add_child.call_deferred(grid_cursor)
-
-	crosshair = crosshair_scene.instantiate()
-	scene_root.add_child.call_deferred(crosshair)
-#	crosshair.hide()
-
-
-# hide mouse cursor
-#	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
+		
 
 func _on_death():
 	death.emit()
@@ -228,19 +222,12 @@ func player_jump(_delta):
 
 
 func _input(event):
-	#	if event is InputEventMouseMotion and is_aiming:
-	#		crosshair_position = get_global_mouse_position()
-
 	if event is InputEventMouseButton:
-		crosshair.hide()
-		input_is_mouse = true
 		if event.is_action_pressed("mouse_look"):
 			is_aiming = true
 		if event.is_action_released("mouse_look"):
 			is_aiming = false
 	if event is InputEventJoypadButton:
-		crosshair.show()
-		input_is_mouse = false
 		if event.is_action_pressed("gamepad_aim_reset"):
 			gamepad_crosshair_offset = Vector2.ZERO
 
@@ -259,7 +246,7 @@ func _input(event):
 
 
 func calc_crosshair_position(_delta):
-	if input_is_mouse:
+	if player_state.is_using_mouse_and_keyboard:
 		crosshair_position = get_global_mouse_position()
 
 	else:
@@ -280,7 +267,7 @@ func calc_crosshair_position(_delta):
 
 
 func do_camera_offset(_delta: float):
-	if is_aiming:
+	if is_aiming or !player_state.is_using_mouse_and_keyboard:
 		var mid_point_x: float = self.global_position.x + (crosshair_position.x - self.global_position.x) / 2
 		var mid_point_y: float = self.global_position.y + (crosshair_position.y - self.global_position.y) / 2
 		var clamped_camera_x: float = clamp(mid_point_x, self.global_position.x - max_camera_offset_x, self.global_position.x + max_camera_offset_x)
@@ -323,7 +310,7 @@ func process_aim_and_fire(_delta):
 	if Input.is_action_just_pressed("fire"):
 		if !use_cursor_grid:
 			target_unoccupied = space_state.intersect_point(target_params).size() == 0
-			
+
 		beam.shoot(target_position, weapon_cooldown, target_unoccupied, target_in_range, target_position_grid_snapped, use_cursor_grid)
 
 
