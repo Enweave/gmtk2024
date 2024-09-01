@@ -38,6 +38,8 @@ var path_follow: PathFollow2D
 func update_dimenstions():
 	var _width_pixels: int = width_cells * grid_size
 	var _height_pixels: int = height_cells * grid_size
+	
+	%CollisionShape2D.shape = RectangleShape2D.new()
 	%CollisionShape2D.shape['size']= Vector2(_width_pixels, _height_pixels)
 	%Polygon2D.polygon = [
 		Vector2(-_width_pixels/2, -_height_pixels/2),
