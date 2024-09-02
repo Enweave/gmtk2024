@@ -138,6 +138,7 @@ func setup_ui():
 func _ready():
 	scene_root = get_parent()
 	crosshair = crosshair_scene.instantiate()
+	crosshair.visible = false
 	scene_root.add_child.call_deferred(crosshair)
 	player_state = GlobalPlayerState as PlayerState
 	player_state.asign_player(self)
