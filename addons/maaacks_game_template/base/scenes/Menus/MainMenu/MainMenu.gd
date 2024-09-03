@@ -22,7 +22,8 @@ func load_scene(scene_path : String):
 
 func play_game():
 	GameLevelLog.set_current_level(0)
-	GlobalPlayerState.reset()
+	var player_state : PlayerState = GlobalPlayerState
+	player_state.reset()
 	SceneLoader.load_scene(game_scene_path)
 
 func _open_sub_menu(menu : Control):

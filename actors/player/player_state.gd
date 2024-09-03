@@ -13,11 +13,11 @@ func reset() -> void:
 	total_collectible_count = 0
 	
 func add_collectible(_node: Node) -> void:
-	if current_player:
+	if is_instance_valid(current_player):
 		current_player.inventory.add_collectible(_node)
 
 func commit_collectibles() -> void:
-	if current_player:
+	if is_instance_valid(current_player):
 		total_collectible_count += current_player.inventory.collectible_count
 	
 func switch_slot(_block_type: BlockBase.BlockType) -> void:
@@ -27,7 +27,7 @@ func asign_player(_player: Player) -> void:
 	current_player = _player
 
 func display_player_gamepad_crosshair(_display) -> void:
-	if current_player:
+	if is_instance_valid(current_player):
 		current_player.crosshair.visible = _display
 
 func _input(event: InputEvent) -> void:
