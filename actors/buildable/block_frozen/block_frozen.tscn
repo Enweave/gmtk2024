@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1cewu6myj5rp" path="res://assets/spritesheets/props/block_frozen.png" id="2_mc634"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u56c2"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hj4c8"]
 atlas = ExtResource("2_mc634")
@@ -122,6 +122,7 @@ script = ExtResource("1_87pli")
 shape = SubResource("RectangleShape2D_u56c2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_rw80v")
 autoplay = "default"
 frame_progress = 0.7808

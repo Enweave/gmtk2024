@@ -1,6 +1,9 @@
-﻿extends Node
+extends Node
 
 class_name PlayerState
+
+var egg_count = 0
+var cube_count = 0
 
 var selected_slot: BlockBase.BlockType = BlockBase.BlockType.SIMPLE
 var is_using_mouse_and_keyboard: bool = true
