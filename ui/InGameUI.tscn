@@ -108,6 +108,20 @@ libraries = {
 "": SubResource("AnimationLibrary_7hnex")
 }
 
+[node name="Collectibles" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/Collectibles"]
+layout_mode = 2
+text = "COLLECTIBLES:"
+
+[node name="CollectibleCount" type="Label" parent="MarginContainer/Collectibles"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
 [node name="StatusHandle" type="Control" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4

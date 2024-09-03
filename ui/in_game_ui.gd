@@ -26,7 +26,9 @@ func update_ui() -> void:
 			_slot.modulate = Color(1, 1, 1)
 		else:
 			_slot.modulate = Color(0.5, 0.5, 0.5)
-
+	
+	%CollectibleCount.text = str(inventory.player_state.total_collectible_count + inventory.collectible_count)	
+		
 func _on_damage(_amount: float) -> void:
 	update_ui()
 	
@@ -35,7 +37,6 @@ func _on_heal(_amount: float) -> void:
 		
 func _on_death():
 	death_sfx_player.play()
-	print("Player died")
 	update_ui()
 
 func assign_health_component(_health_component: HealthComponent) -> void:
@@ -51,6 +52,8 @@ func assign_inventory(_inventory: Inventory) -> void:
 		slot.quantity_changed.connect(update_ui)
 	inventory.slot_switched.connect(update_ui)
 	inventory.blocks_full.connect(warn_block_full)
+	inventory.collectible_added.connect(update_ui)	
+	
 
 	var _slots : HBoxContainer = %Slots
 	slots = []

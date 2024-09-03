@@ -2,15 +2,23 @@ extends Node
 
 class_name PlayerState
 
-var egg_count = 0
-var cube_count = 0
-
 var selected_slot: BlockBase.BlockType = BlockBase.BlockType.SIMPLE
 var is_using_mouse_and_keyboard: bool = true
 var current_player: Player
 
+var total_collectible_count: int = 0
+
 func reset() -> void:
 	selected_slot = BlockBase.BlockType.SIMPLE
+	total_collectible_count = 0
+	
+func add_collectible(_node: Node) -> void:
+	if current_player:
+		current_player.inventory.add_collectible(_node)
+
+func commit_collectibles() -> void:
+	if current_player:
+		total_collectible_count += current_player.inventory.collectible_count
 	
 func switch_slot(_block_type: BlockBase.BlockType) -> void:
 	selected_slot = _block_type

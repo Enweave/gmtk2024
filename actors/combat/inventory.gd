@@ -2,10 +2,17 @@ extends RefCounted
 class_name Inventory
 signal slot_switched
 signal blocks_full
+signal collectible_added
+
 var player_state: PlayerState
 var _selected_slot_index: int = 0
 var _last_slot_index: int = 3
 
+var collectible_count: int = 0
+
+func add_collectible(_node: Node) -> void:
+	collectible_count += 1
+	collectible_added.emit()
 
 func _on_blocks_full() -> void:
 	blocks_full.emit()
