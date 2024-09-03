@@ -22,7 +22,6 @@ func update_bounds():
 
 func _on_area_2d_body_entered(_body):
 	if _body is Player and tile_map != null:
-		print("HiddenWallSensor::_on_area_2d_body_entered")
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property(tile_map, 'modulate:a', 0, fade_duration)
 		
