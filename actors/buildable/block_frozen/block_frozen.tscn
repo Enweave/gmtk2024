@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1cewu6myj5rp" path="res://assets/spritesheets/props/block_frozen.png" id="2_mc634"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u56c2"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hj4c8"]
 atlas = ExtResource("2_mc634")
