@@ -35,7 +35,7 @@ var FRICTION: float = SPEED/10
 
 # jump and gravity
 @export var JUMP_FORCE: float = 300.
-@export var WALL_JUMP_FORCE_X: float = 325.
+@export var WALL_JUMP_FORCE_X: float = 335.
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var NUM_JUMPS_MAX: int = 1
 
