@@ -1,5 +1,6 @@
 @tool
 extends AnimatableBody2D
+class_name MovingPlatform
 
 ## how fast the platform moves along the path
 @export var path_time: float = 0.5
@@ -9,6 +10,10 @@ extends AnimatableBody2D
 @export var rest_time: float = 0.1
 ## if true, the platform will move back and forth along the path
 @export var back_and_forth: bool = true
+## if true, the platform won't start moving until triggered
+@export var triggerable: bool = false
+## if true, the platform will stop at the end of the path
+@export var stop_at_end: bool = false
 ## how long the platform will wait before starting
 @export var delay: float = 0
 
@@ -20,11 +25,11 @@ var _progress: float = 0.
 var _time_elapsed: float = 0
 var _timer: Timer
 var _tick_time: float = 0.01
+var _triggered: bool = false
 
 @export_range(1, 10, 1) var width_cells: int:
 	set (value):
 		width_cells = value
-		print(width_cells)
 		update_dimenstions()
 
 @export_range(1, 10, 1) var height_cells: int:
@@ -38,21 +43,21 @@ var path_follow: PathFollow2D
 func update_dimenstions():
 	var _width_pixels: int = width_cells * grid_size
 	var _height_pixels: int = height_cells * grid_size
-	
+
 	%CollisionShape2D.shape = RectangleShape2D.new()
 	%CollisionShape2D.shape['size']= Vector2(_width_pixels, _height_pixels)
 	%Polygon2D.polygon = [
-		Vector2(-_width_pixels/2, -_height_pixels/2),
-		Vector2(_width_pixels/2, -_height_pixels/2),
-		Vector2(_width_pixels/2, _height_pixels/2),
-		Vector2(-_width_pixels/2, _height_pixels/2),
+	Vector2(-_width_pixels/2, -_height_pixels/2),
+	Vector2(_width_pixels/2, -_height_pixels/2),
+	Vector2(_width_pixels/2, _height_pixels/2),
+	Vector2(-_width_pixels/2, _height_pixels/2),
 	]
-	
+
 	%Polygon2D.uv = [
-		Vector2(0, 0),
-		Vector2(_width_pixels, 0),
-		Vector2(_width_pixels, _height_pixels),
-		Vector2(0, _height_pixels),
+	Vector2(0, 0),
+	Vector2(_width_pixels, 0),
+	Vector2(_width_pixels, _height_pixels),
+	Vector2(0, _height_pixels),
 	]
 
 
@@ -63,7 +68,8 @@ func _on_destination_reached():
 		_direction = -_direction
 	if rest_time > 0:
 		await get_tree().create_timer(rest_time).timeout
-	_timer.start()
+	if !stop_at_end:
+		_timer.start()
 
 
 func _tick():
@@ -83,7 +89,20 @@ func _tick():
 		_on_destination_reached()
 
 
-func start_motion():
+func trigger():
+	if !triggerable:
+		return
+	if _triggered:
+		if _time_elapsed == 0:
+			_timer.start()
+		else:
+			_timer.set_paused(!_timer.is_paused())
+	else:
+		_start_motion()
+
+
+func _start_motion():
+	_triggered = true
 	_timer = Timer.new()
 	_timer.set_wait_time(_tick_time)
 	_timer.set_one_shot(false)
@@ -94,7 +113,8 @@ func start_motion():
 
 func _on_path_follow_ready() -> void:
 	path_follow.add_child(_follower)
-	start_motion()
+	if !triggerable:
+		_start_motion()
 
 
 func _ready():
