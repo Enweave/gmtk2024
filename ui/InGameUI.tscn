@@ -62,6 +62,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
@@ -106,6 +107,20 @@ root_node = NodePath("../blocks2")
 libraries = {
 "": SubResource("AnimationLibrary_7hnex")
 }
+
+[node name="Collectibles" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/Collectibles"]
+layout_mode = 2
+text = "COLLECTIBLES:"
+
+[node name="CollectibleCount" type="Label" parent="MarginContainer/Collectibles"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
 
 [node name="StatusHandle" type="Control" parent="MarginContainer"]
 layout_mode = 2

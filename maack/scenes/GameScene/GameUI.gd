@@ -1,11 +1,9 @@
-@tool
 extends Control
 
 @export var win_scene : PackedScene
 @export var lose_scene : PackedScene
 
 func _ready():
-	$LevelLoader._refresh_files()
 	InGameMenuController.scene_tree = get_tree()
 
 func _on_level_lost():

@@ -1,6 +1,6 @@
-extends Node2D
+extends CollectibleBase
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	GlobalPlayerState.egg_count +=1
+	collect()
 	queue_free()

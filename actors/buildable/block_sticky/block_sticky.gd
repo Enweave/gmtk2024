@@ -2,7 +2,6 @@ class_name BlockSticky
 extends BlockBase
 
 var raycast_length: float = 22
-
 var stick_force: float = 1000
 var connection_duration: float = 0.15
 var gravity_timeout: float = 0.2
@@ -32,20 +31,29 @@ func _ready() -> void:
 
 		raycast.ready.connect(do_sticky_thing.bind(raycast))
 		self.add_child.call_deferred(raycast)
-	
+
 	await get_tree().create_timer(gravity_timeout).timeout
 	self.gravity_scale = 1
+
+
+func _leap_towards(_target: Vector2) -> void:
+	var direction: Vector2 = (_target - global_position).normalized()
+	self.apply_central_force(direction * stick_force)
+
 
 func do_sticky_thing(ray_cast2d: RayCast2D) -> void:
 	ray_cast2d.force_raycast_update()
 	if ray_cast2d.is_colliding():
 		var body: Node = ray_cast2d.get_collider()
+		var collision_point: Vector2 = ray_cast2d.get_collision_point()
+		_leap_towards(collision_point)
 		if body is TileMap:
-			var collision_point: Vector2 = ray_cast2d.get_collision_point()
-			# apply force towards the collision point
-			var direction: Vector2 = (collision_point - global_position).normalized()
-			self.apply_central_force(direction * stick_force)
 			await get_tree().create_timer(connection_duration).timeout
+			self.freeze = true
+		elif body is AnimatableBody2D:
+			var anim_body: AnimatableBody2D = body as AnimatableBody2D
+			await get_tree().create_timer(connection_duration).timeout
+			self.reparent(anim_body)
 			self.freeze = true
 
 

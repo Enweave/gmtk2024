@@ -1,7 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgoj8cq5ax2ti"]
+[gd_scene load_steps=11 format=3 uid="uid://bgoj8cq5ax2ti"]
 
-[ext_resource type="Texture2D" uid="uid://c6ajvkkvpxvn1" path="res://icon.svg" id="1_oqk1v"]
 [ext_resource type="Script" path="res://actors/collectible/egg.gd" id="1_sxam4"]
+[ext_resource type="Texture2D" uid="uid://domicvo5uu231" path="res://assets/spritesheets/props/EGG.png" id="2_d1t5r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2l5y"]
+atlas = ExtResource("2_d1t5r")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptmc4"]
+atlas = ExtResource("2_d1t5r")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uycc1"]
+atlas = ExtResource("2_d1t5r")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pk2f5"]
+atlas = ExtResource("2_d1t5r")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64vj8"]
+atlas = ExtResource("2_d1t5r")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wus52"]
+atlas = ExtResource("2_d1t5r")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqpb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2l5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptmc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uycc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pk2f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64vj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wus52")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oiu45"]
 radius = 12.0
@@ -9,9 +59,10 @@ radius = 12.0
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_sxam4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_oqk1v")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gqpb7")
+autoplay = "default"
+frame_progress = 0.798348
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

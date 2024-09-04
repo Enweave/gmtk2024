@@ -29,7 +29,7 @@ offset_right = 271.5
 offset_bottom = 205.5
 
 [node name="TitlesMargin" parent="MenuContainer/VBoxContainer" index="0"]
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 40
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
 text = "STRANDED"
