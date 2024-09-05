@@ -94,7 +94,7 @@ var _on_damage_effect_ammount: float = 5
 @onready var footsteps_timer: Timer = %FootstepsTimer
 @onready var footsteps_sfx_player: RandomSFXPlayer = %FootstepsSFXPlayer
 @onready var JumpSfxPlayer: RandomSFXPlayer = %JumpSfxPlayer
-
+@onready var damage_sfx_player: RandomSFXPlayer = %DamageSfxPlayer
 
 func _play_footsteps_sound():
 	if is_on_floor():
@@ -168,6 +168,7 @@ func _ready():
 func _on_damage(_amount: float):
 	if !_on_damage_is_playing:
 		_on_damage_is_playing = true
+		damage_sfx_player.play_random_sound()
 		await get_tree().create_timer(_on_damage_effect_time).timeout
 		_on_damage_is_playing = false
 

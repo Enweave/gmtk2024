@@ -316,6 +316,8 @@ sprite_frames = SubResource("SpriteFrames_d47kl")
 animation = &"fire"
 
 [node name="DamageSfxPlayer" parent="." instance=ExtResource("2_va18q")]
+unique_name_in_owner = true
+files = Array[String](["res://sound/sfx/damage/damage-bounce-1.mp3"])
 directory = "res://sound/sfx/damage"
 
 [node name="JumpSfxPlayer" parent="." instance=ExtResource("2_va18q")]
