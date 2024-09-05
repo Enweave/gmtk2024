@@ -9,7 +9,7 @@ var _selected_slot_index: int = 0
 var _last_slot_index: int = 3
 
 # map of collectible amount { CollectibleBase.CollectibleType: int }
-var collectibles: Dictionary = {} # 
+var collectibles: Dictionary # 
 
 func _add_collectible_amount(_type: CollectibleBase.CollectibleType, _amount: int) -> void:
 	if collectibles.has(_type):
@@ -48,7 +48,7 @@ func get_block_type_from_index(_index: int) -> BlockBase.BlockType:
 
 func _init(_player_state: PlayerState) -> void:
 	player_state = _player_state
-	collectibles = player_state.total_collectibles.duplicate()
+	collectibles = {}
 	_last_slot_index = slots_map.size() - 1
 	switch_slot(player_state.selected_slot, false)
 	for slot in slots_map.values():

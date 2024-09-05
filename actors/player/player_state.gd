@@ -5,7 +5,7 @@ var selected_slot: BlockBase.BlockType = BlockBase.BlockType.SIMPLE
 var is_using_mouse_and_keyboard: bool = true
 var current_player: Player
 # map of collectible amount { CollectibleBase.CollectibleType: int }
-var total_collectibles: Dictionary = {} # 
+var total_collectibles: Dictionary # 
 
 
 func reset() -> void:
