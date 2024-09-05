@@ -55,15 +55,8 @@ layer_0/tile_data = PackedInt32Array(-2228248, 1048576, 1610612743, -2162712, 91
 position = Vector2(416, -79)
 tile_map = NodePath("..")
 abyss = NodePath("../../abyss")
-width = 28
-height = 28
-
-[node name="RemoveThislater" parent="IllusionTilemap" node_paths=PackedStringArray("tile_map", "abyss") instance=ExtResource("5_pq5qf")]
-position = Vector2(356, 188)
-tile_map = NodePath("..")
-abyss = NodePath("../../abyss")
-width = 28
-height = 28
+width = 24
+height = 24
 
 [node name="HiddenWallSensor2" parent="IllusionTilemap" node_paths=PackedStringArray("tile_map") instance=ExtResource("5_pq5qf")]
 position = Vector2(-386, -23)
