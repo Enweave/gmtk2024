@@ -18,7 +18,10 @@ var player: Player = null
 var current_speed: float = PATROL_SPEED
 var patrol_idle: bool = true
 var last_patrol_direction: int = 1
+var footsteps_timestep: float = 0.3
+
 @onready var FootstepsPlayer: RandomSFXPlayer = %FootstepsPlayer
+@onready var FootstepsTimer: Timer = %FootstepsTimer
 
 
 func _ready() -> void:
@@ -33,10 +36,14 @@ func _ready() -> void:
 
 	timer.start()
 	health_component.OnDeath.connect(explode)
-	%FootstepsTimer.connect("timeout", _on_footsteps_timer_timeout)
+	FootstepsTimer.connect("timeout", _on_footsteps_timer_timeout)
+	footsteps_timestep = FootstepsTimer.get_wait_time()
+
 
 func _on_footsteps_timer_timeout():
-	FootstepsPlayer.play_random_sound()
+	if velocity.x != 0 and is_on_floor():
+		FootstepsPlayer.play_random_sound()
+
 
 func _on_patrol_timeout() -> void:
 	if player:
@@ -65,8 +72,13 @@ func _physics_process(delta: float) -> void:
 		if player:
 			current_speed = SPEED
 			velocity.x = move_toward(velocity.x, current_speed * sign(player.global_position.x - global_position.x), SPEED/100)
+			var speed_scale = abs(velocity.x)/PATROL_SPEED
+			animated_sprite.speed_scale = speed_scale
+			FootstepsTimer.set_wait_time(clamp(footsteps_timestep/speed_scale, 0.1, footsteps_timestep))
 		else:
+			animated_sprite.speed_scale = 1
 			current_speed = PATROL_SPEED
+			FootstepsTimer.set_wait_time(footsteps_timestep)
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
