@@ -4,6 +4,12 @@ class_name InGameUi
 var health_component: HealthComponent
 var inventory: Inventory
 var slots: Array
+# { CollectibleBase.CollectibleType: CollectibleWidget }
+var collectible_widgets: Dictionary = {}
+
+const slot_widget_path: String = "res://ui/slot_widget.tscn"
+const collectible_widget_path: String = "res://ui/collectible_widget.tscn"
+
 @onready var death_sfx_player : AudioStreamPlayer = %DeathPlayer
 
 func warn_block_full() -> void:
@@ -27,7 +33,14 @@ func update_ui() -> void:
 		else:
 			_slot.modulate = Color(0.5, 0.5, 0.5)
 	
-	%CollectibleCount.text = str(inventory.player_state.total_collectible_count + inventory.collectible_count)	
+	for collectible in inventory.collectibles.keys():
+		if not collectible_widgets.has(collectible):
+			var collectible_widget: CollectibleWidget = preload(collectible_widget_path).instance() as CollectibleWidget
+			%Collectibles.add_child(collectible_widget)
+			collectible_widgets[collectible] = collectible_widget
+			collectible_widget.set_texture(CollectibleBase.IconMap[collectible])
+		collectible_widgets[collectible].update_value(inventory.collectibles[collectible])	
+	
 		
 func _on_damage(_amount: float) -> void:
 	update_ui()
@@ -60,9 +73,14 @@ func assign_inventory(_inventory: Inventory) -> void:
 	for child in _slots.get_children():
 		child.queue_free()
 		
+	var _collectibles : HBoxContainer = %Collectibles
+	for child in _collectibles.get_children():
+		child.queue_free()
+
 	for slot in inventory.slots_map.values():
-		var slot_ui:= preload("res://ui/slot_widget.tscn").instantiate()
+		var _islot: InventorySlot = slot as InventorySlot
+		var slot_ui:= preload("res://ui/slot_widget.tscn").instantiate() as SlotWidget
 		_slots.add_child(slot_ui)
-		slot_ui.set_texture(slot.get_texture())
-		slot_ui.inventory_slot = slot
+		slot_ui.set_texture(_islot.get_texture())
+		slot_ui.inventory_slot = _islot
 		slots.append(slot_ui)

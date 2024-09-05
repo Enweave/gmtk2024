@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bboyiiiqctgln"]
+[gd_scene load_steps=8 format=3 uid="uid://bboyiiiqctgln"]
 
 [ext_resource type="Script" path="res://ui/in_game_ui.gd" id="1_qsgcy"]
+[ext_resource type="PackedScene" uid="uid://bl0ocpgcoa63g" path="res://ui/collectible_widget.tscn" id="2_8pp6t"]
 [ext_resource type="PackedScene" uid="uid://bhie8i5fe7lao" path="res://ui/slot_widget.tscn" id="2_xogei"]
 [ext_resource type="AudioStream" uid="uid://c36m1v5veobf1" path="res://sound/sfx/death/death-bounce-2.mp3" id="3_72xsd"]
 
@@ -109,18 +110,15 @@ libraries = {
 }
 
 [node name="Collectibles" type="HBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_constants/separation = -40
 
-[node name="Label" type="Label" parent="MarginContainer/Collectibles"]
+[node name="CollectibleWidget" parent="MarginContainer/Collectibles" instance=ExtResource("2_8pp6t")]
 layout_mode = 2
-text = "COLLECTIBLES:"
-
-[node name="CollectibleCount" type="Label" parent="MarginContainer/Collectibles"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0"
 
 [node name="StatusHandle" type="Control" parent="MarginContainer"]
 layout_mode = 2

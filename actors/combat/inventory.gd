@@ -8,10 +8,18 @@ var player_state: PlayerState
 var _selected_slot_index: int = 0
 var _last_slot_index: int = 3
 
-var collectible_count: int = 0
+# map of collectible amount { CollectibleBase.CollectibleType: int }
+var collectibles: Dictionary = {} # 
 
-func add_collectible(_node: Node) -> void:
-	collectible_count += 1
+func _add_collectible_amount(_type: CollectibleBase.CollectibleType, _amount: int) -> void:
+	if collectibles.has(_type):
+		collectibles[_type] += _amount
+	else:
+		collectibles[_type] = _amount
+
+
+func add_collectible(_type: CollectibleBase.CollectibleType) -> void:
+	_add_collectible_amount(_type, 1)
 	collectible_added.emit()
 
 func _on_blocks_full() -> void:
@@ -40,6 +48,7 @@ func get_block_type_from_index(_index: int) -> BlockBase.BlockType:
 
 func _init(_player_state: PlayerState) -> void:
 	player_state = _player_state
+	collectibles = player_state.total_collectibles.duplicate()
 	_last_slot_index = slots_map.size() - 1
 	switch_slot(player_state.selected_slot, false)
 	for slot in slots_map.values():
