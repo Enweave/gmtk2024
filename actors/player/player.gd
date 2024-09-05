@@ -52,7 +52,7 @@ var FRICTION: float = SPEED/10
 
 # jump and gravity
 @export var JUMP_FORCE: float = 300.
-@export var WALL_JUMP_FORCE_X: float = 325.
+@export var WALL_JUMP_FORCE_X: float = 335.
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var NUM_JUMPS_MAX: int = 1
 
@@ -174,10 +174,10 @@ func _physics_process(delta):
 	update_animations()
 
 	# push rigid bodies
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+	#for i in get_slide_collision_count():
+		#var c = get_slide_collision(i)
+		#if c.get_collider() is RigidBody2D:
+			#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 
 func _process(_delta):
