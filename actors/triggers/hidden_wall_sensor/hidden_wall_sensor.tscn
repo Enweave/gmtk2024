@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://actors/triggers/hidden_wall_sensor/hidden_wall_sensor.gd" id="1_mtuu6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0w6xy"]
-size = Vector2(155, 80)
+size = Vector2(28, 28)
 
 [node name="HiddenWallSensor" type="Node2D"]
 script = ExtResource("1_mtuu6")
