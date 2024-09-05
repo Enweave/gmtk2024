@@ -86,6 +86,10 @@ var StateAnimationMap: Dictionary = {
 
 var current_state: PlayerAnimationState = PlayerAnimationState.IDLE
 
+var _on_damage_is_playing: bool = false
+var _on_damage_effect_time: float = 0.5
+var _on_damage_effect_ammount: float = 5
+
 # sound 
 @onready var footsteps_timer: Timer = %FootstepsTimer
 @onready var footsteps_sfx_player: RandomSFXPlayer = %FootstepsSFXPlayer
@@ -142,7 +146,7 @@ func _ready():
 	scene_root.add_child.call_deferred(crosshair)
 	player_state = GlobalPlayerState as PlayerState
 	player_state.asign_player(self)
-	
+
 	inventory = Inventory.new(player_state)
 	health_component = HealthComponent.new(max_health)
 	setup_ui()
@@ -153,11 +157,20 @@ func _ready():
 	beam.scene_root = scene_root
 	beam.inventory = inventory
 	target_params = PhysicsPointQueryParameters2D.new()
+
+	health_component.OnDamage.connect(_on_damage)
 	if use_cursor_grid:
 		grid_cursor = grid_cursor_scene.instantiate()
 		grid_cursor.rebuild_rectangle(cursor_grid_size)
 		scene_root.add_child.call_deferred(grid_cursor)
-		
+
+
+func _on_damage(_amount: float):
+	if !_on_damage_is_playing:
+		_on_damage_is_playing = true
+		await get_tree().create_timer(_on_damage_effect_time).timeout
+		_on_damage_is_playing = false
+
 
 func _on_death():
 	death.emit()
@@ -173,11 +186,12 @@ func _physics_process(delta):
 	move_and_slide()
 	update_animations()
 
-	# push rigid bodies
-	#for i in get_slide_collision_count():
-		#var c = get_slide_collision(i)
-		#if c.get_collider() is RigidBody2D:
-			#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+
+# push rigid bodies
+#for i in get_slide_collision_count():
+#var c = get_slide_collision(i)
+#if c.get_collider() is RigidBody2D:
+#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 
 func _process(_delta):
@@ -276,6 +290,9 @@ func do_camera_offset(_delta: float):
 		player_camera.global_position = player_camera.global_position.lerp(Vector2(clamped_camera_x, clamped_camera_y), _delta*camera_interpolation)
 	else:
 		player_camera.global_position = player_camera.global_position.lerp(self.global_position, _delta*camera_interpolation)
+
+	if _on_damage_is_playing:
+		player_camera.global_position += Vector2(randf_range(-_on_damage_effect_ammount, _on_damage_effect_ammount), randf_range(-_on_damage_effect_ammount, _on_damage_effect_ammount))
 
 
 func process_aim_and_fire(_delta):
