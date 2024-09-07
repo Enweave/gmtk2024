@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8ouhiscdat65"]
+[gd_scene load_steps=10 format=3 uid="uid://8ouhiscdat65"]
 
 [ext_resource type="Script" path="res://actors/traps/spikes/spikes.gd" id="1_nr4rx"]
 [ext_resource type="Texture2D" uid="uid://bddhop5o7wls4" path="res://assets/spritesheets/props/spikes.png" id="2_wpgnk"]
@@ -42,6 +42,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfjgt"]
 radius = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iatgh"]
+
 [node name="Spikes" type="Node2D"]
 script = ExtResource("1_nr4rx")
 
@@ -56,5 +58,12 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_jfjgt")
 
+[node name="PushArea2D2" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea2D2"]
+shape = SubResource("CircleShape2D_iatgh")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="PushArea2D2" to="." method="_on_push_area_2d_2_body_entered"]

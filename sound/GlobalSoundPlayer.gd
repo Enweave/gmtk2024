@@ -18,10 +18,7 @@ func play_bgm(bgm: GlobalPlaylists.bgms):
 	sound_player.stop()
 	last_bgm = bgm
 	sound_player.stream = load(GlobalPlaylists.bgm_map[bgm])
-	if bgm == GlobalPlaylists.bgms.MAIN:
-		sound_player.volume_db = -8
-	else:
-		sound_player.volume_db = -10
+	sound_player.volume_db = -8
 	sound_player.play()
 
 

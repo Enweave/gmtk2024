@@ -316,6 +316,8 @@ sprite_frames = SubResource("SpriteFrames_d47kl")
 animation = &"fire"
 
 [node name="DamageSfxPlayer" parent="." instance=ExtResource("2_va18q")]
+unique_name_in_owner = true
+files = Array[String](["res://sound/sfx/damage/damage-bounce-1.mp3"])
 directory = "res://sound/sfx/damage"
 
 [node name="JumpSfxPlayer" parent="." instance=ExtResource("2_va18q")]
@@ -334,9 +336,8 @@ unique_name_in_owner = true
 position = Vector2(0, -17)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_b88jf")
-animation = &"fall"
-autoplay = "jump"
-frame_progress = 0.342543
+animation = &"idle"
+autoplay = "run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)
@@ -353,11 +354,11 @@ top_level = true
 
 [node name="WeaponPivot" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -20.95)
+position = Vector2(0, -15)
 
 [node name="WeaponHotSpot" type="Node2D" parent="WeaponPivot"]
 unique_name_in_owner = true
-position = Vector2(10, 0)
+position = Vector2(6, -0.0499992)
 
 [node name="WallCaster" type="RayCast2D" parent="."]
 unique_name_in_owner = true

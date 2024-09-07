@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://h44awitvg32d"]
+[gd_scene load_steps=15 format=3 uid="uid://h44awitvg32d"]
 
 [ext_resource type="Texture2D" uid="uid://fe21ivghx83m" path="res://assets/spritesheets/enemy/crab-idle.png" id="1_8olvs"]
 [ext_resource type="Script" path="res://actors/enemies/baneling/baneling.gd" id="1_123j1"]
@@ -77,12 +77,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_o55rt"]
 radius = 15.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3kdhr"]
-radius = 200.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gdxxr"]
-radius = 23.83
-
 [node name="Baneling" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
@@ -109,16 +103,16 @@ unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="vision"]
-shape = SubResource("CircleShape2D_3kdhr")
+[node name="VisionCollisionShape2D" type="CollisionShape2D" parent="vision"]
+unique_name_in_owner = true
 
 [node name="trigger" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger"]
-shape = SubResource("CircleShape2D_gdxxr")
+[node name="TriggerCollisionShape2D" type="CollisionShape2D" parent="trigger"]
+unique_name_in_owner = true
 
 [node name="FootstepsTimer" type="Timer" parent="."]
 unique_name_in_owner = true

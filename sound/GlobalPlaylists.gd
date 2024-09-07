@@ -10,8 +10,8 @@ enum bgms {
 }
 
 const bgm_map: Dictionary = {
-	bgms.INTRO: "res://sound/GMTK2024_menu.mp3",
-	bgms.MAIN: "res://sound/gmtk2_main.mp3",
-	bgms.LOSE: "res://sound/sfx/death/death-bounce-2.mp3 ",
-	bgms.WIN: "res://sound/bgm/jingles/win jingle Master-bounce-1.mp3"
+	bgms.INTRO: "res://sound/bgm/gmtk-theme-1.mp3",
+	bgms.MAIN: "res://sound/bgm/gmtk-theme-2.mp3",
+	bgms.LOSE: "res://sound/sfx/death/death-bounce-2.mp3",
+	bgms.WIN: "res://sound/bgm/gmtk-theme-1.mp3"
 }

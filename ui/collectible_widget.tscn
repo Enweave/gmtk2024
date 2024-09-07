@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl0ocpgcoa63g"]
+
+[ext_resource type="Script" path="res://ui/collectible_widget.gd" id="1_se8pk"]
+[ext_resource type="Texture2D" uid="uid://b2jcu2g8ll5dh" path="res://assets/spritesheets/props/EGG_icon.png" id="1_xljgh"]
+
+[node name="CollectibleWidget" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -800.0
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_se8pk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_xljgh")
+stretch_mode = 4
+
+[node name="Value" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+horizontal_alignment = 1

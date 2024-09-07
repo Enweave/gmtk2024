@@ -4,18 +4,27 @@ class_name MovingPlatform
 
 ## how fast the platform moves along the path
 @export var path_time: float = 0.5
+
 ## the path the platform will follow
 @export var path2d: Path2D
+
 ## how long the platform will rest at the end of the path
 @export var rest_time: float = 0.1
+
 ## if true, the platform will move back and forth along the path
 @export var back_and_forth: bool = true
+
 ## if true, the platform won't start moving until triggered
 @export var triggerable: bool = false
+
 ## if true, the platform will stop at the end of the path
 @export var stop_at_end: bool = false
+
 ## how long the platform will wait before starting
 @export var delay: float = 0
+
+## one way collision flag for collider
+@export var one_way_collision: bool = false
 
 ## the size of the grid
 var grid_size: int = 16
@@ -59,7 +68,8 @@ func update_dimenstions():
 	Vector2(_width_pixels, _height_pixels),
 	Vector2(0, _height_pixels),
 	]
-
+	if one_way_collision:
+		%CollisionShape2D.one_way_collision = true
 
 func _on_destination_reached():
 	_timer.stop()

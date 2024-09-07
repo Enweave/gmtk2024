@@ -28,7 +28,7 @@ func _on_area_2d_body_entered(_body):
 		tween.tween_property(tile_map, 'modulate:a', 0, fade_duration)
 		if abyss!=null:
 			var tween2: Tween = get_tree().create_tween()
-			tween.tween_property(abyss, 'modulate:a', 0, fade_duration)
+			tween2.tween_property(abyss, 'modulate:a', 0, fade_duration)
 		if egg != null:
 			egg.visible = true
 	

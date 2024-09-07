@@ -19,7 +19,7 @@ func _ready():
 	if OS.has_feature("web"):
 		%ExitButton.hide()
 	super._ready()
-	GlobalSoundPlayer.play_bgm(GlobalPlaylists.bgms.MAIN)
+	GlobalSoundPlayer.play_bgm(GlobalPlaylists.bgms.WIN)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
