@@ -7,7 +7,7 @@
 absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u56c2"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpn5h"]
 atlas = ExtResource("2_kk8mt")
@@ -125,6 +125,7 @@ script = ExtResource("1_saeop")
 shape = SubResource("RectangleShape2D_u56c2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_rw80v")
 autoplay = "default"
 frame_progress = 0.7808
