@@ -147,6 +147,7 @@ position = Vector2(820, -176)
 position = Vector2(1120, -249)
 
 [node name="CameraBounds" parent="." instance=ExtResource("7_itlqq")]
+visible = false
 position = Vector2(473, -239)
 width = 1625
 height = 655
