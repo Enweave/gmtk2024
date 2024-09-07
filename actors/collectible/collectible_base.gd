@@ -14,6 +14,16 @@ const IconMap : Dictionary = {
 	CollectibleType.CUBE: "res://assets/spritesheets/props/portal-cube_icon.png"
 } 
 
+const NameMap : Dictionary = {
+	CollectibleType.EGG: "Memory core",
+	CollectibleType.CUBE: "Portal cube"
+}
+
+const TotalAmountMap : Dictionary = {
+	CollectibleType.EGG: 12,
+	CollectibleType.CUBE: 1
+}
+
 
 func collect() -> void:
 	if is_collected:

@@ -46,7 +46,6 @@ func update_ui() -> void:
 
 
 func _on_collectible_added(_play_sfx:bool = true) -> void:
-	print("Collectible added", _play_sfx)
 	for collectible in CollectibleBase.CollectibleType.values():
 		var total: int = _get_total_collectible_amount(collectible)
 		if total > 0:

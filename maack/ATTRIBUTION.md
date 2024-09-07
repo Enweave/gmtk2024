@@ -1,7 +1,8 @@
 
-# Game title goes here
+# Stranded
 
 Made by [Enweave](https://enweave.itch.io/) and [Kyugetsuki](https://itch.io/profile/kyugetsuki) for the [GMTK Game Jam 2024](https://itch.io/jam/gmtk-2024)
+and updated for [Post Ham "Jam" #9](https://itch.io/jam/post-jam-jam-9)
 
 ## Tools
 #### Godot

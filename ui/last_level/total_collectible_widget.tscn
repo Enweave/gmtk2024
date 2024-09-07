@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhj1uxggtw1hf"]
+
+[ext_resource type="Script" path="res://ui/last_level/total_collectible_widget.gd" id="1_pe6vt"]
+[ext_resource type="Texture2D" uid="uid://b2jcu2g8ll5dh" path="res://assets/spritesheets/props/EGG_icon.png" id="1_qwdst"]
+
+[node name="TotalCollectiblesWidget" type="HBoxContainer"]
+script = ExtResource("1_pe6vt")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_qwdst")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Memory cores collected"
+
+[node name="Value" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+text = "0/0"
