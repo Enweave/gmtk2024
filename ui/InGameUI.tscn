@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bboyiiiqctgln"]
+[gd_scene load_steps=9 format=3 uid="uid://bboyiiiqctgln"]
 
 [ext_resource type="Script" path="res://ui/in_game_ui.gd" id="1_qsgcy"]
 [ext_resource type="PackedScene" uid="uid://bl0ocpgcoa63g" path="res://ui/collectible_widget.tscn" id="2_8pp6t"]
 [ext_resource type="PackedScene" uid="uid://bhie8i5fe7lao" path="res://ui/slot_widget.tscn" id="2_xogei"]
 [ext_resource type="AudioStream" uid="uid://c36m1v5veobf1" path="res://sound/sfx/death/death-bounce-2.mp3" id="3_72xsd"]
+[ext_resource type="AudioStream" uid="uid://bopab27o2pcri" path="res://sound/sfx/collectible/collectible Master-bounce-1.mp3" id="5_2pabl"]
 
 [sub_resource type="Animation" id="Animation_mm527"]
 length = 0.001
@@ -155,4 +156,9 @@ layout_mode = 2
 [node name="DeathPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_72xsd")
+bus = &"SFX"
+
+[node name="CollectiblePlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_2pabl")
 bus = &"SFX"

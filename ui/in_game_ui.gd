@@ -8,7 +8,7 @@ var collectible_widgets: Dictionary
 const slot_widget_path: String = "res://ui/slot_widget.tscn"
 const collectible_widget_path: String = "res://ui/collectible_widget.tscn"
 @onready var death_sfx_player: AudioStreamPlayer = %DeathPlayer
-
+@onready var collectible_sfx_player: AudioStreamPlayer = %CollectiblePlayer
 
 func warn_block_full() -> void:
 	%BlockAnimationPlayer.play("warn")
@@ -42,6 +42,11 @@ func update_ui() -> void:
 		else:
 			_slot.modulate = Color(0.5, 0.5, 0.5)
 
+
+
+
+func _on_collectible_added(_play_sfx:bool = true) -> void:
+	print("Collectible added", _play_sfx)
 	for collectible in CollectibleBase.CollectibleType.values():
 		var total: int = _get_total_collectible_amount(collectible)
 		if total > 0:
@@ -51,8 +56,9 @@ func update_ui() -> void:
 				collectible_widgets[collectible] = collectible_widget
 				collectible_widget.set_texture(CollectibleBase.IconMap[collectible])
 			collectible_widgets[collectible].update_value(total)
-
-
+	if _play_sfx:
+		collectible_sfx_player.play()
+	
 func _on_damage(_amount: float) -> void:
 	update_ui()
 
@@ -80,8 +86,9 @@ func assign_inventory(_inventory: Inventory) -> void:
 		slot.quantity_changed.connect(update_ui)
 	inventory.slot_switched.connect(update_ui)
 	inventory.blocks_full.connect(warn_block_full)
-	inventory.collectible_added.connect(update_ui)
-
+	inventory.collectible_added.connect(_on_collectible_added.bind(true))
+	_on_collectible_added(false)
+	
 	var _slots: HBoxContainer = %Slots
 	slots = []
 	for child in _slots.get_children():

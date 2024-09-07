@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://actors/moving_platform/moving_platform.gd" id="1_r1o3x"]
 [ext_resource type="Texture2D" uid="uid://b22ce3b8fwthi" path="res://assets/spritesheets/platforms/platform.png" id="2_t4c7i"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g7sd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq6pb"]
 size = Vector2(0, 0)
 
 [node name="MovingPlatform" type="AnimatableBody2D"]
@@ -11,7 +11,7 @@ script = ExtResource("1_r1o3x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-shape = SubResource("RectangleShape2D_6g7sd")
+shape = SubResource("RectangleShape2D_vq6pb")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 unique_name_in_owner = true
