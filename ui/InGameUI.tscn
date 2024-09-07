@@ -161,4 +161,5 @@ bus = &"SFX"
 [node name="CollectiblePlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("5_2pabl")
+volume_db = -7.0
 bus = &"SFX"
