@@ -11,7 +11,7 @@ const patrol_time: float = 1.0
 		vision_radius = value
 		update_params()
 
-@export_range(28, 1000, 1) var trigger_radius: float = 28:
+@export_range(15, 1000, 1) var trigger_radius: float = 28:
 	set (value):
 		trigger_radius = value
 		update_params()
