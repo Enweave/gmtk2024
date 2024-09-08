@@ -7,6 +7,8 @@ build/
 # ignore files .blend1, .blend2, .blend69, etc.
 *.blend[1-9]*
 
+*.kra~
+
 *.wav.import
 
 .wav
