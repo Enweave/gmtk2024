@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://d23votpcpak77"]
+
+[ext_resource type="Texture2D" uid="uid://cktiy53201pkx" path="res://assets/spritesheets/backgrounds/4.png" id="1_s3xuo"]
+[ext_resource type="Texture2D" uid="uid://bho6xgh2puup2" path="res://assets/spritesheets/backgrounds/3.png" id="2_l86sg"]
+[ext_resource type="Texture2D" uid="uid://t5s5ercuitf1" path="res://assets/spritesheets/backgrounds/mountains.png" id="3_7pnnr"]
+
+[node name="ParallaxBackground2" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="CloudsFar" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(5, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsFar"]
+modulate = Color(0.0778456, 0.19036, 0.225361, 1)
+texture = ExtResource("1_s3xuo")
+
+[node name="CloudsClose" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.5, 1.5)
+scroll_offset = Vector2(0, -76.01)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(10, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsClose"]
+modulate = Color(0.0703842, 0.16307, 0.264211, 1)
+texture = ExtResource("2_l86sg")
+
+[node name="MountainsFar" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.7, 1.7)
+scroll_offset = Vector2(200, 100)
+repeat_size = Vector2(320, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="MountainsFar"]
+modulate = Color(0.0341, 0.0442362, 0.117073, 1)
+scale = Vector2(1.82, 1.82)
+texture = ExtResource("3_7pnnr")
+
+[node name="Mountains" type="Parallax2D" parent="."]
+scroll_scale = Vector2(2, 2)
+scroll_offset = Vector2(0, 30)
+repeat_size = Vector2(320, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountains"]
+modulate = Color(0.231373, 0.0666667, 0.345098, 1)
+texture = ExtResource("3_7pnnr")
