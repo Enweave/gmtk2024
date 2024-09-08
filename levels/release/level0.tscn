@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3467y3dqqqb"]
+[gd_scene load_steps=18 format=3 uid="uid://b3467y3dqqqb"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_kbsli"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_o2i7g"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_amq76"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_2ih2i"]
+[ext_resource type="PackedScene" uid="uid://d23votpcpak77" path="res://levels/backgrounds/parallax_background_2.tscn" id="3_2qs8m"]
 [ext_resource type="Texture2D" uid="uid://c636lx3uubtjr" path="res://assets/spritesheets/Clouds 5/4.png" id="3_vnyhv"]
 [ext_resource type="Texture2D" uid="uid://bxtw6sixk2hf3" path="res://assets/spritesheets/props/spaceship.png" id="4_nb4v6"]
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="4_y2elg"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="5_nqk23"]
 [ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="6_4mmlp"]
 [ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="7_ynb2x"]
-[ext_resource type="PackedScene" path="res://levels/backgrounds/abyss.tscn" id="11_g6s4j"]
+[ext_resource type="PackedScene" uid="uid://balkjukooeb6r" path="res://levels/backgrounds/abyss.tscn" id="11_g6s4j"]
 [ext_resource type="PackedScene" uid="uid://bgoj8cq5ax2ti" path="res://actors/collectible/egg.tscn" id="12_qo644"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m14yb"]
@@ -47,7 +48,10 @@ script = ExtResource("1_kbsli")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_o2i7g")]
 
+[node name="ParallaxBackground2" parent="." instance=ExtResource("3_2qs8m")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(1, 1, 1, 0.235294)
 texture_filter = 1
 position = Vector2(1345, -252)
