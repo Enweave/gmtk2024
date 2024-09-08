@@ -209,6 +209,13 @@ func _player_jump():
 	JumpSprite.stop()
 	JumpSprite.play("fire")
 
+func knockback(force: float, x_pos:float, up_force : float):
+	#coming from the left, bounce to the right
+	if x_pos < global_position.x:
+		velocity = Vector2(force * 2, -force * up_force)
+	else:
+		velocity = Vector2(-force * 2, -force * up_force)
+	pass
 
 func _player_walljump():
 	velocity.y = -WALL_JUMP_FORCE_Y
