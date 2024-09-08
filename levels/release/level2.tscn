@@ -83,12 +83,14 @@ height = 530
 metadata/_edit_lock_ = true
 
 [node name="Baneling" parent="." instance=ExtResource("10_n5u7a")]
-position = Vector2(24, -396)
-metadata/_edit_lock_ = true
+position = Vector2(50, -311)
+enable_patrol = false
+vision_radius = 150.0
 
 [node name="Baneling2" parent="." instance=ExtResource("10_n5u7a")]
 position = Vector2(-478, -18)
-metadata/_edit_lock_ = true
+enable_patrol = false
+vision_radius = 150.0
 
 [node name="BlockSticky" parent="." instance=ExtResource("11_xtwcn")]
 position = Vector2(115, -24)
