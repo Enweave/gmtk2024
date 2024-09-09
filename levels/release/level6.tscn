@@ -43,7 +43,7 @@ position = Vector2(113, 12)
 [node name="SpikeGroup" type="Node2D" parent="."]
 
 [node name="LevelExit" parent="." instance=ExtResource("6_g12rb")]
-position = Vector2(1197, -528)
+position = Vector2(1215, -515)
 
 [node name="CameraBounds" parent="." instance=ExtResource("7_3d4j3")]
 visible = false

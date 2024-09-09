@@ -18,7 +18,7 @@ func play_bgm(bgm: GlobalPlaylists.bgms):
 	sound_player.stop()
 	last_bgm = bgm
 	sound_player.stream = load(GlobalPlaylists.bgm_map[bgm])
-	sound_player.volume_db = -8
+	sound_player.volume_db = -14
 	sound_player.play()
 
 

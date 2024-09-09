@@ -40,7 +40,7 @@ layout_mode = 2
 
 [node name="epilogue text" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Epilogue text goes here"
+text = "You've found a way out, great job!"
 horizontal_alignment = 1
 
 [node name="spacer2" type="Control" parent="MarginContainer/VBoxContainer"]

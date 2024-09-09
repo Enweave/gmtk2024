@@ -20,8 +20,8 @@ const NameMap : Dictionary = {
 }
 
 const TotalAmountMap : Dictionary = {
-	CollectibleType.EGG: 12,
-	CollectibleType.CUBE: 1
+	CollectibleType.EGG: 9,
+	CollectibleType.CUBE: 2
 }
 
 
