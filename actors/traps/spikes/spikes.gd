@@ -24,12 +24,9 @@ func _process(delta: float) -> void:
 
 
 func _on_push_area_2d_2_body_entered( body: Node ) -> void:
-	if body.has_method("knockback"):
-		body.knockback(200, global_position.x, 2)
-	elif body is CharacterBody2D:
+	if body is CharacterBody2D:
 		var _character_body: CharacterBody2D = body
-		var _velocity: Vector2 = (_character_body.global_position - global_position).normalized() * push_velocity
-		_character_body.velocity = _velocity
+		_character_body.velocity.y = -push_velocity
 
 
 func _on_area_2d_body_entered( body: Node ) -> void:

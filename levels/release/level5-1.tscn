@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdr4w1bu71lff"]
+[gd_scene load_steps=21 format=3 uid="uid://cdr4w1bu71lff"]
 
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_7gfsx"]
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_cl2dc"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_1i350"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_b3mxk"]
+[ext_resource type="Texture2D" uid="uid://cktiy53201pkx" path="res://assets/spritesheets/backgrounds/4.png" id="3_p5se5"]
+[ext_resource type="Texture2D" uid="uid://bho6xgh2puup2" path="res://assets/spritesheets/backgrounds/3.png" id="4_fdhla"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="4_qe5pl"]
 [ext_resource type="PackedScene" uid="uid://ksty41djvtca" path="res://actors/traps/spikes/spikes_instakill.tscn" id="5_qvnx6"]
 [ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="6_25rvu"]
@@ -29,10 +31,36 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_r8kbb"]
+normal = Vector2(1, 0)
+
 [node name="Level5-1" type="Node2D"]
 script = ExtResource("1_cl2dc")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_7gfsx")]
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="CloudsFar" type="Parallax2D" parent="ParallaxBackground2"]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(5, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsFar"]
+modulate = Color(0.0778456, 0.19036, 0.225361, 1)
+texture = ExtResource("3_p5se5")
+
+[node name="CloudsClose" type="Parallax2D" parent="ParallaxBackground2"]
+scroll_scale = Vector2(1.5, 1.5)
+scroll_offset = Vector2(0, -76.01)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(10, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsClose"]
+modulate = Color(0.0703842, 0.16307, 0.264211, 1)
+texture = ExtResource("4_fdhla")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_1i350")
@@ -532,3 +560,9 @@ height_cells = 1
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(530, 1045)
 curve = SubResource("Curve2D_gj7oa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 296)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_r8kbb")

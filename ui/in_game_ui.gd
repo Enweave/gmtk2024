@@ -46,7 +46,6 @@ func update_ui() -> void:
 
 
 func _on_collectible_added(_play_sfx:bool = true) -> void:
-	print("Collectible added", _play_sfx)
 	for collectible in CollectibleBase.CollectibleType.values():
 		var total: int = _get_total_collectible_amount(collectible)
 		if total > 0:
@@ -80,14 +79,14 @@ func assign_health_component(_health_component: HealthComponent) -> void:
 
 
 func assign_inventory(_inventory: Inventory) -> void:
-	collectible_widgets = {}
+	collectible_widgets = Dictionary()
 	inventory = _inventory
 	for slot in inventory.slots_map.values():
 		slot.quantity_changed.connect(update_ui)
 	inventory.slot_switched.connect(update_ui)
 	inventory.blocks_full.connect(warn_block_full)
 	inventory.collectible_added.connect(_on_collectible_added.bind(true))
-	_on_collectible_added(false)
+	
 	
 	var _slots: HBoxContainer = %Slots
 	slots = []
@@ -105,3 +104,5 @@ func assign_inventory(_inventory: Inventory) -> void:
 		slot_ui.set_texture(_islot.get_texture())
 		slot_ui.inventory_slot = _islot
 		slots.append(slot_ui)
+	
+	_on_collectible_added(false)
