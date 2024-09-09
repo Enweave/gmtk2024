@@ -55,6 +55,7 @@ var FRICTION: float = SPEED/10
 @export var WALL_JUMP_FORCE_X: float = 335.
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var NUM_JUMPS_MAX: int = 1
+@export var terminal_velocity = 400
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_num_jumps_max: int = NUM_JUMPS_MAX
@@ -373,6 +374,7 @@ func process_gravity(delta):
 		if velocity.y > 0:
 			current_state = PlayerAnimationState.FALL
 		velocity.y += gravity * delta
+		velocity.y = clamp(velocity.y, -terminal_velocity, terminal_velocity)
 
 
 func player_run(_delta):
