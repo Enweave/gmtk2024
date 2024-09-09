@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3drsoefcff6g"]
+[gd_scene load_steps=18 format=3 uid="uid://b3drsoefcff6g"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_7byi6"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_tx7w7"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_wbmk5"]
+[ext_resource type="PackedScene" uid="uid://d23votpcpak77" path="res://levels/backgrounds/parallax_background_2.tscn" id="3_o1bv0"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_x3g37"]
 [ext_resource type="TileSet" uid="uid://bsbifjrs7qfr2" path="res://assets/tilesets/tileset1_no_col.tres" id="4_h8qk6"]
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="4_nsn46"]
@@ -27,6 +28,8 @@ width = 512
 script = ExtResource("1_7byi6")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_tx7w7")]
+
+[node name="ParallaxBackground2" parent="." instance=ExtResource("3_o1bv0")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_wbmk5")
@@ -109,6 +112,15 @@ offset_top = -71.0
 offset_right = 165.0
 offset_bottom = -48.0
 text = "Sticky Block"
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = -74.0
+offset_right = 188.0
+offset_bottom = -25.0
+text = "press 1-2-3-4 
+to switch blocks"
 
 [node name="HiddenWallSensor" parent="." node_paths=PackedStringArray("tile_map", "egg") instance=ExtResource("13_r12y5")]
 position = Vector2(-81, -174)

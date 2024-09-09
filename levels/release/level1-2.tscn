@@ -70,7 +70,7 @@ height = 635
 metadata/_edit_lock_ = true
 
 [node name="LevelExit" parent="." instance=ExtResource("8_booxx")]
-position = Vector2(498, -233)
+position = Vector2(501, -226)
 
 [node name="abyss" type="Polygon2D" parent="."]
 texture_filter = 1

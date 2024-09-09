@@ -128,7 +128,7 @@ offset_bottom = -328.0
 text = "LMB To Place Block"
 
 [node name="LevelExit" parent="." instance=ExtResource("6_4mmlp")]
-position = Vector2(1569, -310)
+position = Vector2(1569, -307)
 
 [node name="CameraBounds" parent="." instance=ExtResource("7_ynb2x")]
 visible = false

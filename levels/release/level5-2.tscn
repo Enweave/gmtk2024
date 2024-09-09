@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://be1pqbhnak5fn"]
+[gd_scene load_steps=16 format=3 uid="uid://be1pqbhnak5fn"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_cdgbh"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_crbu0"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_vkt66"]
+[ext_resource type="Texture2D" uid="uid://cktiy53201pkx" path="res://assets/spritesheets/backgrounds/4.png" id="3_d7jcu"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_gi7h1"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="4_3r8si"]
+[ext_resource type="Texture2D" uid="uid://bho6xgh2puup2" path="res://assets/spritesheets/backgrounds/3.png" id="4_njau8"]
 [ext_resource type="PackedScene" uid="uid://ksty41djvtca" path="res://actors/traps/spikes/spikes_instakill.tscn" id="5_ubi3g"]
 [ext_resource type="PackedScene" uid="uid://bdq4wdfc57egu" path="res://actors/level_exit/level_exit.tscn" id="6_qrcqy"]
 [ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="7_vc7kp"]
@@ -24,6 +26,29 @@ width = 512
 script = ExtResource("1_cdgbh")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_crbu0")]
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="CloudsFar" type="Parallax2D" parent="ParallaxBackground2"]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(5, 0)
+repeat_times = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsFar"]
+modulate = Color(0.0778456, 0.19036, 0.225361, 1)
+texture = ExtResource("3_d7jcu")
+
+[node name="CloudsClose" type="Parallax2D" parent="ParallaxBackground2"]
+scroll_scale = Vector2(1.5, 1.5)
+scroll_offset = Vector2(0, -76.01)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(10, 0)
+repeat_times = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsClose"]
+modulate = Color(0.0703842, 0.16307, 0.264211, 1)
+texture = ExtResource("4_njau8")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_vkt66")

@@ -265,6 +265,9 @@ func _input(event):
 		inventory.switch_slot(BlockBase.BlockType.STICKY)
 	elif event.is_action_pressed("next_slot"):
 		inventory.next_slot()
+	if event.is_action_pressed("ui_cheat"):
+		inventory.collectible_added.emit()
+		NUM_JUMPS_MAX = 20
 	elif event.is_action_pressed("prev_slot"):
 		inventory.previous_slot()
 
