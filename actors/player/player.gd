@@ -55,6 +55,7 @@ var FRICTION: float = SPEED/10
 @export var WALL_JUMP_FORCE_X: float = 335.
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var NUM_JUMPS_MAX: int = 1
+@export var terminal_velocity = 400
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_num_jumps_max: int = NUM_JUMPS_MAX
@@ -209,6 +210,13 @@ func _player_jump():
 	JumpSprite.stop()
 	JumpSprite.play("fire")
 
+func knockback(force: float, x_pos:float, up_force : float):
+	#coming from the left, bounce to the right
+	if x_pos < global_position.x:
+		velocity = Vector2(force * 2, -force * up_force)
+	else:
+		velocity = Vector2(-force * 2, -force * up_force)
+	pass
 
 func _player_walljump():
 	velocity.y = -WALL_JUMP_FORCE_Y
@@ -366,6 +374,7 @@ func process_gravity(delta):
 		if velocity.y > 0:
 			current_state = PlayerAnimationState.FALL
 		velocity.y += gravity * delta
+		velocity.y = clamp(velocity.y, -terminal_velocity, terminal_velocity)
 
 
 func player_run(_delta):

@@ -7,6 +7,7 @@ var fade_duration: float = 0.5
 @export var tile_map: TileMap
 @export var abyss: Polygon2D
 @export var egg: CollectibleBase
+@export var oneway_plat: Node2D
 
 @export var width: int = 1280:
 	set(value):
@@ -31,6 +32,8 @@ func _on_area_2d_body_entered(_body):
 			tween2.tween_property(abyss, 'modulate:a', 0, fade_duration)
 		if egg != null:
 			egg.visible = true
+		if oneway_plat != null:
+			oneway_plat.visible = true
 	
 #func _on_area_2d_body_exited(_body):
 	#if _body is Player and tile_map != null:
