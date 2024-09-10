@@ -40,7 +40,7 @@ script = ExtResource("1_cdgbh")
 scroll_scale = Vector2(1.2, 1.2)
 repeat_size = Vector2(576, 324)
 autoscroll = Vector2(5, 0)
-repeat_times = 11
+repeat_times = 12
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsFar"]
 modulate = Color(0.0778456, 0.19036, 0.225361, 1)
@@ -51,7 +51,7 @@ scroll_scale = Vector2(1.5, 1.5)
 scroll_offset = Vector2(0, -76.01)
 repeat_size = Vector2(576, 324)
 autoscroll = Vector2(10, 0)
-repeat_times = 11
+repeat_times = 12
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsClose"]
 modulate = Color(0.0703842, 0.16307, 0.264211, 1)

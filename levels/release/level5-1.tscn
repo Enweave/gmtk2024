@@ -437,7 +437,7 @@ position = Vector2(265, 1131)
 position = Vector2(294, 1131)
 
 [node name="LevelExit" parent="." instance=ExtResource("6_25rvu")]
-position = Vector2(495, 279)
+position = Vector2(496, 286)
 
 [node name="CameraBounds" parent="." instance=ExtResource("7_jb1f3")]
 visible = false
