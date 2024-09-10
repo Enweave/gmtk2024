@@ -33,10 +33,15 @@ stretch_mode = 5
 [node name="ScrollContainer" parent="." index="3"]
 scroll_vertical = 0
 
+[node name="HeaderSpace" parent="ScrollContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(0, 450)
+
 [node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
-text = "[center][font_size=64]Game title goes here[/font_size]
+custom_minimum_size = Vector2(800, 0)
+text = "[center][font_size=64]Stranded[/font_size]
 
 Made by [url=https://enweave.itch.io/]Enweave[/url] and [url=https://itch.io/profile/kyugetsuki]Kyugetsuki[/url] for the [url=https://itch.io/jam/gmtk-2024]GMTK Game Jam 2024[/url]
+and updated for [url=https://itch.io/jam/post-jam-jam-9]Post Ham \"Jam\" #9[/url]
 
 [font_size=48]Tools[/font_size]
 [font_size=24]Godot[/font_size]
@@ -64,6 +69,9 @@ Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]M
 Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
 License: [url=LICENSE.txt]MIT License[/url]
 [/center]"
+
+[node name="FooterSpace" parent="ScrollContainer/VBoxContainer" index="2"]
+custom_minimum_size = Vector2(0, 450)
 
 [node name="CenterContainer" type="CenterContainer" parent="." index="4"]
 layout_mode = 0

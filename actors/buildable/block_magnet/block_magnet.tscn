@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b0pyhseb0ob8e" path="res://sound/sfx/magnet/magnet loop-bounce-2.mp3" id="4_brk14"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_667te"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uywxe"]
 atlas = ExtResource("2_40gnm")
@@ -270,6 +270,7 @@ autoplay = "default"
 frame_progress = 0.0414112
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_ktb50")
 autoplay = "default"
 frame_progress = 0.21642

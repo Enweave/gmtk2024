@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcfcfd2wgxgy8"]
+[gd_scene load_steps=19 format=3 uid="uid://dcfcfd2wgxgy8"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_gi1e7"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="2_bqo1m"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="3_n813o"]
+[ext_resource type="Texture2D" uid="uid://cktiy53201pkx" path="res://assets/spritesheets/backgrounds/4.png" id="3_rxj7i"]
+[ext_resource type="Texture2D" uid="uid://bho6xgh2puup2" path="res://assets/spritesheets/backgrounds/3.png" id="4_8lhbc"]
 [ext_resource type="TileSet" uid="uid://bsbifjrs7qfr2" path="res://assets/tilesets/tileset1_no_col.tres" id="4_o4uft"]
 [ext_resource type="PackedScene" uid="uid://bt6n5gts4koid" path="res://actors/triggers/hidden_wall_sensor/hidden_wall_sensor.tscn" id="5_gf1vl"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="6_hs4yv"]
@@ -27,6 +29,29 @@ width = 512
 script = ExtResource("1_gi1e7")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_bqo1m")]
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="CloudsFar" type="Parallax2D" parent="ParallaxBackground2"]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(5, 0)
+repeat_times = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsFar"]
+modulate = Color(0.0778456, 0.19036, 0.225361, 1)
+texture = ExtResource("3_rxj7i")
+
+[node name="CloudsClose" type="Parallax2D" parent="ParallaxBackground2"]
+scroll_scale = Vector2(1.5, 1.5)
+scroll_offset = Vector2(0, -76.01)
+repeat_size = Vector2(576, 324)
+autoscroll = Vector2(10, 0)
+repeat_times = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/CloudsClose"]
+modulate = Color(0.0703842, 0.16307, 0.264211, 1)
+texture = ExtResource("4_8lhbc")
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(1.0027, 1.02423)
