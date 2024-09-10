@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3drsoefcff6g"]
+[gd_scene load_steps=19 format=3 uid="uid://b3drsoefcff6g"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_7byi6"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_tx7w7"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bqk5we7qeo5by" path="res://actors/buildable/block_sticky/block_sticky.tscn" id="11_xtwcn"]
 [ext_resource type="PackedScene" uid="uid://bt6n5gts4koid" path="res://actors/triggers/hidden_wall_sensor/hidden_wall_sensor.tscn" id="13_r12y5"]
 [ext_resource type="PackedScene" uid="uid://bgoj8cq5ax2ti" path="res://actors/collectible/egg.tscn" id="14_ta8sp"]
+[ext_resource type="PackedScene" uid="uid://8pvqdk5sc4xl" path="res://actors/sign/text_sign.tscn" id="16_xq0dd"]
 
 [sub_resource type="Gradient" id="Gradient_4ms1j"]
 offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
@@ -107,21 +108,22 @@ vision_radius = 150.0
 position = Vector2(116, -68)
 freeze = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = 72.0
-offset_top = -37.0
-offset_right = 164.0
-offset_bottom = -14.0
-text = "Sticky Block"
-
-[node name="Label" type="Label" parent="Label"]
-layout_mode = 0
-offset_left = 150.0
-offset_top = -95.0
-offset_right = 274.0
-offset_bottom = -46.0
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = 207.0
+offset_top = -173.0
+offset_right = 331.0
+offset_bottom = -124.0
 text = "press 1-2-3-4 
 to switch blocks"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 71.0
+offset_top = -47.0
+offset_right = 163.0
+offset_bottom = -24.0
+text = "Sticky Block"
 
 [node name="HiddenWallSensor" parent="." node_paths=PackedStringArray("tile_map", "egg") instance=ExtResource("13_r12y5")]
 position = Vector2(-81, -174)
@@ -131,3 +133,11 @@ egg = NodePath("../Egg")
 [node name="Egg" parent="." instance=ExtResource("14_ta8sp")]
 visible = false
 position = Vector2(-246, -283)
+
+[node name="TextSign" parent="." instance=ExtResource("16_xq0dd")]
+position = Vector2(232, -11)
+text = "Sticky Block"
+
+[node name="TextSign2" parent="." instance=ExtResource("16_xq0dd")]
+position = Vector2(87, -11)
+text = "1-2-3-4 To Switch Blocks"

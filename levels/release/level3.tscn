@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://deutlwkhauia4"]
+[gd_scene load_steps=22 format=3 uid="uid://deutlwkhauia4"]
 
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_2n285"]
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_abdrb"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bgoj8cq5ax2ti" path="res://actors/collectible/egg.tscn" id="13_m7mms"]
 [ext_resource type="PackedScene" uid="uid://kxygy872wlwa" path="res://actors/moving_platform/moving_platform.tscn" id="14_sb4u8"]
 [ext_resource type="PackedScene" uid="uid://dmhytkq23jo7d" path="res://actors/collectible/portal_cube.tscn" id="15_4amn8"]
+[ext_resource type="PackedScene" uid="uid://8pvqdk5sc4xl" path="res://actors/sign/text_sign.tscn" id="17_hq413"]
 
 [sub_resource type="Gradient" id="Gradient_vq61k"]
 offsets = PackedFloat32Array(0, 0.0534591, 0.0628931, 1)
@@ -162,6 +163,7 @@ metadata/_edit_lock_ = true
 position = Vector2(336, -253)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = 291.0
 offset_top = -303.0
 offset_right = 469.0
@@ -216,5 +218,9 @@ metadata/_edit_lock_ = true
 
 [node name="PortalCube" parent="." instance=ExtResource("15_4amn8")]
 position = Vector2(-626, -32)
+
+[node name="TextSign" parent="." instance=ExtResource("17_hq413")]
+position = Vector2(335, -202)
+text = "Static Block"
 
 [editable path="ParallaxBackground2"]

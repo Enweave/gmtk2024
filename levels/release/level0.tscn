@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3467y3dqqqb"]
+[gd_scene load_steps=19 format=3 uid="uid://b3467y3dqqqb"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_kbsli"]
 [ext_resource type="PackedScene" uid="uid://c10a13m3feaeg" path="res://levels/backgrounds/parallax_background.tscn" id="1_o2i7g"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b3hpybldmmesf" path="res://actors/player/camera_bounds.tscn" id="7_ynb2x"]
 [ext_resource type="PackedScene" path="res://levels/backgrounds/abyss.tscn" id="11_g6s4j"]
 [ext_resource type="PackedScene" uid="uid://bgoj8cq5ax2ti" path="res://actors/collectible/egg.tscn" id="12_qo644"]
+[ext_resource type="PackedScene" uid="uid://8pvqdk5sc4xl" path="res://actors/sign/text_sign.tscn" id="14_j4ies"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m14yb"]
 atlas = ExtResource("4_nb4v6")
@@ -92,6 +93,7 @@ position = Vector2(323, -56)
 position = Vector2(88, 125)
 
 [node name="PickUpLabel" type="Label" parent="."]
+visible = false
 offset_left = 1062.0
 offset_top = -266.0
 offset_right = 1227.0
@@ -99,6 +101,7 @@ offset_bottom = -243.0
 text = "LMB To Pick Up Block"
 
 [node name="PickUpLabel2" type="Label" parent="."]
+visible = false
 offset_left = 125.0
 offset_top = -51.0
 offset_right = 222.0
@@ -106,6 +109,7 @@ offset_bottom = -28.0
 text = "AD To Move"
 
 [node name="PickUpLabel3" type="Label" parent="."]
+visible = false
 offset_left = 216.0
 offset_top = -98.0
 offset_right = 329.0
@@ -113,6 +117,7 @@ offset_bottom = -75.0
 text = "Space To Jump"
 
 [node name="PickUpLabel4" type="Label" parent="."]
+visible = false
 offset_left = 1098.0
 offset_top = -87.0
 offset_right = 1232.0
@@ -121,6 +126,7 @@ text = "A/D + Space
 To Wall Jump"
 
 [node name="PlaceLabel" type="Label" parent="."]
+visible = false
 offset_left = 1269.0
 offset_top = -351.0
 offset_right = 1434.0
@@ -140,3 +146,23 @@ metadata/_edit_lock_ = true
 
 [node name="Egg" parent="." instance=ExtResource("12_qo644")]
 position = Vector2(1024, -318)
+
+[node name="TextSign" parent="." instance=ExtResource("14_j4ies")]
+position = Vector2(115, -10)
+text = "AD To Move"
+
+[node name="TextSign2" parent="." instance=ExtResource("14_j4ies")]
+position = Vector2(235, -43)
+text = "Space To Jump"
+
+[node name="TextSign3" parent="." instance=ExtResource("14_j4ies")]
+position = Vector2(894, -11)
+text = "A/D + Space To Wall Jump"
+
+[node name="TextSign4" parent="." instance=ExtResource("14_j4ies")]
+position = Vector2(1127, -203)
+text = "LMB To Pick Up Block"
+
+[node name="TextSign5" parent="." instance=ExtResource("14_j4ies")]
+position = Vector2(1352, -203)
+text = "LMB To Place Block"
