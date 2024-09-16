@@ -352,6 +352,19 @@ limit_smoothed = true
 unique_name_in_owner = true
 top_level = true
 
+[node name="WallCasterPivot" type="Node2D" parent="."]
+position = Vector2(0, -14)
+
+[node name="WallRight" type="RayCast2D" parent="WallCasterPivot"]
+unique_name_in_owner = true
+target_position = Vector2(10, 0)
+hit_from_inside = true
+
+[node name="WallLeft" type="RayCast2D" parent="WallCasterPivot"]
+unique_name_in_owner = true
+target_position = Vector2(-10, 0)
+hit_from_inside = true
+
 [node name="WeaponPivot" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -15)
@@ -359,11 +372,6 @@ position = Vector2(0, -15)
 [node name="WeaponHotSpot" type="Node2D" parent="WeaponPivot"]
 unique_name_in_owner = true
 position = Vector2(6, -0.0499992)
-
-[node name="WallCaster" type="RayCast2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -20)
-target_position = Vector2(10, 0)
 
 [node name="FootstepsTimer" type="Timer" parent="."]
 unique_name_in_owner = true

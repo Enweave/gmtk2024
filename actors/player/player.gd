@@ -43,28 +43,31 @@ var inventory: Inventory
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var weapon_hotspot: Node2D = %WeaponHotSpot
 @onready var beam: Beam = %Beam
-@onready var wall_cast: RayCast2D = %WallCaster
+@onready var wall_cast_left: RayCast2D = %WallLeft
+@onready var wall_cast_right: RayCast2D = %WallRight
 
 # movement
 @export var SPEED: float = 200.
 
+var direction: float = 0
 var FRICTION: float = SPEED/10
-
 # jump and gravity
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @export var JUMP_FORCE: float = 300.
-@export var WALL_JUMP_FORCE_X: float = 335.
+@export var WALL_JUMP_FORCE_X: float = 338.
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var NUM_JUMPS_MAX: int = 1
-@export var terminal_velocity = 400
+@export var terminal_velocity: float = 400
+@export var jump_input_buffer_time: float = 0.1
+@export var jump_coyote_time: float = 0.15
+@export var velocity_while_on_wall : float = 30
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var current_num_jumps_max: int = NUM_JUMPS_MAX
 var jumps_left: int = NUM_JUMPS_MAX
-var jump_queued: bool = false
-var jump_buffer: float = 0.1
-var coyote_time: float = 0.15
+var jump_triggered: bool = false
+var delayed_is_on_floor: bool = false
 var coyote_triggered: bool = false
-var is_on_wall_recently: bool = false
+var is_holidng_onto_wall: bool = false
 
 # animation
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
@@ -86,7 +89,6 @@ var StateAnimationMap: Dictionary = {
 }
 
 var current_state: PlayerAnimationState = PlayerAnimationState.IDLE
-
 var _on_damage_is_playing: bool = false
 var _on_damage_effect_time: float = 0.5
 var _on_damage_effect_ammount: float = 5
@@ -96,6 +98,7 @@ var _on_damage_effect_ammount: float = 5
 @onready var footsteps_sfx_player: RandomSFXPlayer = %FootstepsSFXPlayer
 @onready var JumpSfxPlayer: RandomSFXPlayer = %JumpSfxPlayer
 @onready var damage_sfx_player: RandomSFXPlayer = %DamageSfxPlayer
+
 
 func _play_footsteps_sound():
 	if is_on_floor():
@@ -177,19 +180,18 @@ func _on_damage(_amount: float):
 func _on_death():
 	death.emit()
 
-var push_force: int = 2
-
 
 func _physics_process(delta):
 	process_gravity(delta)
-	player_run(delta)
-	player_jump(delta)
+	process_player_run(delta)
+	process_player_input_jump(delta)
 	calc_crosshair_position(delta)
 	move_and_slide()
 	update_animations()
 
 
 # push rigid bodies
+# var push_force: int = 2
 #for i in get_slide_collision_count():
 #var c = get_slide_collision(i)
 #if c.get_collider() is RigidBody2D:
@@ -199,43 +201,6 @@ func _physics_process(delta):
 func _process(_delta):
 	process_aim_and_fire(_delta)
 	do_camera_offset(_delta)
-
-
-func _player_jump():
-	velocity.y = -JUMP_FORCE
-	jumps_left -= 1
-	current_state = PlayerAnimationState.JUMP
-	jump_queued = false
-	JumpSfxPlayer.play_random_sound()
-	JumpSprite.stop()
-	JumpSprite.play("fire")
-
-
-func _player_walljump():
-	velocity.y = -WALL_JUMP_FORCE_Y
-	velocity.x = WALL_JUMP_FORCE_X * -wall_cast.scale.x
-	current_state = PlayerAnimationState.JUMP
-	is_on_wall_recently = false
-	jump_queued = false
-	JumpSfxPlayer.play_random_sound()
-	JumpSprite.stop()
-	JumpSprite.play("fire")
-
-
-func player_jump(_delta):
-	if Input.is_action_just_pressed("jump"):
-		if is_on_wall_recently and not is_on_floor():
-			_player_walljump()
-		elif jumps_left > 0:
-			_player_jump()
-		else:
-			jump_queued = true
-			await get_tree().create_timer(jump_buffer).timeout
-			if jump_queued and jumps_left > 0:
-				_player_jump()
-			elif jump_queued and is_on_wall_recently:
-				_player_walljump()
-			jump_queued = false
 
 
 func _input(event):
@@ -337,44 +302,8 @@ func process_aim_and_fire(_delta):
 		beam.shoot(target_position, weapon_cooldown, target_unoccupied, target_in_range, target_position_grid_snapped, use_cursor_grid)
 
 
-func coyote():
-	if not coyote_triggered:
-		coyote_triggered = true
-		await get_tree().create_timer(coyote_time).timeout
-		is_on_wall_recently = false
-		if not is_on_floor():
-			current_num_jumps_max = NUM_JUMPS_MAX - 1
-			jumps_left = min(jumps_left, current_num_jumps_max)
-		coyote_triggered = false
-
-
-func process_gravity(delta):
-	if is_on_floor():
-		coyote_triggered = false
-		current_num_jumps_max = NUM_JUMPS_MAX
-		jumps_left = current_num_jumps_max
-		current_state = PlayerAnimationState.IDLE
-		if jump_queued:
-			_player_jump() #doesn't get run?
-	elif is_on_wall_only():
-		is_on_wall_recently = true
-		if jump_queued:
-			_player_walljump()
-		else:
-			if velocity.y >= 0:
-				velocity.y = gravity * delta * 5
-			else:
-				velocity.y += gravity * delta
-	else:
-		coyote()
-		if velocity.y > 0:
-			current_state = PlayerAnimationState.FALL
-		velocity.y += gravity * delta
-		velocity.y = clamp(velocity.y, -terminal_velocity, terminal_velocity)
-
-
-func player_run(_delta):
-	var direction: float = Input.get_axis("move_left", "move_right")
+func process_player_run(_delta):
+	direction = Input.get_axis("move_left", "move_right")
 
 	if direction != 0:
 		if is_on_floor():
@@ -383,10 +312,8 @@ func player_run(_delta):
 		animated_sprite.flip_h = direction < 0
 		if direction < 0:
 			weapon_pivot.rotation_degrees = 180.
-			wall_cast.scale.x = -1
 		else:
 			weapon_pivot.rotation_degrees = 0
-			wall_cast.scale.x = 1
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
 
@@ -399,3 +326,67 @@ func update_animations():
 		_toggle_footsteps_sound(true)
 	else:
 		_toggle_footsteps_sound(false)
+
+
+func _is_colliding_wall() -> bool:
+	return wall_cast_left.is_colliding() or wall_cast_right.is_colliding()
+
+
+func apply_jump_force() -> void:
+	if wall_cast_left.is_colliding() and !is_on_floor():
+		velocity = Vector2(WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
+	elif wall_cast_right.is_colliding() and !is_on_floor():
+		velocity = Vector2(-WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
+	else:
+		jumps_left -= 1
+		velocity.y = -JUMP_FORCE
+
+
+func perform_jump() -> void:
+	if delayed_is_on_floor or jumps_left > 0 or _is_colliding_wall():
+		apply_jump_force()
+
+		current_state = PlayerAnimationState.JUMP
+		JumpSfxPlayer.play_random_sound()
+		JumpSprite.stop()
+		JumpSprite.play("fire")
+
+
+func trigger_jump() -> void:
+	perform_jump()
+	if not jump_triggered:
+		jump_triggered = true
+		await get_tree().create_timer(jump_input_buffer_time).timeout
+		jump_triggered = false
+
+
+func trigger_coyote() -> void:
+	if not coyote_triggered:
+		coyote_triggered = true
+		await get_tree().create_timer(jump_coyote_time).timeout
+		delayed_is_on_floor = false
+		coyote_triggered = false
+
+
+func process_gravity(delta):
+	var new_velocity: float =  velocity.y + gravity * delta
+	if is_on_floor():
+		delayed_is_on_floor = true
+		jumps_left = NUM_JUMPS_MAX
+		current_state = PlayerAnimationState.IDLE
+		if jump_triggered:
+			perform_jump()
+	else:
+		trigger_coyote()
+		if velocity.y > 0:
+			current_state = PlayerAnimationState.FALL
+			if _is_colliding_wall():
+				new_velocity = velocity_while_on_wall
+			
+		velocity.y = clamp(new_velocity, -terminal_velocity, terminal_velocity)
+
+
+
+func process_player_input_jump(_delta):
+	if Input.is_action_just_pressed("jump"):
+		trigger_jump()
