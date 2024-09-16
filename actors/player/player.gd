@@ -67,7 +67,9 @@ var jumps_left: int = NUM_JUMPS_MAX
 var jump_triggered: bool = false
 var delayed_is_on_floor: bool = false
 var coyote_triggered: bool = false
+var coyote_tirgger_reset: bool = true
 var wall_coyote_triggered: bool = false
+var wall_coyote_tirgger_reset: bool = true
 var delayed_is_on_wall: bool = false
 
 # animation
@@ -362,26 +364,29 @@ func trigger_jump() -> void:
 
 
 func trigger_wall_coyote() -> void:
-	if not wall_coyote_triggered:
+	if not wall_coyote_triggered and wall_coyote_tirgger_reset:
 		wall_coyote_triggered = true
 		await get_tree().create_timer(jump_coyote_time).timeout
 		wall_coyote_triggered = false
 		delayed_is_on_wall = false
+		wall_coyote_tirgger_reset = false
 
 
 func trigger_coyote() -> void:
-	if not coyote_triggered:
+	if not coyote_triggered and coyote_tirgger_reset:
 		coyote_triggered = true
 		await get_tree().create_timer(jump_coyote_time).timeout
 		delayed_is_on_floor = false
 		coyote_triggered = false
+		coyote_tirgger_reset = false
 
 
 func process_gravity(delta):
 	var new_velocity: float = velocity.y + gravity * delta
-	var _wall_calliding: bool = _is_colliding_wall() and !is_on_floor()
-	if _wall_calliding:
+	var _wall_colliding: bool = _is_colliding_wall() and !is_on_floor()
+	if _wall_colliding:
 		delayed_is_on_wall = true
+		wall_coyote_tirgger_reset = true
 	else:
 		trigger_wall_coyote()
 
@@ -389,13 +394,14 @@ func process_gravity(delta):
 		delayed_is_on_floor = true
 		jumps_left = NUM_JUMPS_MAX
 		current_state = PlayerAnimationState.IDLE
+		coyote_tirgger_reset = true
 		if jump_triggered:
 			perform_jump()
 	else:
 		trigger_coyote()
 		if velocity.y > 0:
 			current_state = PlayerAnimationState.FALL
-			if _wall_calliding:
+			if _wall_colliding:
 				new_velocity = velocity_while_on_wall
 
 		velocity.y = clamp(new_velocity, -terminal_velocity, terminal_velocity)
