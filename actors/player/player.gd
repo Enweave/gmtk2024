@@ -43,8 +43,8 @@ var inventory: Inventory
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var weapon_hotspot: Node2D = %WeaponHotSpot
 @onready var beam: Beam = %Beam
-@onready var wall_cast_left: RayCast2D = %WallLeft
-@onready var wall_cast_right: RayCast2D = %WallRight
+@onready var wall_collider_left: Area2D = %WallLeft
+@onready var wall_collider_right: Area2D = %WallRight
 
 # movement
 @export var SPEED: float = 200.
@@ -329,13 +329,13 @@ func update_animations():
 
 
 func _is_colliding_wall() -> bool:
-	return wall_cast_left.is_colliding() or wall_cast_right.is_colliding()
+	return wall_collider_left.has_overlapping_bodies() or wall_collider_right.has_overlapping_bodies()
 
 
 func apply_jump_force() -> void:
-	if wall_cast_left.is_colliding() and !is_on_floor():
+	if wall_collider_left.has_overlapping_bodies() and !is_on_floor():
 		velocity = Vector2(WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
-	elif wall_cast_right.is_colliding() and !is_on_floor():
+	elif wall_collider_right.has_overlapping_bodies() and !is_on_floor():
 		velocity = Vector2(-WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
 	else:
 		jumps_left -= 1

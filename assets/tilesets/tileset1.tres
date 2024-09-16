@@ -193,7 +193,7 @@ texture = ExtResource("1_p18o0")
 16:11/0 = 0
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 5
 sources/0 = SubResource("TileSetAtlasSource_h38ja")
 pattern_0 = SubResource("TileMapPattern_yuns5")
 pattern_1 = SubResource("TileMapPattern_yf1hq")
