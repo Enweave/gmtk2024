@@ -61,13 +61,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var terminal_velocity: float = 400
 @export var jump_input_buffer_time: float = 0.1
 @export var jump_coyote_time: float = 0.15
-@export var velocity_while_on_wall : float = 30
+@export var velocity_while_on_wall: float = 30
 
 var jumps_left: int = NUM_JUMPS_MAX
 var jump_triggered: bool = false
 var delayed_is_on_floor: bool = false
 var coyote_triggered: bool = false
-var is_holidng_onto_wall: bool = false
+var wall_coyote_triggered: bool = false
+var delayed_is_on_wall: bool = false
 
 # animation
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
@@ -343,9 +344,9 @@ func apply_jump_force() -> void:
 
 
 func perform_jump() -> void:
-	if delayed_is_on_floor or jumps_left > 0 or _is_colliding_wall():
+	if delayed_is_on_floor or jumps_left > 0 or delayed_is_on_wall:
 		apply_jump_force()
-
+		delayed_is_on_wall = false
 		current_state = PlayerAnimationState.JUMP
 		JumpSfxPlayer.play_random_sound()
 		JumpSprite.stop()
@@ -360,6 +361,14 @@ func trigger_jump() -> void:
 		jump_triggered = false
 
 
+func trigger_wall_coyote() -> void:
+	if not wall_coyote_triggered:
+		wall_coyote_triggered = true
+		await get_tree().create_timer(jump_coyote_time).timeout
+		wall_coyote_triggered = false
+		delayed_is_on_wall = false
+
+
 func trigger_coyote() -> void:
 	if not coyote_triggered:
 		coyote_triggered = true
@@ -369,7 +378,13 @@ func trigger_coyote() -> void:
 
 
 func process_gravity(delta):
-	var new_velocity: float =  velocity.y + gravity * delta
+	var new_velocity: float = velocity.y + gravity * delta
+	var _wall_calliding: bool = _is_colliding_wall() and !is_on_floor()
+	if _wall_calliding:
+		delayed_is_on_wall = true
+	else:
+		trigger_wall_coyote()
+
 	if is_on_floor():
 		delayed_is_on_floor = true
 		jumps_left = NUM_JUMPS_MAX
@@ -380,11 +395,10 @@ func process_gravity(delta):
 		trigger_coyote()
 		if velocity.y > 0:
 			current_state = PlayerAnimationState.FALL
-			if _is_colliding_wall():
+			if _wall_calliding:
 				new_velocity = velocity_while_on_wall
-			
-		velocity.y = clamp(new_velocity, -terminal_velocity, terminal_velocity)
 
+		velocity.y = clamp(new_velocity, -terminal_velocity, terminal_velocity)
 
 
 func process_player_input_jump(_delta):
