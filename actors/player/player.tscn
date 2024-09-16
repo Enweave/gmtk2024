@@ -352,17 +352,18 @@ limit_smoothed = true
 unique_name_in_owner = true
 top_level = true
 
-[node name="WallCasterPivot" type="Node2D" parent="."]
-position = Vector2(0, -14)
-
-[node name="WallRight" type="RayCast2D" parent="WallCasterPivot"]
+[node name="WallRight" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -14)
 target_position = Vector2(10, 0)
+collision_mask = 3
 hit_from_inside = true
 
-[node name="WallLeft" type="RayCast2D" parent="WallCasterPivot"]
+[node name="WallLeft" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -14)
 target_position = Vector2(-10, 0)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="WeaponPivot" type="Node2D" parent="."]
