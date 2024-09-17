@@ -32,6 +32,7 @@ var max_camera_offset_y: int = 140
 @export var max_health: float = 10
 
 var health_component: HealthComponent
+var invuln_time: float = 1.5
 # weapon
 var target_params: PhysicsPointQueryParameters2D
 var space_state: PhysicsDirectSpaceState2D
@@ -417,3 +418,10 @@ func process_gravity(delta):
 func process_player_input_jump(_delta):
 	if Input.is_action_just_pressed("jump"):
 		trigger_jump()
+		
+func damaged(damage: float) -> void:
+	if not health_component.is_invulnerable:
+		health_component.damage(damage)
+		health_component.is_invulnerable = true
+		await get_tree().create_timer(invuln_time).timeout
+		health_component. is_invulnerable = false
