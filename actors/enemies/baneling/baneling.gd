@@ -11,13 +11,13 @@ const patrol_time: float = 1.0
 		vision_radius = value
 		update_params()
 
-@export_range(15, 1000, 1) var trigger_radius: float = 28:
+@export_range(15, 1000, 1) var trigger_radius: float = 24:
 	set (value):
 		trigger_radius = value
 		update_params()
 
 @export var explosion_force: float = 100
-@export var explosion_radius: float = 50
+@export var explosion_radius: float = 54
 @export var max_health: float = 3
 @export var damage: float = 3
 @export var explosion_scene: PackedScene = preload("res://actors/enemies/fx/explosion.tscn")
@@ -33,6 +33,7 @@ var patrol_idle: bool = true
 var last_patrol_direction: int = 1
 var footsteps_timestep: float = 0.3
 var friction: float = 3
+var explosion_triggered: bool = false
 
 @onready var FootstepsPlayer: RandomSFXPlayer = %FootstepsPlayer
 @onready var FootstepsTimer: Timer = %FootstepsTimer
@@ -119,8 +120,11 @@ func _physics_process(delta: float) -> void:
 
 
 func explode():
+	if explosion_triggered:
+		return
+	explosion_triggered = true
 	for target in vision_area.get_overlapping_bodies():
-		if (self.global_position - target.global_position).length() < explosion_radius:
+		if (self.global_position - target.global_position).length() < explosion_radius and target != self:
 			if target is RigidBody2D:
 				var _target: RigidBody2D = target as RigidBody2D
 				_target.apply_central_impulse((target.global_position - self.global_position).normalized() * explosion_force)
@@ -128,7 +132,6 @@ func explode():
 				var _health_component: HealthComponent = target[HealthComponent.FIELD_NAME]
 				_health_component.damage(damage)
 
-	health_component.is_dead = true
 	var explosion := explosion_scene.instantiate()
 	explosion.global_position = global_position
 	self.get_parent().add_child(explosion)
@@ -138,7 +141,7 @@ func explode():
 func _on_trigger_body_entered(body: Node) -> void:
 	if body is Player and !health_component.is_dead:
 		player = body as Player
-		explode()
+		health_component.instakill()
 
 
 func update_animations():
