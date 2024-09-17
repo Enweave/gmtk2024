@@ -71,6 +71,7 @@ var coyote_tirgger_reset: bool = true
 var wall_coyote_triggered: bool = false
 var wall_coyote_tirgger_reset: bool = true
 var delayed_is_on_wall: bool = false
+var delayed_is_on_wall_direction: float = 0
 
 # animation
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
@@ -332,14 +333,18 @@ func update_animations():
 
 
 func _is_colliding_wall() -> bool:
-	return wall_collider_left.has_overlapping_bodies() or wall_collider_right.has_overlapping_bodies()
+	if wall_collider_left.has_overlapping_bodies():
+		delayed_is_on_wall_direction = -1
+		return true
+	elif wall_collider_right.has_overlapping_bodies():
+		delayed_is_on_wall_direction = 1
+		return true
+	return false
 
 
 func apply_jump_force() -> void:
-	if wall_collider_left.has_overlapping_bodies() and !is_on_floor():
-		velocity = Vector2(WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
-	elif wall_collider_right.has_overlapping_bodies() and !is_on_floor():
-		velocity = Vector2(-WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
+	if delayed_is_on_wall_direction != 0 and !is_on_floor():
+		velocity = Vector2(-delayed_is_on_wall_direction * WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
 	else:
 		jumps_left -= 1
 		velocity.y = -JUMP_FORCE
@@ -349,6 +354,7 @@ func perform_jump() -> void:
 	if delayed_is_on_floor or jumps_left > 0 or delayed_is_on_wall:
 		apply_jump_force()
 		delayed_is_on_wall = false
+		delayed_is_on_wall_direction = 0
 		current_state = PlayerAnimationState.JUMP
 		JumpSfxPlayer.play_random_sound()
 		JumpSprite.stop()
@@ -369,6 +375,7 @@ func trigger_wall_coyote() -> void:
 		await get_tree().create_timer(jump_coyote_time).timeout
 		wall_coyote_triggered = false
 		delayed_is_on_wall = false
+		delayed_is_on_wall_direction = 0
 		wall_coyote_tirgger_reset = false
 
 
