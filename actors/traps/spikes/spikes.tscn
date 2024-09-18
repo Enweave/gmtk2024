@@ -65,5 +65,4 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_iatgh")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="PushArea2D2" to="." method="_on_push_area_2d_2_body_entered"]

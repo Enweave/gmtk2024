@@ -32,7 +32,7 @@ var max_camera_offset_y: int = 140
 @export var max_health: float = 10
 
 var health_component: HealthComponent
-var invuln_time: float = 1.5
+var invulnerability_time: float = 1.5
 # weapon
 var target_params: PhysicsPointQueryParameters2D
 var space_state: PhysicsDirectSpaceState2D
@@ -176,18 +176,25 @@ func _ready():
 
 func _on_damage(_amount: float):
 	do_camera_shake()
-	%HitFlashAnimationPlayer.play("hit_flash2")
-	health_component.is_invulnerable = true
-	await get_tree().create_timer(invuln_time).timeout
-	health_component. is_invulnerable = false
+	do_invulnearbility()
+
+
+func do_invulnearbility():
+	if !health_component.is_invulnerable:
+		%HitFlashAnimationPlayer.play("hit_flash2")
+		health_component.is_invulnerable = true
+		await get_tree().create_timer(invulnerability_time).timeout
+		health_component.is_invulnerable = false
+
 
 func do_camera_shake():
 	if !_on_damage_is_playing:
 		_on_damage_is_playing = true
 		damage_sfx_player.play_random_sound()
 		await get_tree().create_timer(_on_damage_effect_time).timeout
-		_on_damage_is_playing = false	
-		
+		_on_damage_is_playing = false
+
+
 func _on_death():
 	death.emit()
 
@@ -424,9 +431,9 @@ func process_gravity(delta):
 func process_player_input_jump(_delta):
 	if Input.is_action_just_pressed("jump"):
 		trigger_jump()
-		
-#func damaged(damage: float) -> void:
-	#if not health_component.is_invulnerable:
+
+		#func damaged(damage: float) -> void:
+		#if not health_component.is_invulnerable:
 		#health_component.damage(damage)
 		#%AnimationPlayer.play("on_damage")
 		#health_component.is_invulnerable = true
