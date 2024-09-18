@@ -11,9 +11,7 @@ var damage_time_accumulator: float = 0
 
 func damage_targets() -> void:
 	for target in targets:
-		if target is Player and HealthComponent.FIELD_NAME in target:
-			target.damaged(damage)
-		elif HealthComponent.FIELD_NAME in target:
+		if HealthComponent.FIELD_NAME in target:
 			var health_component: HealthComponent = target[HealthComponent.FIELD_NAME]
 			health_component.damage(damage)
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://wvcxcqjoq8mw"]
+[gd_scene load_steps=54 format=3 uid="uid://wvcxcqjoq8mw"]
 
 [ext_resource type="Texture2D" uid="uid://c2t3ga231e2jp" path="res://assets/spritesheets/player/player-idle.png" id="1_3wp24"]
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_wegfv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://fqy3c8t1csck" path="res://assets/spritesheets/fx/Free Smoke Fx  Pixel 07.png" id="2_m1ssn"]
 [ext_resource type="PackedScene" uid="uid://lp6xjp83jnyv" path="res://sound/RandomSFXPlayer.tscn" id="2_va18q"]
 [ext_resource type="Texture2D" uid="uid://c7dtq0euc30n5" path="res://assets/spritesheets/player/player-jump.png" id="3_ut8j1"]
+[ext_resource type="Shader" path="res://actors/player/hit_flash2.gdshader" id="4_jules"]
 [ext_resource type="PackedScene" uid="uid://co37m83j8o14e" path="res://actors/player/beam.tscn" id="4_v35ri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_co1b0"]
@@ -127,6 +128,11 @@ animations = [{
 "name": &"fire",
 "speed": 22.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kjkft"]
+shader = ExtResource("4_jules")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e2bgx"]
 atlas = ExtResource("3_ut8j1")
@@ -305,6 +311,44 @@ radius = 7.0
 radius = 4.4
 height = 24.0
 
+[sub_resource type="Animation" id="Animation_hnnac"]
+length = 0.001
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_6x272"]
+resource_name = "hit_flash2"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.233333, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [null, 0.8, null, 1.0, 0.0, 0.8, 0.0, 0.8, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1y8iv"]
+_data = {
+"RESET": SubResource("Animation_hnnac"),
+"hit_flash2": SubResource("Animation_6x272")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
@@ -337,6 +381,7 @@ volume_db = -8.535
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kjkft")
 position = Vector2(0, -17)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_b88jf")
@@ -385,3 +430,9 @@ position = Vector2(6, -0.0499992)
 [node name="FootstepsTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.365
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_1y8iv")
+}
