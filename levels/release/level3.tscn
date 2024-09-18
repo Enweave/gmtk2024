@@ -192,6 +192,7 @@ path_time = 2.0
 path2d = NodePath("../Path2D")
 rest_time = 0.2
 delay = 1.0
+_one_way_collision = null
 width_cells = 2
 height_cells = 1
 
@@ -201,7 +202,7 @@ path_time = 3.0
 path2d = NodePath("../ElevatorPath")
 rest_time = 0.5
 delay = 1.0
-one_way_collision = true
+_one_way_collision = null
 width_cells = 3
 height_cells = 1
 

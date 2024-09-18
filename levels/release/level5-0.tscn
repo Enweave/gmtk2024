@@ -152,20 +152,16 @@ metadata/_edit_lock_ = true
 [node name="Egg2" parent="." instance=ExtResource("11_t68oq")]
 position = Vector2(430, -516)
 
-[node name="Spikes" parent="." instance=ExtResource("13_c0t8c")]
-position = Vector2(547, -622)
-
 [node name="Spikes5" parent="." instance=ExtResource("13_c0t8c")]
 position = Vector2(410, -624)
 
 [node name="Spikes2" parent="." instance=ExtResource("13_c0t8c")]
-position = Vector2(576, -622)
+position = Vector2(560, -608)
+scale = Vector2(2.155, 2.155)
 
 [node name="Spikes3" parent="." instance=ExtResource("13_c0t8c")]
-position = Vector2(707, -623)
-
-[node name="Spikes4" parent="." instance=ExtResource("13_c0t8c")]
-position = Vector2(736, -623)
+position = Vector2(722, -608)
+scale = Vector2(2.155, 2.155)
 
 [node name="OnewayPlatform" parent="." instance=ExtResource("14_dtiy5")]
 visible = false

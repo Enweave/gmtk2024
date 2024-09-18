@@ -25,9 +25,9 @@ width = 512
 
 [sub_resource type="Curve2D" id="Curve2D_5a3bd"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 52, 53, 0, 0, 0, 0, -270, 53, 0, 0, 0, 0, -270, -500)
+"points": PackedVector2Array(0, 0, 0, 0, -40, 404, 0, 0, 0, 0, -40, 388, 0, 0, 0, 0, -40, 52, 0, 0, 0, 0, -224, 52, 0, 0, 0, 0, -264, 52, 0, 0, 0, 0, -270, -500)
 }
-point_count = 3
+point_count = 6
 
 [node name="Level5-2" type="Node2D"]
 script = ExtResource("1_cdgbh")
@@ -182,7 +182,7 @@ position = Vector2(136, -588)
 curve = SubResource("Curve2D_5a3bd")
 
 [node name="MovingPlatform" parent="." node_paths=PackedStringArray("path2d") instance=ExtResource("15_424v4")]
-position = Vector2(413, -662)
+position = Vector2(96, -184)
 path_time = 2.0
 path2d = NodePath("../Path2D")
 rest_time = 2.0

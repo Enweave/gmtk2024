@@ -29,7 +29,7 @@ script = ExtResource("1_xlig3")
 [node name="ParallaxBackground2" parent="." instance=ExtResource("3_hlqln")]
 
 [node name="Egg" parent="." instance=ExtResource("4_c6ja7")]
-position = Vector2(-118, -326)
+position = Vector2(-40, -400)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
@@ -82,10 +82,10 @@ polygon = PackedVector2Array(-0.168633, 184.126, 11.973, 184.126, 11.973, -8.677
 metadata/_edit_group_ = true
 
 [node name="Spikes" parent="." instance=ExtResource("11_ywbn1")]
-position = Vector2(250, -160)
+position = Vector2(255, -160)
 
 [node name="Spikes2" parent="." instance=ExtResource("11_ywbn1")]
-position = Vector2(281, -160)
+position = Vector2(279, -160)
 
 [node name="Spikes3" parent="." instance=ExtResource("11_ywbn1")]
-position = Vector2(310, -160)
+position = Vector2(303, -160)

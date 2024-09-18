@@ -24,7 +24,7 @@ class_name MovingPlatform
 @export var delay: float = 0
 
 ## one way collision flag for collider
-@export var one_way_collision: bool = false
+@export var _one_way_collision: bool = true
 
 ## the size of the grid
 var grid_size: int = 16
@@ -68,8 +68,7 @@ func update_dimenstions():
 	Vector2(_width_pixels, _height_pixels),
 	Vector2(0, _height_pixels),
 	]
-	if one_way_collision:
-		%CollisionShape2D.one_way_collision = true
+	%CollisionShape2D.one_way_collision = _one_way_collision
 
 func _on_destination_reached():
 	_timer.stop()
