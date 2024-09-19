@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var text: String
-@export var gamepad_text: String
+var gamepad_text: String
 
 var player_state: PlayerState
 
@@ -49,13 +49,14 @@ func template_text(_text: String, is_gamepad: bool = false) -> String:
 
 
 func _ready()->void:
-	regex.compile("\\(.*?\\)")
+#	regex.compile("\\(.*?\\)")
 
-	player_state = GlobalPlayerState as PlayerState
-	%Label.text = template_text(text, !player_state.is_using_mouse_and_keyboard)
+#	player_state = GlobalPlayerState as PlayerState
+	%Label.text = text
+#	%Label.text = template_text(text, !player_state.is_using_mouse_and_keyboard)
 
-	player_state.switch_to_gamepad.connect(_on_switch_to_gamepad)
-	player_state.switch_to_mouse_and_keyboard.connect(_on_switch_to_mouse_and_keyboard)
+#	player_state.switch_to_gamepad.connect(_on_switch_to_gamepad)
+#	player_state.switch_to_mouse_and_keyboard.connect(_on_switch_to_mouse_and_keyboard)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
