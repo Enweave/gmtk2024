@@ -17,8 +17,8 @@ var use_cursor_grid: bool = false
 var gamepad_crosshair_speed: float = 250
 var gamepad_crosshair_momentum: float = 0
 var gamepad_crosshair_momentum_delta: float = 0.7
-var gamepad_crosshair_range_x: float = 440
-var gamepad_crosshair_range_y: float = 255
+var gamepad_crosshair_range_x: float = 480
+var gamepad_crosshair_range_y: float = 260
 var gamepad_crosshair_offset: Vector2 = Vector2.ZERO
 
 # camera stuff
@@ -315,7 +315,6 @@ func process_aim_and_fire(_delta):
 		target_position_grid_snapped = grid_cursor.snap_to_grid(target_position, target_in_range, target_unoccupied, target_pickable)
 
 	if Input.is_action_just_pressed("place_block"):
-		print((target_position - beam.global_position).length())
 		if !use_cursor_grid:
 			target_unoccupied = space_state.intersect_point(target_params).size() == 0
 
