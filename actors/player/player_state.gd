@@ -1,6 +1,10 @@
 extends Node
 class_name PlayerState
 
+signal switch_to_gamepad
+signal switch_to_mouse_and_keyboard
+
+
 var selected_slot: BlockBase.BlockType = BlockBase.BlockType.SIMPLE
 var is_using_mouse_and_keyboard: bool = true
 var current_player: Player
@@ -48,7 +52,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		is_using_mouse_and_keyboard = true
 		display_player_gamepad_crosshair(false)
+		switch_to_mouse_and_keyboard.emit()
 
-	if event is InputEventJoypadButton:
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		is_using_mouse_and_keyboard = false
 		display_player_gamepad_crosshair(true)
+		switch_to_gamepad.emit()
