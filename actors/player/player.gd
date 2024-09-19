@@ -38,7 +38,7 @@ var target_params: PhysicsPointQueryParameters2D
 var space_state: PhysicsDirectSpaceState2D
 var inventory: Inventory
 
-@export var weapon_range: float = 400
+@export var weapon_range: float = 550
 @export var weapon_cooldown: float = 0.2
 
 @onready var weapon_pivot: Node2D = %WeaponPivot
@@ -314,12 +314,17 @@ func process_aim_and_fire(_delta):
 				break
 		target_position_grid_snapped = grid_cursor.snap_to_grid(target_position, target_in_range, target_unoccupied, target_pickable)
 
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_just_pressed("place_block"):
+		print((target_position - beam.global_position).length())
 		if !use_cursor_grid:
 			target_unoccupied = space_state.intersect_point(target_params).size() == 0
 
-		beam.shoot(target_position, weapon_cooldown, target_unoccupied, target_in_range, target_position_grid_snapped, use_cursor_grid)
-
+		beam.shoot(false, target_position, weapon_cooldown, target_unoccupied, target_in_range, target_position_grid_snapped, use_cursor_grid)
+	
+	if Input.is_action_pressed("pickup_block") and !beam.is_firing:
+		if !use_cursor_grid:
+			target_unoccupied = space_state.intersect_point(target_params).size() == 0
+		beam.shoot(true, target_position, weapon_cooldown, target_unoccupied, target_in_range, target_position_grid_snapped, use_cursor_grid)
 
 func process_player_run(_delta):
 	direction = Input.get_axis("move_left", "move_right")
