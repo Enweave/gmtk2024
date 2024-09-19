@@ -402,6 +402,7 @@ func trigger_coyote() -> void:
 	if not coyote_triggered and coyote_tirgger_reset:
 		coyote_triggered = true
 		await get_tree().create_timer(jump_coyote_time).timeout
+		jumps_left -= 1
 		delayed_is_on_floor = false
 		coyote_triggered = false
 		coyote_tirgger_reset = false
