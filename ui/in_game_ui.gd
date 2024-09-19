@@ -24,15 +24,17 @@ func _get_total_collectible_amount(_type: CollectibleBase.CollectibleType) -> in
 	return total
 
 
+func _render_health_value(_health: float) -> String:
+	var content: String = ""
+	for i in range(int(_health)):
+		content += "■"
+	return str(content)
+
 func update_ui() -> void:
 	%StatusText.text = ""
-	%HealthValue.text = "%.1f" % health_component.current_health
+	%HealthValue.text = _render_health_value(health_component.current_health)
 	if health_component.is_dead:
-		%HealthValue.text = "0"
-		%HealthValue.modulate = Color(1, 0, 0)
 		%StatusText.text = "You died!"
-	else:
-		%HealthValue.modulate = Color(1, 1, 1)
 
 	for slot in slots:
 		var _slot: SlotWidget = slot

@@ -29,7 +29,7 @@ var max_camera_offset_x: int = 220
 var max_camera_offset_y: int = 140
 
 # health
-@export var max_health: float = 10
+@export var max_health: float = 5
 
 var health_component: HealthComponent
 var invulnerability_time: float = 1.5
