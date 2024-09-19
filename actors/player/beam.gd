@@ -9,7 +9,7 @@ enum ShootResult {
 	PRINT,
 	FAIL
 }
-var _is_firing: bool = false
+var is_firing: bool = false
 var _last_target: Vector2 = Vector2.ZERO
 
 # visuals
@@ -28,7 +28,7 @@ var beam_error_color: Color = Color(255, 0, 0)
 
 
 func _physics_process(delta: float) -> void:
-	if _is_firing:
+	if is_firing:
 		_ray_time_accumulator += delta
 		if _ray_time_accumulator >= ray_time:
 			beam_graphic.points[1] = _last_target - self.global_position + Vector2(
@@ -40,12 +40,12 @@ func _physics_process(delta: float) -> void:
 
 func _enqueue_cooldown(_timeout: float) -> void:
 	beam_graphic.points[1] = _last_target - self.global_position
-	_is_firing = true
+	is_firing = true
 	beam_graphic.visible = true
 
 	await get_tree().create_timer(_timeout).timeout
 
-	_is_firing = false
+	is_firing = false
 	beam_graphic.visible = false
 
 
@@ -81,8 +81,8 @@ func _result_sfx(_result: ShootResult):
 			PrintFailSfxPlayer.play_random_sound()
 
 
-func shoot(_target: Vector2, _cooldown: float, _target_unoccupied: bool, _target_in_range: bool, _target_grid_snapped: Vector2, _use_grid: bool = false) -> void:
-	if _is_firing:
+func shoot(_pickup: bool, _target: Vector2, _cooldown: float, _target_unoccupied: bool, _target_in_range: bool, _target_grid_snapped: Vector2, _use_grid: bool = false) -> void:
+	if is_firing:
 		return
 	gun_sfx_player.play_random_sound()
 
@@ -94,7 +94,7 @@ func shoot(_target: Vector2, _cooldown: float, _target_unoccupied: bool, _target
 
 	_enqueue_cooldown(_cooldown)
 
-	if self.is_colliding():
+	if self.is_colliding() and _pickup:
 		result_collider = self.get_collider()
 		_last_target= self.get_collision_point()
 		if result_collider is BlockBase:
@@ -105,7 +105,7 @@ func shoot(_target: Vector2, _cooldown: float, _target_unoccupied: bool, _target
 			_result_sfx(ShootResult.FAIL)
 			return
 
-	if _target_unoccupied and _target_in_range:
+	if _target_unoccupied and _target_in_range and !_pickup:
 		if _use_grid:
 			_last_target = _target_grid_snapped
 		_print_block( _last_target)
