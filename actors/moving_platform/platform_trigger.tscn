@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bndf2m1bxxetr"]
+[gd_scene load_steps=9 format=3 uid="uid://bndf2m1bxxetr"]
 
 [ext_resource type="Script" path="res://actors/moving_platform/platform_trigger.gd" id="1_fv8rb"]
+[ext_resource type="Script" path="res://sound/RandomSFXPlayer.gd" id="2_hh6b3"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ms3tf"]
 points = PackedVector2Array(-7, -5, 7, -5, 12, 1, -12, 1)
@@ -128,6 +129,12 @@ libraries = {
 "": SubResource("AnimationLibrary_dpuja")
 }
 autoplay = "RESET"
+
+[node name="RandomSFXPlayer" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_hh6b3")
+files = Array[String](["res://sound/sfx/buttons/button Master-bounce-1.mp3", "res://sound/sfx/buttons/button Master-bounce-2.mp3", "res://sound/sfx/buttons/button Master-bounce-3.mp3", "res://sound/sfx/buttons/button Master-bounce-4.mp3"])
+directory = "res://sound/sfx/buttons"
 
 [connection signal="body_entered" from="TriggerArea2D" to="." method="_on_trigger_area_2d_body_entered"]
 [connection signal="body_exited" from="TriggerArea2D" to="." method="_on_trigger_area_2d_body_exited"]

@@ -5,6 +5,7 @@ extends Node2D
 @onready var anim_player: AnimationPlayer = %AnimationPlayer
 @export var oneshot: bool = true
 
+@onready var sfx_player: RandomSFXPlayer = %RandomSFXPlayer
 var _is_triggered: bool = false
 
 
@@ -14,6 +15,7 @@ func _on_trigger_area_2d_body_entered(body: Node) -> void:
 	_is_triggered = true
 	if body is Player or body is BlockBase:
 		platform.trigger()
+		sfx_player.play_random_sound()
 		anim_player.play("down")
 
 

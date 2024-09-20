@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bldkgjkyb03k7"
+path="res://.godot/imported/button Master-bounce-2.mp3-a89d2946d0dc12d313a879306ffa0d49.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/buttons/button Master-bounce-2.mp3"
+dest_files=["res://.godot/imported/button Master-bounce-2.mp3-a89d2946d0dc12d313a879306ffa0d49.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
