@@ -6,6 +6,7 @@
 [node name="Video" instance=ExtResource("1_o14py")]
 
 [node name="AntiAliasingControl" parent="VBoxContainer" index="2" instance=ExtResource("2_c86j1")]
+visible = false
 layout_mode = 2
 lock_titles = true
 option_values = [0, 1, 2, 3]

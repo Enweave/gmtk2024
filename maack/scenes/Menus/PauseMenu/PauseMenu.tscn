@@ -9,12 +9,22 @@ script = ExtResource("2_wsapg")
 options_packed_scene = ExtResource("3_w1bnh")
 main_menu_scene = "res://maack/scenes/Menus/MainMenu/MainMenu.tscn"
 
+[node name="LevelName" type="Label" parent="." index="3"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.486275)
+offset_top = 64.0
+offset_right = 800.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RestartButton" parent="MenuContainer/VBoxContainer/MenuButtons" index="1"]
 text = "Restart Level"
 
-[node name="ConfirmRestart" parent="." index="5"]
+[node name="ConfirmRestart" parent="." index="6"]
 size = Vector2i(215, 100)
 dialog_text = "Restart the level?"
 
-[node name="ConfirmMainMenu" parent="." index="6"]
+[node name="ConfirmMainMenu" parent="." index="7"]
 size = Vector2i(267, 100)

@@ -4,6 +4,7 @@ class_name PlayerState
 signal switch_to_gamepad
 signal switch_to_mouse_and_keyboard
 
+var current_level_name: String = ""
 
 var selected_slot: BlockBase.BlockType = BlockBase.BlockType.SIMPLE
 var is_using_mouse_and_keyboard: bool = true
@@ -13,6 +14,7 @@ var total_collectibles: Dictionary #
 
 
 func reset() -> void:
+	current_level_name = ""
 	selected_slot = BlockBase.BlockType.SIMPLE
 	total_collectibles = {}
 

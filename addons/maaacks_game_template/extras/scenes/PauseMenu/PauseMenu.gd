@@ -3,6 +3,8 @@ extends CanvasLayer
 @export var options_packed_scene : PackedScene
 @export_file("*.tscn") var main_menu_scene : String
 
+var player_state : PlayerState
+
 var popup_open
 
 func close_popup():
@@ -35,10 +37,12 @@ func _setup_options():
 		%OptionsContainer.call_deferred("add_child", options_scene)
 
 func _setup_main_menu():
+	%LevelName.text = player_state.current_level_name
 	if main_menu_scene.is_empty():
 		%MainMenuButton.hide()
 
 func _ready():
+	player_state = GlobalPlayerState as PlayerState
 	if OS.has_feature("web"):
 		%ExitButton.hide()
 	_setup_options()

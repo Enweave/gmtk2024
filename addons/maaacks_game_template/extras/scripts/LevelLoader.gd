@@ -14,6 +14,8 @@ signal levels_finished
 @export_group("Debugging")
 @export var force_level : int = -1
 
+var player_state : PlayerState
+
 var current_level : Node
 
 func get_current_level_id() -> int:
@@ -56,6 +58,7 @@ func load_level(level_id : int = get_current_level_id()):
 	emit_signal("level_load_started")
 	await(SceneLoader.scene_loaded)
 	current_level = _attach_level(SceneLoader.get_resource())
+	player_state.current_level_name = level_file.get_file().get_basename()
 	emit_signal("level_loaded")
 
 func advance_and_load_level():
@@ -63,6 +66,7 @@ func advance_and_load_level():
 		load_level()
 
 func _ready():
+	player_state = GlobalPlayerState as PlayerState
 	if Engine.is_editor_hint():
 		# Text files get a `.remap` extension added on export.
 		_refresh_files()
