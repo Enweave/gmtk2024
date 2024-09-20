@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kpxkbdxjj62i"]
+[gd_scene load_steps=15 format=3 uid="uid://kpxkbdxjj62i"]
 
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_pjgjm"]
 [ext_resource type="TileSet" uid="uid://bsbifjrs7qfr2" path="res://assets/tilesets/tileset1_no_col.tres" id="3_2mou3"]
@@ -18,6 +18,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -436, 81, 0, 0, 0, 0, -308, 81)
 }
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_186bl"]
+size = Vector2(8, 162.965)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_pjgjm")
@@ -88,6 +91,9 @@ position = Vector2(112, 24)
 [node name="Block" parent="." instance=ExtResource("9_bysu4")]
 position = Vector2(-336, -48)
 
+[node name="Block2" parent="." instance=ExtResource("9_bysu4")]
+position = Vector2(-173, -22)
+
 [node name="BlockMagnet" parent="." instance=ExtResource("10_5pl2u")]
 position = Vector2(-16, -16)
 
@@ -105,3 +111,10 @@ width = 640
 height = 275
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="SlidyThing2" type="StaticBody2D" parent="."]
+position = Vector2(64, 34)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlidyThing2"]
+shape = SubResource("RectangleShape2D_186bl")

@@ -20,6 +20,10 @@ func _on_level_loader_level_loaded():
 		$LevelLoader.current_level.level_lost.connect(_on_level_lost)
 	$LoadingScreen.close()
 
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_advance_level"):
+		_on_level_won()	
+
 func _on_level_loader_levels_finished():
 	InGameMenuController.open_menu(win_scene, get_viewport())
 
