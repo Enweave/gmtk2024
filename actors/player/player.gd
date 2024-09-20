@@ -29,7 +29,7 @@ var max_camera_offset_x: int = 220
 var max_camera_offset_y: int = 140
 
 # health
-@export var max_health: float = 10
+@export var max_health: float = 5
 
 var health_component: HealthComponent
 var invulnerability_time: float = 1.5
@@ -402,6 +402,7 @@ func trigger_coyote() -> void:
 	if not coyote_triggered and coyote_tirgger_reset:
 		coyote_triggered = true
 		await get_tree().create_timer(jump_coyote_time).timeout
+		jumps_left -= 1
 		delayed_is_on_floor = false
 		coyote_triggered = false
 		coyote_tirgger_reset = false

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/maacks_level.gd" id="1_xlig3"]
 [ext_resource type="TileSet" uid="uid://dt8tm1k7vpnyd" path="res://assets/tilesets/tileset1.tres" id="2_hcagg"]
 [ext_resource type="PackedScene" uid="uid://wvcxcqjoq8mw" path="res://actors/player/player.tscn" id="3_7wwhx"]
-[ext_resource type="PackedScene" path="res://levels/backgrounds/parallax_background_2.tscn" id="3_hlqln"]
+[ext_resource type="PackedScene" uid="uid://d23votpcpak77" path="res://levels/backgrounds/parallax_background_2.tscn" id="3_hlqln"]
 [ext_resource type="PackedScene" uid="uid://c8avthnktmgsj" path="res://actors/buildable/block_simple/block_simple.tscn" id="4_ar4t4"]
 [ext_resource type="PackedScene" uid="uid://bgoj8cq5ax2ti" path="res://actors/collectible/egg.tscn" id="4_c6ja7"]
 [ext_resource type="PackedScene" uid="uid://caona68d3lmsi" path="res://actors/traps/killz.tscn" id="5_hhnkj"]

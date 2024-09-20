@@ -436,3 +436,4 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_1y8iv")
 }
+autoplay = "RESET"

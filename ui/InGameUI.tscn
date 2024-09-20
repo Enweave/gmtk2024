@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bboyiiiqctgln"]
+[gd_scene load_steps=10 format=3 uid="uid://bboyiiiqctgln"]
 
 [ext_resource type="Script" path="res://ui/in_game_ui.gd" id="1_qsgcy"]
 [ext_resource type="PackedScene" uid="uid://bl0ocpgcoa63g" path="res://ui/collectible_widget.tscn" id="2_8pp6t"]
+[ext_resource type="FontFile" uid="uid://6pseduy2m3v0" path="res://ui/Garet-Book.ttf" id="2_rcpse"]
 [ext_resource type="PackedScene" uid="uid://bhie8i5fe7lao" path="res://ui/slot_widget.tscn" id="2_xogei"]
 [ext_resource type="AudioStream" uid="uid://c36m1v5veobf1" path="res://sound/sfx/death/death-bounce-2.mp3" id="3_72xsd"]
 [ext_resource type="AudioStream" uid="uid://bopab27o2pcri" path="res://sound/sfx/collectible/collectible Master-bounce-1.mp3" id="5_2pabl"]
@@ -80,12 +81,16 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Health"]
 layout_mode = 2
-text = "HEALTH:"
+text = "HP:"
 
 [node name="HealthValue" type="Label" parent="MarginContainer/HBoxContainer/Health"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "10"
+theme_override_colors/font_color = Color(0.8, 0.141176, 0.521569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_rcpse")
+text = "■■■■■"
 
 [node name="BlockCount" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

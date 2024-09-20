@@ -39,7 +39,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _enqueue_cooldown(_timeout: float) -> void:
-	beam_graphic.points[1] = _last_target - self.global_position
 	is_firing = true
 	beam_graphic.visible = true
 
@@ -94,21 +93,22 @@ func shoot(_pickup: bool, _target: Vector2, _cooldown: float, _target_unoccupied
 
 	_enqueue_cooldown(_cooldown)
 
-	if self.is_colliding() and _pickup:
+	if self.is_colliding():
 		result_collider = self.get_collider()
-		_last_target= self.get_collision_point()
-		if result_collider is BlockBase:
+		_last_target = self.get_collision_point()
+		beam_graphic.points[1] = _last_target - self.global_position
+		if result_collider is BlockBase and _pickup:
 			var _collider_block: BlockBase = result_collider
 			_pickup_block(_collider_block)
 			return
 		else:
 			_result_sfx(ShootResult.FAIL)
 			return
-
-	if _target_unoccupied and _target_in_range and !_pickup:
-		if _use_grid:
-			_last_target = _target_grid_snapped
-		_print_block( _last_target)
-		return
+	else:
+		if _target_unoccupied and _target_in_range and !_pickup:
+			if _use_grid:
+				_last_target = _target_grid_snapped
+			_print_block( _last_target)
+			return
 
 	_result_sfx(ShootResult.FAIL)
