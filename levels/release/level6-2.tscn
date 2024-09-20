@@ -91,9 +91,6 @@ position = Vector2(112, 24)
 [node name="Block" parent="." instance=ExtResource("9_bysu4")]
 position = Vector2(-336, -48)
 
-[node name="Block2" parent="." instance=ExtResource("9_bysu4")]
-position = Vector2(-173, -22)
-
 [node name="BlockMagnet" parent="." instance=ExtResource("10_5pl2u")]
 position = Vector2(-16, -16)
 
