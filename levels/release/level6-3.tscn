@@ -59,7 +59,7 @@ layer_0/tile_data = PackedInt32Array(-2555940, 1179648, 7, -2490404, 1179648, 8,
 position = Vector2(16, -192)
 
 [node name="PlatformTrigger2" parent="PlatformGroup2" node_paths=PackedStringArray("platform") instance=ExtResource("6_shvrn")]
-position = Vector2(-448, -100)
+position = Vector2(-448, -96)
 platform = NodePath("../MovingPlatform2")
 
 [node name="MovingPlatform2" parent="PlatformGroup2" node_paths=PackedStringArray("path2d") instance=ExtResource("7_1bbuw")]
