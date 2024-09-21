@@ -105,6 +105,7 @@ func shoot(_pickup: bool, _target: Vector2, _cooldown: float, _target_unoccupied
 			_result_sfx(ShootResult.FAIL)
 			return
 	else:
+		beam_graphic.points[1] = _last_target - self.global_position
 		if _target_unoccupied and _target_in_range and !_pickup:
 			if _use_grid:
 				_last_target = _target_grid_snapped
