@@ -9,6 +9,10 @@
 [ext_resource type="Shader" path="res://actors/player/hit_flash2.gdshader" id="4_jules"]
 [ext_resource type="PackedScene" uid="uid://co37m83j8o14e" path="res://actors/player/beam.tscn" id="4_v35ri"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0mia"]
+atlas = ExtResource("2_m1ssn")
+region = Rect2(896, 640, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_co1b0"]
 atlas = ExtResource("2_m1ssn")
 region = Rect2(0, 256, 64, 64)
@@ -69,13 +73,12 @@ region = Rect2(832, 256, 64, 64)
 atlas = ExtResource("2_m1ssn")
 region = Rect2(896, 256, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f0mia"]
-atlas = ExtResource("2_m1ssn")
-region = Rect2(896, 640, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_d47kl"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0mia")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_co1b0")
 }, {
