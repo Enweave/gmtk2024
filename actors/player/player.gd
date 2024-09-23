@@ -254,14 +254,14 @@ func calc_crosshair_position(_delta):
 		crosshair_position = get_global_mouse_position()
 
 	else:
-		var direction: Vector2 = Vector2.ZERO
-		direction.x = Input.get_action_strength("gamepad_aim_right") - Input.get_action_strength("gamepad_aim_left")
-		direction.y = Input.get_action_strength("gamepad_aim_down") - Input.get_action_strength("gamepad_aim_up")
-		if direction.length() > 0:
+		var _direction: Vector2 = Vector2.ZERO
+		_direction.x = Input.get_action_strength("gamepad_aim_right") - Input.get_action_strength("gamepad_aim_left")
+		_direction.y = Input.get_action_strength("gamepad_aim_down") - Input.get_action_strength("gamepad_aim_up")
+		if _direction.length() > 0:
 			gamepad_crosshair_momentum = clamp(gamepad_crosshair_momentum + gamepad_crosshair_momentum_delta * _delta, 0, 1)
 			var _rate = gamepad_crosshair_speed * gamepad_crosshair_momentum * _delta
-			gamepad_crosshair_offset.x = clamp(gamepad_crosshair_offset.x + direction.x * _rate, -gamepad_crosshair_range_x, gamepad_crosshair_range_x)
-			gamepad_crosshair_offset.y = clamp(gamepad_crosshair_offset.y + direction.y * _rate, -gamepad_crosshair_range_y, gamepad_crosshair_range_y)
+			gamepad_crosshair_offset.x = clamp(gamepad_crosshair_offset.x + _direction.x * _rate, -gamepad_crosshair_range_x, gamepad_crosshair_range_x)
+			gamepad_crosshair_offset.y = clamp(gamepad_crosshair_offset.y + _direction.y * _rate, -gamepad_crosshair_range_y, gamepad_crosshair_range_y)
 		else:
 			gamepad_crosshair_momentum = clamp(gamepad_crosshair_momentum - gamepad_crosshair_momentum_delta * _delta, 0, 1)
 		crosshair.set_valid(gamepad_crosshair_offset.length() < weapon_range)
